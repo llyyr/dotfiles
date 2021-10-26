@@ -1,0 +1,267 @@
+:not(.fa):not(.fas):not(.glyphicon):not(i) {
+    font-family: "Noto Sans JP" !important;
+    font-size: 12pt !important;
+	line-height: 1.3 !important;
+    text-shadow: none !important;
+    user-select: text !important;
+}
+
+/* Color overrides */
+
+:not(img):not(pre):not(code):not(span) {
+    background-color: black !important;
+	color: #DDCCBB !important;
+    /*color: #00AA00 !important;*/
+}
+
+a[href], a[href] * {
+    color: #FFAA0F !important;
+}
+
+a:visited, a:visited * {
+    color: #FF5D4A !important;
+}
+
+pre, code {
+    color: #cba !important;
+	background-color: #111 !important;
+    border: 1px dashed #555 !important;
+    padding: 1px !important;
+}
+
+pre code {
+    border: none !important;
+    padding: none !important;
+	color: #DDCCBB !important;
+}
+
+div.sourceCode > pre, td.sourceCode > pre {
+    border: none !important;
+}
+
+/* Syntax highlighting */
+code span.kw { color: #ffa600 !important; } /* Keyword */
+code span.dt { color: #85c600 !important; } /* DataType */
+code span.dv { color: #e0374f !important; } /* DecVal */
+code span.bn { color: #e0374f !important; } /* BaseN */
+code span.fl { color: #e0374f !important; } /* Float */
+code span.ch { color: #e0374f !important; } /* Char */
+code span.st { color: #e0374f !important; } /* String */
+code span.co { color: #0099bc !important; } /* Comment */
+code span.ot { color: #e50c88 !important; } /* Other */
+code span.al { color: #e0374f !important; } /* Alert */
+code span.fu { color: #d78787 !important; } /* Function */
+code span.re { } /* RegionMarker */
+code span.er { color: #ff0000 !important; font-weight: bold !important; } /* Error */
+
+span.qutehint {
+    opacity: 100% !important;
+    background: rgba(0, 0, 0, 0.8) !important;
+    color: #B3FF1D !important;
+    outline: 1px solid rgba(179,255,29,1) !important;
+    padding: 2px !important;
+}
+
+span.qutehint > font {
+    color: #e51688 !important;
+}
+
+/* github */
+.mt-5, .mt-3 {
+	margin-top: 0 !important;
+}
+
+.bg-gray, .btn, .bg-gray-light, .bg-blue-light {
+    background-color: black !important;
+    background-image: none !important;
+}
+
+.container-lg {
+	max-width: none !important;
+}
+
+.pl-c{color:#959da5}.pl-c1,.pl-s .pl-v{color:#c8e1ff}.pl-e,.pl-en{color:#b392f0}.pl-s .pl-s1,.pl-smi{color:#f6f8fa}.pl-ent{color:#7bcc72}.pl-k{color:#ea4a5a}.pl-pds,.pl-s,.pl-s .pl-pse .pl-s1,.pl-sr,.pl-sr .pl-cce,.pl-sr .pl-sra,.pl-sr .pl-sre{color:#79b8ff}.pl-ml,.pl-v{color:#fb8532}.pl-bu{color:#d73a49}.pl-ii{color:#fafbfc;background-color:#d73a49}.pl-c2{color:#fafbfc;background-color:#d73a49}.pl-c2::before{content:"^M"}.pl-sr .pl-cce{font-weight:700;color:#7bcc72}.pl-mh,.pl-mh .pl-en,.pl-ms{font-weight:700;color:#0366d6}.pl-mi{font-style:italic;color:#f6f8fa}.pl-mb{font-weight:700;color:#f6f8fa}.pl-md{color:#b31d28;background-color:#ffeef0}.pl-mi1{color:#176f2c;background-color:#f0fff4}.pl-mc{color:#b08800;background-color:#fffdef}.pl-mi2{color:#2f363d;background-color:#959da5}.pl-mdr{font-weight:700;color:#b392f0}.pl-mo{color:#0366d6}.pl-ba{color:#ffeef0}.pl-sg{color:#6a737d}.pl-corl{text-decoration:underline;color:#79b8ff}.pl-token.active,.pl-token:hover{background:#b392f0;color:#141414}
+
+
+/* jpopsuki */
+
+#userinfo_major, #userinfo_minor {
+	display:inline !important;
+}
+
+#userinfo_stats {
+	display:block !important;
+}
+
+
+/* reddit */
+
+div.jscroll-inner > div.link {
+	padding-left:0px !important;
+}
+
+#header-bottom-right {
+	position: fixed !important;
+	bottom: 0px !important;
+	top: auto !important;
+}
+
+.separator {
+	visibility: visible !important;
+}
+
+/* For the new osu-web */
+
+@media (min-width:900px){
+	.osu-page {
+		width: calc(100% - 30px) !important;
+		max-width: inherit !important;
+	}
+/*
+	.osu-layout__row {
+		width:calc(100% - 30px) !important;
+		max-width:inherit !important;
+	}
+
+	.beatmapsets__item {
+		width:calc(50% - 10px) !important;
+	}
+	.beatmapsets__items-row {
+		width:50% !important;
+	} */
+}
+
+/* For 4chan */
+
+pre.prettyprint {
+	font: sundae;
+	background-color: #020202;
+	max-width: 100%;
+}
+
+
+div.adg-rects, form#delform > div > div > iframe {
+    display: none !important;
+}
+
+div#quickReply textarea {
+    width: 550px !important;
+    height: 500px !important;
+}
+
+span.quote {
+    color: #789922 !important;
+}
+
+span.sjis, #quickReply .sjis {
+    font-family: 'IPAMonaPGothic','Mona','MS PGothic',monospace !important;
+}
+
+s, s a:not(:hover) {
+    color: #333 !important;
+    background: #333 !important;
+}
+
+s:hover, s:focus, s:hover a, s:hover span {
+    color: white !important;
+    background: black !important;
+}
+
+div.postContainer > div.post > div.file {
+    width: 800px !important;
+}
+
+span.nameBlock > span.n-pu {
+    background: url('https://s.4cdn.org/image/minileaf.gif') !important;
+}
+
+input#qrFile {
+    width: 60% !important;
+}
+
+body.is_thread > iframe {
+    display: none !important;
+}
+
+div.reply.highlight {
+    border: 1px solid #ff0 !important;
+}
+
+textarea[name=com] {
+    width: 1000px !important;
+    height: 300px !important;
+}
+
+tr#captchaFormPart {
+    display: none !important;
+}
+
+/* TeX images */
+
+img.tex, img.numberedequation, img.inlineformula, span.math,
+img.mwe-math-fallback-image-inline, img.illustration {
+    background-color: #bbb !important;
+    padding: 1px !important;
+}
+
+/*meritnation*/
+
+.exp_content.maxHeight75px {
+	max-height: 9999px !important;
+}
+
+span.math {
+    background: none !important;
+    border-color: black !important;
+}
+
+/* For wikipedia */
+
+div[style^="position: absolute"] {
+    background: none !important;
+}
+
+/* For youtube */
+
+div#yt-dialog-bg, div.yt-dialog {
+    display: none !important;
+}
+
+/* for nyaa.si */
+.container {
+	width: 100% !important;
+}
+
+/* Ad element hiding */
+
+div#_Ltg { /* google search results */
+    display: none !important;
+}
+
+div.pyv-afc-ads-container { /* youtube search results */
+    display: none !important;
+}
+
+div.ad-wrapper, div.sponsored-headlines { /* ESPNCricinfo ads */
+	display: none !important;
+}
+
+.layout-full, .layout-abc, .layout-bc, .layout-bc-large, .layout-cb, .layout-dbc, .layout-cbc {
+	width: inherit !important;
+}
+
+.col-b {
+	width: 1292px !important;
+}
+
+header#global-header {
+	display: none !important;
+}
+
+section#pane-main {
+	padding-top: 50px !important;
+}
+
+span.c00 {
+	color: #DDCCBB !important;
+}
