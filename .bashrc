@@ -33,8 +33,6 @@ alias feh="feh --auto-zoom --scale-down"
 alias cp="cp -ip"
 alias mv="mv -i"
 alias traffic="sudo ss -tp4"
-alias cheat="sh -c '\''curl cheat.sh/$1'\'' _"
-alias wttr="sh -c '\''curl wttr.in/$1'\'' _"
 alias windesktop="cd /mnt/c/Users/llyyr/Desktop/"
 alias f="ag --smart-case --skip-vcs-ignores"
 alias blank="sleep 1; xset dpms force off"
@@ -44,3 +42,18 @@ upload-file() {
     curl -F "file=@$1" https://0x0.st
 }
 
+wttr() {
+    if [ -z $1 ]; then
+        curl -s "v2.wttr.in"
+    else
+        curl -s "v2.wttr.in/$1"
+    fi
+}
+
+cheat() {
+    if [ -z $1 ]; then
+        curl -s "cheat.sh"
+    else
+        curl -s "cheat.sh/$1"
+    fi
+}
