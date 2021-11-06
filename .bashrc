@@ -4,9 +4,8 @@
 
 export EDITOR=/usr/bin/nvim
 export PATH="${HOME}/.local/bin:${PATH}"
-export TERM=xterm-256color
-export LC_ALL=en_US.UTF-8
-export LANG=en_US.UTF-8
+#export LC_ALL=en_US.UTF-8
+#export LANG=en_US.UTF-8
 export LESS=-R 
 export LESS_TERMCAP_mb=$"\e[01;31m"
 export LESS_TERMCAP_md=$"\e[01;31m"
@@ -29,7 +28,6 @@ alias mvi="mpv --config-dir=/mnt/c/mvi/"
 alias twitchclip="yt-dlp -o '%(creator)s-%(id)s.%(ext)s'"
 alias twitterclip="yt-dlp -o '%(uploader_id)s-%(id)s.%(ext)s'"
 alias yt-dlp-aria2c="yt-dlp --external-downloader aria2c --downloader-args 'aria2c:--continue true --retry-wait=30 -j 5 -x 5 -s 5 -k 1M'"
-alias feh="feh --auto-zoom --scale-down"
 alias cp="cp -ip"
 alias mv="mv -i"
 alias traffic="sudo ss -tp4"
@@ -37,6 +35,8 @@ alias windesktop="cd /mnt/c/Users/llyyr/Desktop/"
 alias f="ag --smart-case --skip-vcs-ignores"
 alias blank="sleep 1; xset dpms force off"
 alias dotfiles="/usr/bin/git --git-dir=$HOME/dotfiles --work-tree=$HOME"
+alias localejp="LC_ALL=ja_JP.UTF-8 LANG=ja_JP.UTF-8"
+alias cpug="sudo cpupower frequency-set -g $1"
 
 upload-file() {
     curl -F "file=@$1" https://0x0.st
