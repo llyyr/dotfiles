@@ -13,12 +13,19 @@ DefaultProfile=Profile 1.profile
 CommandBarLastUsedActions=
 
 [KFileDialog Settings]
+Recent URLs[$e]=file:$HOME/
 detailViewIconSize=16
+iconViewIconSize=43
+treeViewIconSize=16
+
+[KonsoleWindow]
+FocusFollowsMouse=true
+ShowMenuBarByDefault=false
+ShowWindowTitleOnTitleBar=true
 
 [MainWindow]
-MenuBar=Disabled
 RestorePositionForNextInstance=false
-State=AAAA/wAAAAD9AAAAAAAAA/YAAAG9AAAABAAAAAQAAAAIAAAACPwAAAABAAAAAgAAAAIAAAAWAG0AYQBpAG4AVABvAG8AbABCAGEAcgAAAAAA/////wAAAAAAAAAAAAAAHABzAGUAcwBzAGkAbwBuAFQAbwBvAGwAYgBhAHIAAAAAAP////8AAAAAAAAAAA==
+State=AAAA/wAAAAD9AAAAAAAAA/YAAAGfAAAABAAAAAQAAAAIAAAACPwAAAABAAAAAgAAAAIAAAAWAG0AYQBpAG4AVABvAG8AbABCAGEAcgAAAAAA/////wAAAAAAAAAAAAAAHABzAGUAcwBzAGkAbwBuAFQAbwBvAGwAYgBhAHIAAAAAAP////8AAAAAAAAAAA==
 StatusBar=Disabled
 ToolBarsMovable=Disabled
 VGA-1 Height 1366x768=498
@@ -33,3 +40,7 @@ VGA1 XPosition 1366x768=0
 VGA1 XPosition 800x600=0
 VGA1 YPosition 1366x768=29
 VGA1 YPosition 800x600=123
+
+[TabBar]
+CloseTabButton=None
+NewTabBehavior=PutNewTabAfterCurrentTab

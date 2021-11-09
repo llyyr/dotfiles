@@ -1,4 +1,4 @@
-git clone --bare git@yourgit.example.com/dotfiles.git $HOME/dotfiles
+git clone --bare https://github.com/llyyr/dotfiles $HOME/dotfiles
 
 alias dotfiles='/usr/bin/git --git-dir=$HOME/dotfiles --work-tree=$HOME'
 

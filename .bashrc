@@ -6,14 +6,6 @@ export EDITOR=/usr/bin/nvim
 export PATH="${HOME}/.local/bin:${PATH}"
 #export LC_ALL=en_US.UTF-8
 #export LANG=en_US.UTF-8
-export LESS=-R 
-export LESS_TERMCAP_mb=$"\e[01;31m"
-export LESS_TERMCAP_md=$"\e[01;31m"
-export LESS_TERMCAP_me=$"\e[0m"
-export LESS_TERMCAP_se=$"\e[0m"
-export LESS_TERMCAP_so=$"\e[01;44;33m"
-export LESS_TERMCAP_ue=$"\e[0m"
-export LESS_TERMCAP_us=$"\e[01;32m"
 shopt -s autocd
 
 HISTIGNORE="ls:bg:fg:exit:reset:clear:cd"
