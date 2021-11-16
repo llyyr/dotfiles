@@ -16,7 +16,7 @@ HISTFILESIZE=2000
 alias vim=nvim
 alias ls="ls -Ah --color=auto --group-directories-first"
 alias mpa="mpv --profile=audio"
-alias mvi="mpv --config-dir=/mnt/c/mvi/"
+alias grep="grep --color=auto --binary-files=without-match --devices=skip"
 alias twitchclip="yt-dlp -o '%(creator)s-%(id)s.%(ext)s'"
 alias twitterclip="yt-dlp -o '%(uploader_id)s-%(id)s.%(ext)s'"
 alias yt-dlp-aria2c="yt-dlp --external-downloader aria2c --downloader-args 'aria2c:--continue true --retry-wait=30 -j 5 -x 5 -s 5 -k 1M'"
@@ -29,9 +29,14 @@ alias blank="sleep 1; xset dpms force off"
 alias dotfiles="/usr/bin/git --git-dir=$HOME/dotfiles --work-tree=$HOME"
 alias localejp="LC_ALL=ja_JP.UTF-8 LANG=ja_JP.UTF-8"
 alias cpug="sudo cpupower frequency-set -g $1"
+alias runvenv="source env/bin/activate"
 
 upload-file() {
     curl -F "file=@$1" https://0x0.st
+}
+
+mkcd() {
+    test -d "$1" || mkdir "$1" && cd "$1"
 }
 
 wttr() {

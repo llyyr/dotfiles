@@ -33,7 +33,7 @@ function! g:Sline()
     \   }
   return get(l:mode_map, mode())
 endfunction
-set statusline=%1*\ %{Sline()}\ %2*\ %f\ %m\ %r%=\ %{&ff}\ \|\ %{strlen(&fenc)?&fenc:'none'}\ \|\ %{&filetype}\ \|\ %3*\ %l:%L\ 
+set statusline=%1*\ %{Sline()}\ %2*\ %f\ %m\ %r%=\ %{&ff}\ \|\ %{strlen(&fenc)?&fenc:'none'}\ \|\ %{&filetype}\ \|\ %l:%L:%c:%{strwidth(getline('.'))}\ 
 fun! HumanSize(bytes) abort
     let l:bytes = a:bytes
     let l:sizes = ['B', 'KiB', 'MiB', 'GiB']
@@ -44,6 +44,8 @@ fun! HumanSize(bytes) abort
     endwhile
     return printf('%.1f%s', l:bytes, l:sizes[l:i])
 endfun
+
+cmap w!! w !sudo tee % > /dev/null 
 
 let &statusline .= "| %{HumanSize(line2byte('$') + len(getline('$')))}"
 
