@@ -30,6 +30,7 @@ alias dotfiles="/usr/bin/git --git-dir=$HOME/dotfiles --work-tree=$HOME"
 alias localejp="LC_ALL=ja_JP.UTF-8 LANG=ja_JP.UTF-8"
 alias cpug="sudo cpupower frequency-set -g $1"
 alias runvenv="source env/bin/activate"
+alias ghc="ghc -no-keep-hi-files -no-keep-o-files $1"
 
 upload-file() {
     curl -F "file=@$1" https://0x0.st

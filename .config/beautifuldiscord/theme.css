@@ -54,10 +54,13 @@
     content: none;
 }
 
+.container-1ov-mD { display: inline-block; } /* embed stuff*/
+.container-1ov-mD>* { display: inline-block; vertical-align: top; margin: 0.25rem; }
+.reactions-12N0jA { display:  flex; } /*embed stuff*/
+
 .icon-2Po-VO {
 	display: none;
 }
-
 
 .theme-dark [class*=searchResult-] [class*=hit-] { /* search result box */
     box-shadow:none;

@@ -11,10 +11,10 @@ if dein#load_state('~/.cache/dein')
   "call dein#add('Shougo/denite.nvim')
   call dein#add('Shougo/Defx.nvim')
   call dein#add('sheerun/vim-polyglot')
-  call dein#add('poiuto/gruvbox9')
   call dein#add('Yggdroot/indentLine')
   call dein#add('mbbill/undotree')
   call dein#add('cohama/lexima.vim')
+  call dein#add('srcery-colors/srcery-vim')
   if !has('nvim')
     call dein#add('roxma/nvim-yarp')
     call dein#add('roxma/vim-hug-neovim-rpc')
@@ -103,6 +103,7 @@ set history=500
 
 " Enable filetype plugins
 filetype plugin indent on
+set omnifunc=syntaxcomplete#Complete
 
 " Enable mouse support
 set mouse=a
@@ -136,10 +137,6 @@ augroup END
 
 
 """ Moving around in tabs/windows/buffers
-" Map <Space> to / (search) and Ctrl-<Space> to ? (backwards search)
-map <space> /
-map <C-space> ?
-
 " Disable highlight when <leader><cr> is pressed
 map <silent> <leader><cr> :noh<cr>
 
@@ -157,6 +154,11 @@ map <leader>ba :bufdo bd<cr>
 
 map <M-l> :bnext<cr>
 map <M-h> :bprevious<cr>
+
+" Tab navigation like Firefox.
+nnoremap <C-Left> :tabprevious<CR>
+nnoremap <C-Right>   :tabnext<CR>
+nnoremap <C-t>     :tabnew<CR>
 
 " Useful mappings for managing tabs
 map <leader>tn :tabnew<cr>
@@ -219,7 +221,27 @@ map <leader>x :e ~/buffer.md<cr>
 map <leader>pp :setlocal paste!<cr>
 """
 
+function! Smart_TabComplete()
+  let line = getline('.')                         " current line
+  let substr = strpart(line, -1, col('.'))      " from the start of the current
+                                                  " line to one character right
+                                                  " of the cursor
+  let substr = matchstr(substr, "[^ \t]*$")       " word till cursor
+  if (strlen(substr)==0)                          " nothing to match on empty string
+    return "\<tab>"
+  endif
+  let has_period = match(substr, '\.') != -1      " position of period, if any
+  let has_slash = match(substr, '\/') != -1       " position of slash, if any
+  if (!has_period && !has_slash)
+    return "\<C-X>\<C-P>"                         " existing text matching
+  elseif ( has_slash )
+    return "\<C-X>\<C-F>"                         " file matching
+  else
+    return "\<C-X>\<C-O>"                         " plugin matching
+  endif
+endfunction
 
+inoremap <tab> <c-r>=Smart_TabComplete()<CR>
 
 """ Visual mode stuff
 
@@ -249,8 +271,6 @@ function! VisualSelection(direction, extra_filter) range
 endfunction
 """
 
-
-
 """ Colors
 " Enable syntax highlighting
 syntax enable
@@ -260,21 +280,10 @@ set t_8f=\[[38;2;%lu;%lu;%lum
 set t_8b=\[[48;2;%lu;%lu;%lum
 set termguicolors
 
-" Set background
 set background=dark
-
-" gruvbox settings, these need to be set before colorscheme
-" gruvbox syntax colors based on filetype
-let g:gruvbox_filetype_hi_groups = 1
-
-" gruvbox highlighting based on plugin
-let g:gruvbox_plugin_hi_groups = 1
-
-" gruvbox transparent background
-let g:gruvbox_transp_bg = 1
-
-" Set colorscheme (gruvbox9, gruvbox9_hard, gruvbox9_soft available)
-colorscheme gruvbox9_hard
+let g:srcery_bg_passthrough = 1
+colorscheme srcery
+hi TabLineFill guibg=NONE
 
 " Set extra options when running in GUI mode
 if has("gui_running")
@@ -285,18 +294,6 @@ if has("gui_running")
 endif
 
 """
-
-
-
-""" Turn persistent undo on, so that you can undo even when you close a buffer/VIM
-"try
-"    set undodir=~/.vim_runtime/temp_dirs/undodir
-"    set undofile
-"catch
-"endtry
-"""
-
-
 
 """ Plugins
 " Disable deoplete on startup
