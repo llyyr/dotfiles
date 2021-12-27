@@ -6,6 +6,22 @@
     user-select: text !important;
 }
 
+/* Color overrides */
+
+:not(img):not(pre):not(code):not(span) {
+    background-color: black !important;
+	color: #DDCCBB !important;
+    /*color: #00AA00 !important;*/
+}
+
+a[href], a[href] * {
+    color: #FFAA0F !important;
+}
+
+a:visited, a:visited * {
+    color: #FF5D4A !important;
+}
+
 pre, code {
     color: #cba !important;
 	background-color: #111 !important;

@@ -68,7 +68,11 @@
 
 *:not([class*="hljs"]) { /* font */
     font-family: "Noto Sans JP" !important;
-	line-height: 1.35 !important;
+	line-height: 1.33 !important;
+}
+
+.hljs {
+    font-family: "Iosevka Term Custom" !important;
 }
 
 .searchResultsWrap-2DKFzt { /* search result width */
