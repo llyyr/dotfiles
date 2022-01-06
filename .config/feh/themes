@@ -1,1 +1,1 @@
-feh -B black -N --auto-zoom --scale-down
+feh -x -B black -N --auto-zoom --scale-down

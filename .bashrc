@@ -12,6 +12,7 @@ HISTIGNORE="ls:bg:fg:exit:reset:clear:cd"
 HISTCONTROL="ignoreboth:erasedups"
 HISTSIZE=1000
 HISTFILESIZE=2000
+datetimefilename=$(date +'%Y%m%d-%H%M')
 
 alias vim=nvim
 alias ls="ls -Ah --color=auto --group-directories-first"
@@ -37,9 +38,14 @@ alias xpaste="xclip -selection clipboard -o"
 alias xcopy="xclip -selection c"
 #temp lol
 alias gbf="chromium-browser --enable-features=UseOzonePlatform --ozone-platform=wayland"
+alias gbf2="microsoft-edge-beta --enable-features=UseOzonePlatform --ozone-platform=wayland"
 alias discord="discord --no-sandbox --disable-smooth-scrolling --enable-features=UseOzonePlatform --ozone-platform=wayland"
 alias discord-canary="discord-canary --no-sandbox --disable-smooth-scrolling --enable-features=UseOzonePlatform --ozone-platform=wayland"
 
+waylandrc() {
+    #wf-recorder -g "$(slurp)" -c h264_vaapi -d /dev/dri/renderD128 --force-yuv -f ~/Videos/${datetimefilename}.mp4
+    wf-recorder -g "$(slurp)" -f ~/Videos/${datetimefilename}.mp4
+}
 
 upload-file() {
     curl -F "file=@$1" https://0x0.st

@@ -7,7 +7,8 @@
         "max-length": 50
     },
     "clock": {
-        "format": "{:%a, %d. %b  %H:%M}",
+        "timezones": ["Asia/Kolkata", "Asia/Tokyo"],
+        "format": "{:%a, %d. %b  %H:%M %Z}",
         "tooltip": false,
     },
     "wlr/taskbar": {
@@ -24,7 +25,7 @@
     },
     "cpu": {
         "interval": 10,
-        "format": "{}% ",
+        "format": "{usage}% ",
         "max-length": 10
     },
     "pulseaudio": {

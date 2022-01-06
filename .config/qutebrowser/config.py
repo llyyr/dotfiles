@@ -287,7 +287,8 @@ c.content.blocking.enabled = True
 # extracting it from the `location` parameter of the subscribe URL and
 # URL-decoding it).
 # Type: List of Url
-c.content.blocking.adblock.lists = ['https://easylist.to/easylist/easylist.txt', 'https://pgl.yoyo.org/adservers/serverlist.php?hostformat=hosts&showintro=1&mimetype=plaintext', 'https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/filters.txt']
+
+c.content.blocking.adblock.lists = ['https://easylist.to/easylist/easylist.txt','https://easylist.to/easylist/easyprivacy.txt', 'https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/filters.txt', 'https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_2_English/filter.txt', 'https://secure.fanboy.co.nz/fanboy-cookiemonster.txt', 'https://easylist.to/easylist/fanboy-social.txt', 'https://secure.fanboy.co.nz/fanboy-annoyance.txt']
 
 # Enable hyperlink auditing (`<a ping>`).
 # Type: Bool
