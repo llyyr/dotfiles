@@ -1,1 +1,1 @@
-feh -x -B black -N --auto-zoom --scale-down
+feh -S mtime -x -B black -N --auto-zoom --scale-down

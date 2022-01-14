@@ -1,5 +1,5 @@
 {
     "mapping": {
-        "1,274,1": "k(BackSpace).w(100).m(Shift_L, k(BackSpace))"
+        "1,274,1": "m(Alt_L, k(Left).w(100).k(Right))"
     }
 }

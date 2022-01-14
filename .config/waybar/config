@@ -46,7 +46,7 @@
     },
     "custom/weather": {
         "tooltip": false,
-        "exec": "curl 'https://wttr.in/Patna?format=1'",
-        "interval": 800
+        "exec": "curl -sf https://wttr.in/dak+patna?format='%t+%w+%p'",
+        "interval": 900
     }
 }

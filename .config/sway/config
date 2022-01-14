@@ -22,7 +22,8 @@ font pango:Iosevka Term Custom 9
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg /mnt/c/Users/llyyr/Desktop/4chan/jp/1637197847029.jpg fit #000000
+# output * bg /mnt/c/Users/llyyr/Desktop/4chan/jp/1637197847029.jpg fit #000000
+output * bg /mnt/e/Images/Altina/鮫島タムラ \(2830191\)/88663225_p0 - アルティナ雑まとめv2.png fill #000000
 #
 # Example configuration:
 #
@@ -32,8 +33,8 @@ output * bg /mnt/c/Users/llyyr/Desktop/4chan/jp/1637197847029.jpg fit #000000
 
 ### Idle configuration
  exec swayidle -w \
-          timeout 300 'swaylock -f -c 000000' \
-          timeout 300 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
+          timeout 600 'swaylock -f -c 000000' \
+          timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
           before-sleep 'swaylock -f -c 000000'
 
 # This will lock your screen after 300 seconds of inactivity, then turn off
@@ -284,10 +285,10 @@ for_window [app_id="com.chatterino.https:\/\/www.chatterino"] floating enable
 for_window [app_id="com.chatterino.https:\/\/www.chatterino"] move scratchpad
 for_window [app_id="com.chatterino.https:\/\/www.chatterino"] scratchpad show
 for_window [app_id="mpv"] floating enable
-for_window [app_id="mpv"] move scratchpad
-for_window [app_id="mpv"] scratchpad show
 for_window [app_id="mpv"] resize set 960 540
 for_window [app_id="mpv"] border pixel 0
+for_window [app_id="mpv"] move scratchpad
+for_window [app_id="mpv"] scratchpad show
 
 
 exec_always {
