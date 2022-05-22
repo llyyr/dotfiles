@@ -1,0 +1,31 @@
+#!/bin/sh
+
+# Download media from 4chan thread with curl and jq
+# Usage: 4dl board thread_num
+
+error () {
+	printf "$1\n"
+    printf "Usage: 4dl board thread_num\n"
+	exit ${2:-1}
+}
+
+[ "$1" = "--help" ] || [ "$1" = "-h" ] && error "Help" 0
+[ -z "$2" ] && error "Not enough arguments"
+
+board=${1}
+thread=${2}
+
+temp=$(mktemp --tmpdir "${Prog}.tmp.XXXXXXXX")
+threadjson=$(mktemp --tmpdir "${Prog}.json.XXXXXXXX")
+
+curl -s "https://a.4cdn.org/$board/thread/${thread}.json" > "$threadjson"
+read _Word < "$threadjson" || [ -n "$_Word" ] || error "No media found." 
+mkdir -p "${board}_${thread}"
+cd "${board}_${thread}"
+printf "parallel\n" > "$temp"
+url="https://i.4cdn.org/$board/"
+
+jq -r '.posts|.[]|select(.tim !=null)|"url = \"'"$url"'\(.tim)\(.ext)\"\nremote-name\n"' < "$threadjson" >> "$temp"
+
+curl -K "$temp"
+rm -f "$temp" "$threadjson"

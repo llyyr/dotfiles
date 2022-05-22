@@ -1,5 +1,5 @@
 * {
-  font-family: Iosevka Term Custom;
+  font-family: Iosevka Aile Custom;
   font-size: 10pt;
   color: white;
   border: none;
@@ -19,13 +19,14 @@ window#waybar {
 #disk,
 #pulseaudio,
 #custom-weather,
-#cpu {
-  padding-left: 1rem;
-  padding-right: 1rem;
+#cpu,
+#temperature {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
 }
 
 #custom-weather {
-  padding-left: 2rem;
+  padding-right: 2rem;
   font-weight: bold;
 }
 

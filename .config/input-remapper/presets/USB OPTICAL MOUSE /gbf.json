@@ -1,0 +1,8 @@
+{
+    "mapping": {
+        "1,274,1": [
+            "m(Alt_L, k(Left).w(10).k(Right))\n# Broken mapping:\n# No target can handle all specified keycodes",
+            "keyboard"
+        ]
+    }
+}

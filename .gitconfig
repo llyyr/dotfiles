@@ -1,2 +1,5 @@
 [init]
 	defaultBranch = main
+[user]
+	email = llyyr@users.noreply.github.com
+	name = llyyr

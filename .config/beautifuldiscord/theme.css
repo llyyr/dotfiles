@@ -11,7 +11,7 @@
     --interactive-muted: #4f545c;
     --background-primary: black; 
     --background-secondary: black;
-	--background-secondary-alt: black;
+    --background-secondary-alt: black;
     --background-tertiary: black;
     --background-accent: black;
     --background-floating: black;
@@ -46,6 +46,7 @@
 .theme-dark .root-g14mjS, .theme-dark .footer-31IekZ,
 .theme-dark .streamPreview-2-WUWT,
 .theme-dark .keyboardShortcutsModal-2CRmCm,
+.theme-dark .perksModal-CLcR1c,
 .theme-dark .peopleColumn-1wMU14 {
     background-color: var(--background-primary) !important;
 }
@@ -54,17 +55,30 @@
     background: none;
 }
 
-[class*=searchResult]:after, [class*=searchResult]:before, .theme-dark .option-96V44q:after, .theme-dark .resultsGroup-r_nuzN:before {
+[class*=searchResult]:after, [class*=searchResult]:before, .theme-dark [class*=option-]:after, .theme-dark [class*=resultsGroup-]:before {
     top: none;
     content: none;
 }
 
-.container-1ov-mD { display: inline-block; } /* embed stuff*/
-.container-1ov-mD>* { display: inline-block; vertical-align: top; margin: 0.25rem; }
-.reactions-12N0jA { display:  flex; } /*embed stuff*/
+ /* embed stuff*/
+.container-2sjPya {
+    display: inline-block;
+}
+
+.container-2sjPya>.messageAttachment-CZp8Iv, .container-2sjPya>.embed-hKpSrO {
+    display: inline-block; vertical-align: top; margin: 0.25rem;
+}
+
+.removeAttachmentButton-1iO1qS {
+    top: -1.5rem;
+}
+
+.reactions-1BUEKl {
+    display: flex;
+} /*embed stuff*/
 
 .icon-2Po-VO {
-	display: none;
+    display: none;
 }
 
 .theme-dark [class*=searchResult-] [class*=hit-],  { /* search result box */
@@ -72,9 +86,15 @@
 }
 
 *:not([class*="hljs"]) { /* font */
-    font-family: "Noto Sans JP" !important;
-	line-height: 1.33 !important;
+    font-family: "Noto Sans CJK JP" !important;
+    line-height: 1.4 !important;
 }
+
+/*
+.compact-2nkcau.wrapper-30-nkg, .cozy-vmldnb.wrapper-30-nkg {
+    padding-top: 0px !important;
+    padding-bottom: 0px !important;
+}*/
 
 .hljs {
     font-family: "Iosevka Term Custom" !important;
@@ -89,7 +109,7 @@
 }*/
 
 .channelTextArea-rNsIhG, .form-2fGMdU { /* chat input box margins */
-	margin-top: unset;
+    margin-top: unset;
     margin-left: unset;
     margin-right: unset;
     border: unset;
@@ -98,10 +118,6 @@
 
 .containerCozy-jafyvG { /* chat message spacing */
     padding: 5px 0px 5px 0px;
-}
-
-.buttons-uaqb-5 { /* gift and gif button */
-    display: none;
 }
 
 .attachment-33OFj0, .wrapperAudio-1jDe0Q { /* attachment */

@@ -1,15 +1,16 @@
 {
     "layer": "top",
     "modules-left": ["sway/workspaces", "sway/mode", "sway/window"],
-    "modules-center": ["clock", "custom/weather"],
-    "modules-right": ["wlr/taskbar", "pulseaudio", "memory", "cpu"],
+    "modules-center": ["custom/weather", "clock"],
+    "modules-right": ["custom/recorder", "wlr/taskbar", "pulseaudio", "memory", "cpu", "temperature"],
     "sway/window": {
         "max-length": 50
     },
     "clock": {
         "timezones": ["Asia/Kolkata", "Asia/Tokyo"],
-        "format": "{:%a, %d. %b  %H:%M %Z}",
+        "format": "{:%a, %d %b. %r %Z}",
         "tooltip": false,
+        "interval": 1,
     },
     "wlr/taskbar": {
         "format": "{icon}",
@@ -21,12 +22,18 @@
     },
     "memory": {
         "interval": 30,
-        "format": "{used:0.1f}G/{total:0.1f}G "
+        "format": "{used:0.1f}G "
     },
     "cpu": {
         "interval": 10,
         "format": "{usage}% ",
         "max-length": 10
+    },
+    "temperature": {
+        "thermal-zone": 2,
+        "critical-threshold": 80,
+        "format-critical": "{temperatureC}°C ",
+        "format": "{temperatureC}°C "
     },
     "pulseaudio": {
         "format": "{volume}% {icon}",
@@ -46,7 +53,14 @@
     },
     "custom/weather": {
         "tooltip": false,
-        "exec": "curl -sf https://wttr.in/dak+patna?format='%t+%w+%p'",
-        "interval": 900
-    }
+        "exec": "curl -sf https://wttr.in/jamal+patna?format='%t+%w+%p'",
+        "interval": 600
+    },
+    "custom/recorder": {
+        "format": "",
+		"return-type": "json",
+		"interval": 1,
+		"exec": "echo '{\"class\": \"recording\"}'",
+		"exec-if": "pgrep wf-recorder"
+	}
 }
