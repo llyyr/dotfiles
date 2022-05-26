@@ -10,10 +10,8 @@ shopt -s autocd
 
 # Load/launch tmux if the user owns this script, bash is interactive,
 # the environment is not a Vim Terminal, and this is not a subshell.
-[[ -O "$BASH_SOURCE" && $- == *i* && ! $VIM_TERMINAL ]] && ((SHLVL < 2)) &&
+[[ -O "$BASH_SOURCE" && $- == *i* && ! $VIM_TERMINAL ]] && ((SHLVL < 3)) &&
 	{ command tmux ls && command tmux -2 attach || command tmux -2; }
-
-
 
 HISTIGNORE="ls:bg:fg:exit:reset:clear:cd"
 HISTCONTROL="ignoreboth:erasedups"

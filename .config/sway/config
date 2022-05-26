@@ -285,6 +285,8 @@ for_window [app_id="discord"] floating enable, move scratchpad, scratchpad show,
 for_window [app_id="termfloat"] floating enable, move scratchpad, scratchpad show
 for_window [app_id="com.chatterino.https:\/\/www.chatterino"] floating enable, move scratchpad, scratchpad show
 for_window [app_id="mpv"] floating enable, resize set 960 540, move scratchpad, scratchpad show
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="task_dialog"] floating enable
 
 exec_always {
     systemctl --user import-environment
@@ -297,5 +299,5 @@ exec_always {
 }
 
 exec mako
-exec fcitx5 -d
+exec fcitx5 -rd
 exec /usr/libexec/polkit-gnome-authentication-agent-1
