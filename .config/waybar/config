@@ -2,14 +2,14 @@
     "layer": "top",
     "modules-left": ["sway/workspaces", "sway/mode", "sway/window"],
     "modules-center": ["custom/weather", "clock"],
-    "modules-right": ["custom/recorder", "wlr/taskbar", "pulseaudio", "memory", "cpu", "temperature"],
+    "modules-right": ["custom/recorder", "wlr/taskbar", "pulseaudio", "memory", "cpu", "temperature", "idle_inhibitor"],
     "sway/window": {
         "max-length": 50
     },
     "clock": {
         "timezones": ["Asia/Kolkata", "Asia/Tokyo"],
         "format": "{:%a, %d %b. %r %Z}",
-        "tooltip": false,
+        "tooltip-format": "<tt>{calendar}</tt>",
         "interval": 1,
     },
     "wlr/taskbar": {
@@ -62,5 +62,12 @@
 		"interval": 1,
 		"exec": "echo '{\"class\": \"recording\"}'",
 		"exec-if": "pgrep wf-recorder"
-	}
+	},
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "format-icons": {
+            "activated": "",
+            "deactivated": ""
+        }
+    },
 }

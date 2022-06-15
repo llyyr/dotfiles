@@ -3,7 +3,7 @@
 # important for language settings, see below.
 
 export EDITOR=/usr/bin/nvim
-export PATH="${HOME}/.local/bin:${PATH}"
+export PATH="${HOME}/.dotnet/:${HOME}/.local/bin:${PATH}"
 #export LC_ALL=en_US.UTF-8
 #export LANG=en_US.UTF-8
 shopt -s autocd
@@ -17,6 +17,10 @@ HISTIGNORE="ls:bg:fg:exit:reset:clear:cd"
 HISTCONTROL="ignoreboth:erasedups"
 HISTSIZE=1000
 HISTFILESIZE=2000
+
+
+WINEDEBUG=fixme-all
+
 
 alias vim=nvim
 alias ls="ls -Ah --color=auto --group-directories-first"
@@ -65,7 +69,7 @@ gbfrc() {
 }
 
 upload-file() {
-    curl -F "file=@$1" https://0x0.st
+    curl -o /dev/null -F "file=@$1" https://0x0.st
 }
 
 mkcd() {

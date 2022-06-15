@@ -1,0 +1,30 @@
+; vim: set ft=scheme:
+
+(assoc
+  #:pattern '("(application|text)/(x-)?(pdf|postscript|ps|epub.*)" "image/(x-)?eps" "^https?://.+/.+\\.(pdf|epub|ps)(\\?.+)?$")
+  #:program "zathura %f")
+
+(assoc
+  #:pattern "^(http(s)?://)?((w){3}.)?youtu(be|.be)?(.com)?/.+"
+  #:program "firefox %f ; umpv %f")
+
+(assoc
+  #:pattern "^https?://.+/.+\\.(webm|WEBM|mp4|MP4|mkv|MKV|mov|MOV)$"
+  #:program "umpv %f")
+
+(assoc
+  #:pattern "^https?://.*.(mp3|MP3|wav|WAV)$"
+  #:program "foot -e --app-id='termfloat' mpv --profile=audio %f")
+
+(assoc
+  #:pattern "^https?://.*"
+  #:program "qutebrowser %f"
+  #:test "pgrep qutebrowser"
+  #:on-fail "firefox %f")
+
+(assoc
+  #:pattern ".*"
+  #:program (select-alternative-with "fuzzel -d")
+  #:standalone #t)
+
+
