@@ -9,11 +9,11 @@
   #:program "firefox %f ; umpv %f")
 
 (assoc
-  #:pattern "^https?://.+/.+\\.(webm|WEBM|mp4|MP4|mkv|MKV|mov|MOV)$"
+  #:pattern "^https?://.+/.+\\.(webm|WEBM|mp4|MP4|mkv|MKV|mov|MOV)"
   #:program "umpv %f")
 
 (assoc
-  #:pattern "^https?://.*.(mp3|MP3|wav|WAV)$"
+  #:pattern "^https?://.*.(mp3|MP3|wav|WAV)"
   #:program "foot -e --app-id='termfloat' mpv --profile=audio %f")
 
 (assoc
@@ -21,6 +21,14 @@
   #:program "qutebrowser %f"
   #:test "pgrep qutebrowser"
   #:on-fail "firefox %f")
+
+(assoc
+  #:pattern ".(webm|mp4|mkv|mov)$"
+  #:program "mpv %f")
+
+(assoc
+  #:pattern "inode/directory"
+  #:program "dolphin %f")
 
 (assoc
   #:pattern ".*"

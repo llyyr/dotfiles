@@ -1,32 +1,34 @@
-vim.opt.shell            = '/bin/sh'
+vim.opt.shell         = '/bin/sh'
+vim.opt.undofile      = true
+vim.opt.undodir       = '/home/llyyr/.cache/undo'
+vim.opt.mouse         = 'a'
+vim.opt.expandtab     = true                   -- tabs instead of spaces
+vim.opt.shiftwidth    = 4                      -- shift 4 spaces when tab
+vim.opt.tabstop       = 4                      -- 1 tab == 4 spaces
+vim.opt.softtabstop   = 4                      -- same
+vim.opt.smartindent   = true                   -- autoindent new lines
+vim.opt.wrap          = true
+vim.opt.linebreak     = true
+vim.opt.splitbelow    = true
+vim.opt_splitright    = true
+vim.opt.smd           = true
+vim.opt.number        = true
+vim.opt.termguicolors = true
+vim.opt.ignorecase    = true
+vim.opt.smartcase     = true
+vim.opt.magic         = true
+vim.opt.showmatch     = true                   -- highlight matching parenthesis
+vim.opt.textwidth     = 0
+vim.opt.colorcolumn   = '81'
+vim.opt.completeopt   = 'menu,menuone,noselect'
+vim.opt.clipboard     = 'unnamedplus'          -- copy/paste to system clipboard
+vim.opt.hidden        = true
+vim.opt.signcolumn    = 'no'                   -- disable signscolumn
+vim.g.mapleader       = ','
+vim.o.sessionoptions  = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal"
 
-vim.opt.undofile         = true
-vim.opt.undodir          = '/home/llyyr/.cache/undo'
-vim.opt.mouse            = 'a'
-vim.opt.expandtab        = true                    -- tabs instead of spaces
-vim.opt.shiftwidth       = 4                       -- shift 4 spaces when tab
-vim.opt.tabstop          = 4                       -- 1 tab == 4 spaces
-vim.opt.softtabstop      = 4                       -- same
-vim.opt.smartindent      = true                    -- autoindent new lines
-vim.opt.wrap             = true
-vim.opt.splitbelow       = true
-vim.opt_splitright       = true
-vim.opt.smd              = true
-vim.opt.number           = true
-vim.opt.termguicolors    = true
-vim.opt.ignorecase       = true
-vim.opt.showmatch        = true                    -- highlight matching parenthesis
-vim.opt.textwidth        = 0
-vim.opt.colorcolumn      = '81'
-vim.opt.completeopt      = 'menu,menuone,noselect'
-vim.opt.clipboard        = 'unnamedplus'           -- copy/paste to system clipboard
-vim.opt.hidden           = true
-vim.opt.signcolumn       = 'no'                    -- disable signscolumn
-vim.g.mapleader          = ','
-vim.o.sessionoptions     = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal"
-
+require('impatient') -- .enable_profile()
 require('packer_init')
-require('impatient').enable_profile()
 require('filetype_init')
 require('kanagawa_init')
 require('lualine_init')
@@ -58,10 +60,10 @@ call SetupCommandAlias("Q","q")
 vim.api.nvim_set_keymap('n', '<C-h>', ':wincmd h<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<C-l>', ':wincmd l<CR>', { noremap = true, silent = true })
 
-vim.api.nvim_set_keymap('n', '<A-j>', '<C-d>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<A-k>', '<C-u>', { noremap = true, silent = true })
-
-vim.api.nvim_set_keymap('n', '<leader>;', ':exe "normal A;"<cr>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<A-j>', 'mz:m+<CR>`z', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<A-k>', 'mz:m-2<CR>`z', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('v', '<A-j>', ':m\'>+<cr>`<my`>mzgv`yo`z', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('v', '<A-k>', ':m\'<-2<cr>`>my`<mzgv`yo`z', { noremap = true, silent = true })
 
 vim.api.nvim_set_keymap('n', '<leader>.', '/<c-r>=expand("<cword>")<CR><CR>N', { noremap = true, silent = true })
 

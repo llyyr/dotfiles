@@ -1,11 +1,11 @@
 require('lualine').setup({
     options = {
-        icons_enabled = true,
+        icons_enabled = false,
         theme = 'kanagawa',
-        section_separators = { left = '', right = ''},
-        component_separators = { left = '', right = ''},
+        section_separators = { left = '', right = ''},
+        component_separators = { left = '|', right = '|'},
         disabled_filetypes = { },
-        padding = 2,
+        padding = 1,
     },
     filetype_names = {
         TelescopePrompt = 'Telescope',
@@ -19,8 +19,8 @@ require('lualine').setup({
         lualine_b = { 'branch'   },
         lualine_c = { 'filename' },
         lualine_x = { 'diagnostics', 'diff' },
-        lualine_y = { 'encoding', 'fileformat', 'filetype' },
-        lualine_z = { 'location' }
+        lualine_y = { 'encoding', 'fileformat', 'filetype', 'filesize' },
+        lualine_z = { 'location', "progress" }
     },
     inactive_sections = {
         lualine_a = { },

@@ -23,9 +23,9 @@ WINEDEBUG=fixme-all
 
 
 alias vim=nvim
+alias diff="nvim -d"
 alias ls="ls -Ah --color=auto --group-directories-first"
 alias mpa="mpv --profile=audio"
-alias mvi="mpv --config-dir=/mnt/c/mvi/ $@"
 alias grep="grep --color=auto --binary-files=without-match --devices=skip"
 alias twitchclip="yt-dlp -o '%(creator)s-%(id)s.%(ext)s'"
 alias twitterclip="yt-dlp -o '%(uploader_id)s-%(id)s.%(ext)s'"
@@ -46,14 +46,15 @@ alias ghc="ghc -no-keep-hi-files -no-keep-o-files $1"
 #alias xpaste="xclip -selection clipboard -o"
 #alias xcopy="xclip -selection c"
 alias screenoff="swayidle timeout 10 'swaymsg \"output * dpms off\"' resume 'swaymsg \"output * dpms on\"'"
+alias httpserve="sudo darkhttpd $1 --no-server-id"
 #temp lol
-alias gbf="chromium-browser --ozone-platform-hint=auto --disable-backgrounding-occluded-windows"
+#alias gbf="chromium-browser --ozone-platform-hint=auto --disable-backgrounding-occluded-windows"
 alias gbf2="microsoft-edge-beta --profile-directory='Profile 2' --ozone-platform-hint=auto --disable-backgrounding-occluded-windows"
-alias gbf22="microsoft-edge-beta --profile-directory='Profile 3' --ozone-platform-hint=auto --disable-backgrounding-occluded-windows"
-alias gbf23="microsoft-edge-beta --profile-directory='Profile 4' --ozone-platform-hint=auto --disable-backgrounding-occluded-windows"
+#alias gbf22="microsoft-edge-beta --profile-directory='Profile 3' --ozone-platform-hint=auto --disable-backgrounding-occluded-windows"
+#alias gbf23="microsoft-edge-beta --profile-directory='Profile 4' --ozone-platform-hint=auto --disable-backgrounding-occluded-windows"
 #alias discord="discord --no-sandbox --disable-smooth-scrolling" 
 alias discord-canary="discord-canary --no-sandbox --disable-smooth-scrolling" 
-#alias discordtest="discord --no-sandbox --disable-smooth-scrolling --enable-features=UseOzonePlatform --ozone-platform=wayland"
+alias discordtest="discord --no-sandbox --disable-smooth-scrolling --enable-features=UseOzonePlatform --ozone-platform=wayland"
 
 colpick() {
     grim -g "$(slurp -p)" -t ppm - | convert - -format '%[pixel:p{0,0}]' txt:-
@@ -69,7 +70,7 @@ gbfrc() {
 }
 
 upload-file() {
-    curl -o /dev/null -F "file=@$1" https://0x0.st
+    curl -F "file=@$1" https://0x0.st
 }
 
 mkcd() {
