@@ -18,27 +18,27 @@ HISTCONTROL="ignoreboth:erasedups"
 HISTSIZE=1000
 HISTFILESIZE=2000
 
+ZYPP_MEDIANETWORK=1
 
 WINEDEBUG=fixme-all
 
+eval $(dircolors ~/.dir_colors)
 
 alias vim=nvim
-alias diff="nvim -d"
-alias ls="ls -Ah --color=auto --group-directories-first"
+alias ls="ls -AhF --color=auto --group-directories-first"
 alias grep="grep --color=auto --binary-files=without-match --devices=skip"
 alias psg="ps aux | grep -v grep | grep -i -e VSZ -e"
 alias mpa="mpv --profile=audio"
-alias twitchclip="yt-dlp -o '%(creator)s-%(id)s.%(ext)s'"
-alias twitterclip="yt-dlp -o '%(uploader_id)s-%(id)s.%(ext)s'"
 alias yt-dlp-aria2c="yt-dlp --external-downloader aria2c --downloader-args 'aria2c:--continue true --retry-wait=30 -j 5 -x 5 -s 5 -k 1M'"
 alias cp="cp -ip"
 alias mv="mv -i"
 alias rm="rm -i"
 alias mkdir="mkdir -pv"
 alias du="du -ach | sort -h"
+alias diff="diff -Naup"
 alias traffic="sudo ss -tp4"
-alias windesktop="cd /mnt/c/Users/llyyr/Desktop/"
-alias brplay="cd ~/.local/share/Steam/steamapps/compatdata/291550/pfx/drive_c/users/steamuser/BrawlhallaReplays"
+alias windesktop="/mnt/c/Users/llyyr/Desktop/"
+alias brplay="~/.local/share/Steam/steamapps/compatdata/291550/pfx/drive_c/users/steamuser/BrawlhallaReplays"
 alias f="ag --smart-case --skip-vcs-ignores"
 alias blank="sleep 1; xset dpms force off"
 alias dotfiles="/usr/bin/git --git-dir=$HOME/dotfiles --work-tree=$HOME"
@@ -51,9 +51,8 @@ alias ghc="ghc -no-keep-hi-files -no-keep-o-files $1"
 alias screenoff="swayidle timeout 10 'swaymsg \"output * dpms off\"' resume 'swaymsg \"output * dpms on\"'"
 #temp lol
 alias gbf2="microsoft-edge-beta --profile-directory='Profile 2' --ozone-platform-hint=auto --disable-backgrounding-occluded-windows"
-#alias discord="discord --no-sandbox --disable-smooth-scrolling" 
 alias discord-canary="discord-canary --no-sandbox --disable-smooth-scrolling" 
-alias discordtest="discord --no-sandbox --disable-smooth-scrolling --enable-features=UseOzonePlatform --ozone-platform=wayland"
+alias discordtest="discord-canary --no-sandbox --disable-smooth-scrolling --enable-features=UseOzonePlatform --ozone-platform=wayland"
 
 colpick() {
     grim -g "$(slurp -p)" -t ppm - | convert - -format '%[pixel:p{0,0}]' txt:-
@@ -69,7 +68,11 @@ gbfrc() {
 }
 
 upload-file() {
-    curl -F "file=@$1" https://0x0.st
+    if [ $# -eq 0 ]; then
+        exec curl -F file=@- https://0x0.st
+    else
+        exec curl -F file=@"$1" https://0x0.st
+    fi
 }
 
 mkcd() {
@@ -92,6 +95,24 @@ cheat() {
     fi
 }
 
+# fuzzy find (case insensitive)
+function ff() {
+	local pattern="$1"
+	shift
+	if [ $# -eq 0 ]; then
+		set -- .
+	fi
+	find "$@" | grep -i -- "$pattern"
+}
+
+function man() {
+	LESS_TERMCAP_md=$'\e[1;36m' \
+	LESS_TERMCAP_me=$'\e[0m' \
+	LESS_TERMCAP_us=$'\e[1;32m' \
+	LESS_TERMCAP_ue=$'\e[0m' \
+	GROFF_NO_SGR=1 \
+	command man "$@"
+}
 
 function extract {
  if [ -z "$1" ]; then

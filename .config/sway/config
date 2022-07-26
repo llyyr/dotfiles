@@ -160,12 +160,13 @@ input "12538:768:USB_OPTICAL_MOUSE" {
     # Show the next scratchpad window or hide the focused scratchpad window.
     # If there are multiple scratchpad windows, this command cycles through them.
     bindsym $mod+minus scratchpad show
-    # Show discord with mod+c
-    bindsym $mod+c exec 'swaymsg [app_id="discord"] scratchpad show'
-    bindsym $mod+x exec 'swaymsg [app_id="microsoft-edge-beta"] scratchpad show'
-    bindsym $mod+m exec 'swaymsg [app_id="mpv"] scratchpad show'
     bindsym $mod+z exec 'swaymsg [app_id="termfloat"] scratchpad show'
+    bindsym $mod+x exec 'swaymsg [app_id="microsoft-edge-beta"] scratchpad show'
+    bindsym $mod+c exec 'swaymsg [app_id="Electron"] scratchpad show'
+    bindsym $mod+m exec 'swaymsg [app_id="mpv"] scratchpad show'
     bindsym $mod+t exec 'swaymsg [app_id="com.chatterino.https:\/\/www.chatterino"] scratchpad show'
+    bindsym $mod+semicolon exec 'swaymsg [app_id="org.keepassxc.KeePassXC"] scratchpad show'
+
 #
 # Resizing containers:
 #
@@ -185,6 +186,17 @@ mode "resize" {
     bindsym Up resize shrink height 10px
     bindsym Right resize grow width 10px
 
+    # Same as before but 1px with Shift
+    bindsym Shift+$left resize shrink width 1px
+    bindsym Shift+$down resize grow height 1px
+    bindsym Shift+$up resize shrink height 1px
+    bindsym Shift+$right resize grow width 1px
+
+    bindsym Shift+Left resize shrink width 1px
+    bindsym Shift+Down resize grow height 1px
+    bindsym Shift+Up resize shrink height 1px
+    bindsym Shift+Right resize grow width 1px
+
     # Return to default mode
     bindsym Return mode "default"
     bindsym Escape mode "default"
@@ -197,20 +209,20 @@ bindsym $mod+n exec sunset
 # Screenshot to clipboard (all displays)
 bindsym Print exec grimshot --notify copy
 
+# Screenshot to file (all displays)
+bindsym $mod+Print exec grimshot --notify save
+
+# Region-select-screenshot to clipboard
+bindsym ctrl+Print exec grimshot --notify copy window
+
+# Region-select-screenshot to file
+bindsym $mod+ctrl+Print exec grimshot --notify save window
+
 # Current display to clipboard
 bindsym ctrl+alt+Print exec grimshot --notify copy output
 
 # Current window to clipboard (doesn't work on floating windows tho)
 bindsym alt+Print exec grimshot --notify copy active
-
-# Region-select-screenshot to clipboard
-bindsym ctrl+Print exec grimshot --notify copy area
-
-# Screenshot to file (all displays)
-bindsym $mod+Print exec grimshot --notify save
-
-# Region-select-screenshot to file
-bindsym $mod+ctrl+Print exec grimshot --notify save area
 
 # Record screen
 bindsym --to-code $mod+Shift+R exec 'bash ~/.local/bin/toggle-screen-recorder.sh'
@@ -246,8 +258,8 @@ for_window [title="Mozilla - Sharing Indicator"] floating enable
 for_window [app_id="org.kde.dolphin"] floating enable
 for_window [title="qBittorrent"] floating enable
 for_window [app_id="input-remapper-gtk"] floating enable
-for_window [app_id="org.keepassxc.KeePassXC"] floating enable
-for_window [app_id="discord"] floating enable, move scratchpad, scratchpad show, move position 0 239
+for_window [app_id="org.keepassxc.KeePassXC"] floating enable, move scratchpad, scratchpad show
+for_window [app_id="Electron"] floating enable, move scratchpad, scratchpad show, move position 0 239
 for_window [app_id="termfloat"] floating enable, move scratchpad, scratchpad show
 for_window [app_id="com.chatterino.https:\/\/www.chatterino"] floating enable, move scratchpad, scratchpad show
 for_window [app_id="mpv"] floating enable, resize set 960 540, move scratchpad, scratchpad show
@@ -262,7 +274,11 @@ exec_always {
     gsettings set org.gnome.desktop.interface cursor-theme 'breeze_cursors'
 }
 
-exec swaymsg "workspace 2; exec $term"
+exec sunset
 exec mako
 exec fcitx5 -rd
 exec /usr/libexec/polkit-gnome-authentication-agent-1
+exec swaymsg "workspace 2; exec $term"
+
+
+# vim: set filetype=config:

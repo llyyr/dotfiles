@@ -29,7 +29,7 @@ map('n', '<C-w>', ':BufferClose<CR>', opts)
 --                 :BufferCloseBuffersLeft<CR>
 --                 :BufferCloseBuffersRight<CR>
 -- Magic buffer-picking mode
-map('n', '<C-b>', ':BufferPick<CR>', opts)
+map('n', '<A-b>', ':BufferPick<CR>', opts)
 -- Sort automatically by...
 map('n', '<leader>bb', ':BufferOrderByBufferNumber<CR>', opts)
 map('n', '<leader>bd', ':BufferOrderByDirectory<CR>', opts)

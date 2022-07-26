@@ -52,7 +52,7 @@
         "on-click": "pavucontrol"
     },
     "custom/weather": {
-        "tooltip": false,
+        "tooltip": true,
         "exec": "curl -sf https://wttr.in/jamal+patna?format='%t+%w+%p'",
         "interval": 600
     },

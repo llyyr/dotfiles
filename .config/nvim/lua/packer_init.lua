@@ -18,7 +18,7 @@ return packer.startup(function()
     use { 'wbthomason/packer.nvim' }
     use { 'kyazdani42/nvim-web-devicons' }
     use { 'nvim-lua/plenary.nvim' }
-
+    
     use { 'rebelot/kanagawa.nvim', as = "kanagawa" }
     use { 'hoob3rt/lualine.nvim', requires = { 'kyazdani42/nvim-web-devicons' } }
     use { 'folke/todo-comments.nvim' }
@@ -32,7 +32,9 @@ return packer.startup(function()
     use { 'lukas-reineke/virt-column.nvim' }
     use { 'AckslD/nvim-neoclip.lua' }
     use { 'nathom/filetype.nvim' }
+    
     use { 'lewis6991/impatient.nvim' }
+    use { 'https://github.com/NMAC427/guess-indent.nvim' }
 
     use { 'rmagatti/auto-session' }
     use { 'L3MON4D3/LuaSnip' }

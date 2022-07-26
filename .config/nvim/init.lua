@@ -45,6 +45,7 @@ require('autosession_init')
 require('neoclip_init')
 require('telescope_init')
 require('indent_blankline_init')
+require('guess-indent_init')
 require('autopairs_init')
 
 vim.cmd[[
