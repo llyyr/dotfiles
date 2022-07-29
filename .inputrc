@@ -24,10 +24,11 @@ set bell-style none
 #
 
 set show-all-if-ambiguous on
-TAB:menu-complete
 
 set completion-ignore-case on
 
+TAB:menu-complete
+"\e[Z":menu-complete-backward
 #
 # end
 #

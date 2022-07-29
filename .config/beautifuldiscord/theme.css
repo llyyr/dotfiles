@@ -87,8 +87,8 @@
 }
 
 *:not([class*="hljs"]) { /* font */
-    font-family: "Noto Sans CJK JP" !important;
-    line-height: 1.4 !important;
+    font-family: "Iosevka Aile Custom" !important;
+    line-height: 1.2 !important;
 }
 
 /*

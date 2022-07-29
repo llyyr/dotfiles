@@ -6,8 +6,8 @@ export EDITOR=/usr/bin/nvim
 export PATH="${HOME}/.dotnet/:${HOME}/.local/bin:${PATH}"
 #export LC_ALL=en_US.UTF-8
 #export LANG=en_US.UTF-8
+shopt -s extglob
 shopt -s autocd
-
 # Load/launch tmux if the user owns this script, bash is interactive,
 # the environment is not a Vim Terminal, and this is not a subshell.
 [[ -O "$BASH_SOURCE" && $- == *i* && ! $VIM_TERMINAL ]] && ((SHLVL < 3)) &&
@@ -112,6 +112,14 @@ function man() {
 	LESS_TERMCAP_ue=$'\e[0m' \
 	GROFF_NO_SGR=1 \
 	command man "$@"
+}
+
+incd() {
+    if [ -z $1 ]; then
+        ls -i
+    else
+        cd $(find . -maxdepth 1 -inum $1)
+    fi
 }
 
 function extract {

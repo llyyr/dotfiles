@@ -1,0 +1,17 @@
+[include]
+	path = secrets
+[init]
+	defaultBranch = master
+[user]
+	email = llyyr.public@gmail.com
+	name = llyyr
+[url "https://github.com/"]
+	insteadOf = "git@github.com:"
+[url "git@github.com:"]
+	pushInsteadOf = "https://github.com/"
+	pushInsteadOf = "git@github.com:"
+[sendemail]
+	smtpserver = smtp.gmail.com
+	smtpuser = llyyr.public@gmail.com
+	smtpencryption = tls
+    smtpserverport = 587

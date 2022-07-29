@@ -234,6 +234,9 @@ bar {
     swaybar_command waybar
 }
 
+# set $XCURSOR_{THEME,SIZE}
+seat seat0 xcursor_theme suo_sango 24
+
 # Hide borders for XWayland
 for_window [class="^.*"] border pixel 0
 default_border pixel 1
@@ -271,7 +274,7 @@ exec_always {
     dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
     gsettings set org.gnome.desktop.interface gtk-theme 'Breeze'
     gsettings set org.gnome.desktop.interface icon-theme 'Breeze'
-    gsettings set org.gnome.desktop.interface cursor-theme 'breeze_cursors'
+    gsettings set org.gnome.desktop.interface cursor-theme 'suo_sango'
 }
 
 exec sunset
