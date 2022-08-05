@@ -1,0 +1,14 @@
+#!/bin/sh
+export WINEPREFIX="$HOME/.wine_osu"
+export WINEARCH=win32
+#export STAGING_AUDIO_PERIOD=256
+#export STAGING_AUDIO_DURATION=50000 ##50000 # 26459 # As low as you can get osu! stable with
+export vblank_mode=0
+export WINEFSYNC=1
+export WINEESYNC=1
+
+#export PULSE_LATENCY_MSEC=60
+export PATH=/opt/wine-osu/bin:$PATH
+
+cd /mnt/e/osu!/ # Or wherever you installed osu! in
+gamemoderun wine osu!.exe "$@"

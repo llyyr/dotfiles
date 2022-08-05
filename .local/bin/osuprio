@@ -1,0 +1,1 @@
+sudo renice -n -20 -p $(pidof 'osu!.exe') && sudo ionice -c 1 -n 1 -p $(pidof 'osu!.exe')
