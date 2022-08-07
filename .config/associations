@@ -14,7 +14,7 @@
 
 (assoc
   #:pattern "^https?://.*.(mp3|MP3|wav|WAV)(\\?.+)?$"
-  #:program "foot -e --app-id='termfloat' mpv --profile=audio %f")
+  #:program "foot --app-id='termfloat' mpv --profile=audio %f")
 
 (assoc
   #:pattern "^https?://.*"
@@ -24,6 +24,10 @@
 
 (assoc
   #:pattern ".(webm|mp4|mkv|mov)$"
+  #:program "mpv %f")
+
+(assoc
+  #:pattern ".(png|jpg|jpeg|PNG|JPEG|JPG)$"
   #:program "mpv %f")
 
 (assoc

@@ -291,7 +291,7 @@ gaps bottom 0
 gaps left 0
 
 # Misc settings
-for_window [app_id="(pavucontrol|psensor)"] floating enable
+for_window [app_id="(pavucontrol|psensor)"] floating enable, move position cursor, move down 35
 for_window [class="feh"] floating enable
 for_window [app_id="imv"] floating enable
 for_window [app_id="electron"] floating enable
@@ -302,12 +302,12 @@ for_window [class="^.*[sS]team.*$"] move container to workspace 8
 for_window [app_id="thunderbird"] move container to workspace 9
 for_window [app_id="org.qbittorrent.qBittorrent"] move container to workspace 10
 for_window [app_id="org.kde.dolphin"] floating enable
-for_window [app_id="input-remapper-gtk"] floating enable
 for_window [app_id="org.keepassxc.KeePassXC"] floating enable, move scratchpad, scratchpad show
 for_window [app_id="Electron"] floating enable, move scratchpad, scratchpad show, move position 0 239
 for_window [app_id="termfloat"] floating enable, move scratchpad, scratchpad show
 for_window [app_id="com.chatterino.https:\/\/www.chatterino"] floating enable, move scratchpad, scratchpad show
-for_window [app_id="mpv"] floating enable, resize set 960 540, move scratchpad, scratchpad show
+for_window [app_id="mpv"] floating enable, move scratchpad, scratchpad show
+for_window [floating app_id="mpv"] move position 0 0
 for_window [window_role="pop-up"] floating enable
 for_window [window_role="task_dialog"] floating enable
 
