@@ -32,7 +32,7 @@
 
 (assoc
   #:pattern ".*"
-  #:program (select-alternative-with "fuzzel -d")
+  #:program (select-alternative-with "fuzzel -d -f \"Iosevka Aile Custom\" -x 5 -y 5 -r 0 -b 000000d0 -t ddccbbff -s 0E0E0Eff -S 72767dff --show-actions -w 50 -T 'foot --app-id=termfloat'")
   #:standalone #t)
 
 

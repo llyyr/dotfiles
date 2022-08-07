@@ -15,6 +15,7 @@
     --background-tertiary: black;
     --background-accent: black;
     --background-floating: black;
+    --modal-background: black;
     --background-mobile-header: black;
     --background-modifier-hover: #0E0E0E;
     --background-modifier-active: #0E0E0E; 
@@ -44,7 +45,7 @@
 .theme-dark .container-2McqkF,
 .theme-dark .autocomplete-3NRXG8,
 .theme-dark .container-3ayLPN,
-.theme-dark .root-g14mjS, .theme-dark .footer-31IekZ,
+.theme-dark .footer-31IekZ,
 .theme-dark .streamPreview-2-WUWT,
 .theme-dark .keyboardShortcutsModal-2CRmCm,
 .theme-dark .perksModal-CLcR1c,

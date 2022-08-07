@@ -58,6 +58,14 @@ call SetupCommandAlias("W","w")
 call SetupCommandAlias("Q","q")
 ]]
 
+-- Restore cursor position
+vim.api.nvim_create_autocmd({ "BufReadPost" }, {
+    pattern = { "*" },
+    callback = function()
+        vim.api.nvim_exec('silent! normal! g`"zv', false)
+    end,
+})
+
 vim.api.nvim_set_keymap('n', '<C-h>', ':wincmd h<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<C-l>', ':wincmd l<CR>', { noremap = true, silent = true })
 

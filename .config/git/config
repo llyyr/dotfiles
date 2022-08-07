@@ -5,6 +5,7 @@
 [user]
 	email = llyyr.public@gmail.com
 	name = llyyr
+	signingkey = 7976433E656E4C1F
 [url "https://github.com/"]
 	insteadOf = "git@github.com:"
 [url "git@github.com:"]

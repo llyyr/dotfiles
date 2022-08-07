@@ -3,15 +3,16 @@
 # important for language settings, see below.
 
 export EDITOR=/usr/bin/nvim
-export PATH="${HOME}/.dotnet/:${HOME}/.local/bin:${PATH}"
+export PATH="${HOME}/.dotnet/:${HOME}/.local/bin:${HOME}/.cargo/bin:${PATH}"
 #export LC_ALL=en_US.UTF-8
 #export LANG=en_US.UTF-8
 shopt -s extglob
 shopt -s autocd
 # Load/launch tmux if the user owns this script, bash is interactive,
 # the environment is not a Vim Terminal, and this is not a subshell.
-[[ -O "$BASH_SOURCE" && $- == *i* && ! $VIM_TERMINAL ]] && ((SHLVL < 3)) &&
-	{ command tmux ls && command tmux -2 attach || command tmux -2; }
+if [[ -O "$BASH_SOURCE" && $- == *i* && ! $VIM_TERMINAL ]] && [ -z "${TMUX}" ]; then # && (SHLVL <3)
+	command tmux attach || command tmux 
+fi
 
 HISTIGNORE="ls:bg:fg:exit:reset:clear:cd"
 HISTCONTROL="ignoreboth:erasedups"
@@ -26,28 +27,26 @@ eval $(dircolors ~/.dir_colors)
 
 alias vim=nvim
 alias ls="ls -AhF --color=auto --group-directories-first"
+alias browse='fzf --bind="enter:execute(echo -n {} | wl-copy)" --preview="pygmentize {} 2>/dev/null || cat {}" --preview-window=up'
 alias grep="grep --color=auto --binary-files=without-match --devices=skip"
 alias psg="ps aux | grep -v grep | grep -i -e VSZ -e"
 alias mpa="mpv --profile=audio"
-alias yt-dlp-aria2c="yt-dlp --external-downloader aria2c --downloader-args 'aria2c:--continue true --retry-wait=30 -j 5 -x 5 -s 5 -k 1M'"
+alias ytdl2c="yt-dlp --external-downloader aria2c --downloader-args 'aria2c:--continue true --retry-wait=30 -j 5 -x 5 -s 5 -k 1M'"
 alias cp="cp -ip"
 alias mv="mv -i"
 alias rm="rm -i"
 alias mkdir="mkdir -pv"
 alias du="du -ach | sort -h"
-alias diff="diff -Naup"
+alias diff="diff -Naup --color=auto"
 alias traffic="sudo ss -tp4"
 alias windesktop="/mnt/c/Users/llyyr/Desktop/"
 alias brplay="~/.local/share/Steam/steamapps/compatdata/291550/pfx/drive_c/users/steamuser/BrawlhallaReplays"
 alias f="ag --smart-case --skip-vcs-ignores"
-alias blank="sleep 1; xset dpms force off"
 alias dotfiles="/usr/bin/git --git-dir=$HOME/dotfiles --work-tree=$HOME"
 alias localejp="LC_ALL=ja_JP.UTF-8 LANG=ja_JP.UTF-8"
 alias cpug="sudo cpupower frequency-set -g $1"
 alias runvenv="source env/bin/activate"
 alias ghc="ghc -no-keep-hi-files -no-keep-o-files $1"
-#alias xpaste="xclip -selection clipboard -o"
-#alias xcopy="xclip -selection c"
 alias screenoff="swayidle timeout 10 'swaymsg \"output * dpms off\"' resume 'swaymsg \"output * dpms on\"'"
 #temp lol
 alias gbf2="microsoft-edge-beta --profile-directory='Profile 2' --ozone-platform-hint=auto --disable-backgrounding-occluded-windows"
@@ -69,9 +68,9 @@ gbfrc() {
 
 upload-file() {
     if [ $# -eq 0 ]; then
-        exec curl -F file=@- https://0x0.st
+        curl -s -F file=@- https://0x0.st
     else
-        exec curl -F file=@"$1" https://0x0.st
+        curl -s -F file=@"$1" https://0x0.st
     fi
 }
 
