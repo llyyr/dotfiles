@@ -10,7 +10,7 @@ shopt -s extglob
 shopt -s autocd
 # Load/launch tmux if the user owns this script, bash is interactive,
 # the environment is not a Vim Terminal, and this is not a subshell.
-if [[ -O "$BASH_SOURCE" && $- == *i* && ! $VIM_TERMINAL ]] && [ -z "${TMUX}" ]; then # && (SHLVL <3)
+if [[ -O "$BASH_SOURCE" && $- == *i* && ! $VIM_TERMINAL ]] && [ -n "${DISPLAY}" ] && [ -z "${TMUX}" ]; then # && (SHLVL <3)
 	command tmux attach || command tmux 
 fi
 
@@ -26,6 +26,7 @@ WINEDEBUG=fixme-all
 eval $(dircolors ~/.dir_colors)
 
 alias vim=nvim
+alias nnn="nnn -Hde"
 alias ls="ls -AhF --color=auto --group-directories-first"
 alias browse='fzf --bind="enter:execute(echo -n {} | wl-copy)" --preview="pygmentize {} 2>/dev/null || cat {}" --preview-window=up'
 alias grep="grep --color=auto --binary-files=without-match --devices=skip"
@@ -41,7 +42,7 @@ alias diff="diff -Naup --color=auto"
 alias traffic="sudo ss -tp4"
 alias windesktop="/mnt/c/Users/llyyr/Desktop/"
 alias brplay="~/.local/share/Steam/steamapps/compatdata/291550/pfx/drive_c/users/steamuser/BrawlhallaReplays"
-alias f="ag --smart-case --skip-vcs-ignores"
+alias f="rg --smart-case --skip-vcs-ignores"
 alias dotfiles="/usr/bin/git --git-dir=$HOME/dotfiles --work-tree=$HOME"
 alias localejp="LC_ALL=ja_JP.UTF-8 LANG=ja_JP.UTF-8"
 alias cpug="sudo cpupower frequency-set -g $1"
