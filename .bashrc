@@ -26,7 +26,6 @@ WINEDEBUG=fixme-all
 eval $(dircolors ~/.dir_colors)
 
 alias vim=nvim
-alias nnn="nnn -Hde"
 alias ls="ls -AhF --color=auto --group-directories-first"
 alias browse='fzf --bind="enter:execute(echo -n {} | wl-copy)" --preview="pygmentize {} 2>/dev/null || cat {}" --preview-window=up'
 alias grep="grep --color=auto --binary-files=without-match --devices=skip"
@@ -42,13 +41,13 @@ alias diff="diff -Naup --color=auto"
 alias traffic="sudo ss -tp4"
 alias windesktop="/mnt/c/Users/llyyr/Desktop/"
 alias brplay="~/.local/share/Steam/steamapps/compatdata/291550/pfx/drive_c/users/steamuser/BrawlhallaReplays"
-alias f="rg --smart-case --skip-vcs-ignores"
+alias rg="rg --smart-case"
 alias dotfiles="/usr/bin/git --git-dir=$HOME/dotfiles --work-tree=$HOME"
 alias localejp="LC_ALL=ja_JP.UTF-8 LANG=ja_JP.UTF-8"
 alias cpug="sudo cpupower frequency-set -g $1"
 alias runvenv="source env/bin/activate"
 alias ghc="ghc -no-keep-hi-files -no-keep-o-files $1"
-alias screenoff="swayidle timeout 10 'swaymsg \"output * dpms off\"' resume 'swaymsg \"output * dpms on\"'"
+alias screenoff="swayidle timeout 3 'swaymsg \"output * dpms off\"' resume 'swaymsg \"output * dpms on\"'"
 #temp lol
 alias gbf2="microsoft-edge-beta --profile-directory='Profile 2' --ozone-platform-hint=auto --disable-backgrounding-occluded-windows"
 alias discord-canary="discord-canary --no-sandbox --disable-smooth-scrolling" 
@@ -122,3 +121,34 @@ incd() {
     fi
 }
 
+
+n ()
+{
+    # Block nesting of nnn in subshells
+    if [[ "${NNNLVL:-0}" -ge 1 ]]; then
+        echo "nnn is already running"
+        return
+    fi
+    # The behaviour is set to cd on quit (nnn checks if NNN_TMPFILE is set)
+    # If NNN_TMPFILE is set to a custom path, it must be exported for nnn to
+    # see. To cd on quit only on ^G, remove the "export" and make sure not to
+    # use a custom path, i.e. set NNN_TMPFILE *exactly* as follows:
+    #     NNN_TMPFILE="${XDG_CONFIG_HOME:-$HOME/.config}/nnn/.lastd"
+    NNN_TMPFILE="${XDG_CONFIG_HOME:-$HOME/.config}/nnn/.lastd"
+
+    # Unmask ^Q (, ^V etc.) (if required, see `stty -a`) to Quit nnn
+    # stty start undef
+    # stty stop undef
+    # stty lwrap undef
+    # stty lnext undef
+    export NNN_PLUG='d:dragdrop'
+
+    # The backslash allows one to alias n to nnn if desired without making an
+    # infinitely recursive alias
+    \nnn "$@"
+
+    if [ -f "$NNN_TMPFILE" ]; then
+            . "$NNN_TMPFILE"
+            rm -f "$NNN_TMPFILE" > /dev/null
+    fi
+}

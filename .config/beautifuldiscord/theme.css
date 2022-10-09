@@ -177,7 +177,7 @@
 
  /* embed stuff*/
 .container-2sjPya {
-    display: block;
+    display: table;
 }
 
 .container-2sjPya > .messageAttachment-CZp8Iv, .container-2sjPya > .embed-hKpSrO {

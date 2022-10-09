@@ -3,7 +3,7 @@
 require('nvim-treesitter.configs').setup({
     -- one of "all", "maintained", or a list
     ensure_installed = { "c", "cpp", "bash", "comment", "css", "cuda",
-                         "dot", "glsl", "go", "html", "javascript", 
+                         "dot", "glsl", "go", "html", "haskell" ,"javascript", 
                          "julia", "latex", "lua", "make", "python", "rst", 
                          "json", "yaml" },
 
