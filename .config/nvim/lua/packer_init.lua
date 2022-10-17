@@ -29,7 +29,6 @@ return packer.startup(function()
     use { 'windwp/nvim-autopairs' }
     use { 'lukas-reineke/indent-blankline.nvim' }
     use { 'ggandor/leap.nvim' }
-    use { 'lukas-reineke/virt-column.nvim' }
     use { 'AckslD/nvim-neoclip.lua' }
     use { 'nathom/filetype.nvim' }
     

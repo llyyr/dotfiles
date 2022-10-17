@@ -14,7 +14,7 @@ set $menu fuzzel -f "Iosevka Aile Custom" -x 5 -y 5 -r 0 -b 000000d0 -t ddccbbff
 font pango:Iosevka Term Custom 9
 
 ### Output configuration
-output VGA-1 {
+output * {
     bg /mnt/c/Users/llyyr/Desktop/4chan/jp/1637197847029.jpg fit #000000
     #bg /mnt/e/Images/Altina/鮫島タムラ \(2830191\)/88663225_p0 - アルティナ雑まとめv2.png fill #000000
 }
@@ -294,6 +294,7 @@ gaps left 0
 # Misc settings
 for_window [app_id="(pavucontrol|psensor)"] floating enable, move position cursor, move down 35
 for_window [class="feh"] floating enable
+for_window [app_id="org.kde.kcalc"] floating enable
 for_window [app_id="imv"] floating enable
 for_window [app_id="electron"] floating enable
 for_window [app_id="firefox"] move container to workspace 1
