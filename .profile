@@ -9,11 +9,13 @@ test -z "$PROFILEREAD" && . /etc/profile || true
 
 # Some applications read the EDITOR variable to determine your favourite text
 # editor. So uncomment the line below and enter the editor of your choice :-)
-export EDITOR=/usr/bin/nvim
 #export EDITOR=/usr/bin/mcedit
 
 # For some news readers it makes sense to specify the NEWSSERVER variable here
 #export NEWSSERVER=your.news.server
+
+# export LC_ALL=en_US.UTF-8
+# export LANG=en_US.UTF-8
 
 # Some people don't like fortune. If you uncomment the following lines,
 # you will have a fortune each time you log in ;-)
