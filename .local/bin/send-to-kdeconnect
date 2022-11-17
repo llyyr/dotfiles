@@ -1,0 +1,2 @@
+#!/bin/bash
+qdbus-qt5 "org.kde.kdeconnect" "/modules/kdeconnect/devices/$(kdeconnect-cli --id-only -a | sed '1q')/share" "org.kde.kdeconnect.device.share.shareUrl" $1

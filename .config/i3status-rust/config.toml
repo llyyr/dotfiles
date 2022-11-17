@@ -1,0 +1,60 @@
+[icons]
+icons = "awesome6"
+
+[theme]
+theme = "plain"
+[theme.overrides]
+separator = "/"
+
+[[block]]
+block = "focused_window"
+[block.format]
+full = " $title |"
+short = " $title.str(0,50) |"
+
+[[block]]
+block = "custom"
+command = " pgrep wf-recorder > /dev/null && echo "
+hide_when_empty = true
+
+[[block]]
+block = "custom"
+command = " sed 's/  //' <(curl 'https://wttr.in/jamal+patna?format='%t+%w+%p'' -sf) "
+interval = 600
+
+[[block]]
+block = "time"
+interval = 1
+timezone = "Asia/Kolkata"
+format = " %a, %d %b. %r %Z "
+[[block.click]]
+button = "left"
+cmd = "zenity --calendar --text=Calendar"
+# cmd = "TZ=Asia/Tokyo date +'%a, %d %b. %r %Z'"
+
+[[block]]
+block = "kdeconnect"
+
+[[block]]
+block = "sound"
+[[block.click]]
+button = "left"
+cmd = "pavucontrol"
+
+[[block]]
+block = "memory"
+format = " $icon $mem_used.eng(4,B,M) "
+format_alt = " $icon_swap $swap_used.eng(4,B,M) "
+
+[[block]]
+block = "cpu"
+
+[[block]]
+block = "temperature"
+format = " $icon $average "
+format_alt = " $icon $min min, $max max, $average avg "
+interval = 10
+chip = "coretemp-isa-0000"
+
+[[block]]
+block = "net"

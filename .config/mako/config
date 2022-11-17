@@ -31,3 +31,7 @@ group-by=category
 [app-name=Cantata]
 default-timeout=1000
 group-by=app-name
+
+[summary=Bell]
+default-timeout=1000
+group-by=summary

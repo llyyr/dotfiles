@@ -9,13 +9,13 @@ if [[ -O "${BASH_SOURCE[0]:-${(%):-%x}}" && $- == *i* && ! $VIM_TERMINAL ]] && [
 fi
 
 export EDITOR=/usr/bin/nvim
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
 export ZYPP_MEDIANETWORK=1
 export WINEDEBUG=-all
-
 eval $(dircolors ~/.dir_colors)
 source ~/.aliases
 
-# History in cache directory:
 export HISTFILE=~/.zsh_history
 export HISTSIZE=10000
 export SAVEHIST=100000
@@ -28,7 +28,8 @@ setopt share_history
 
 setopt auto_cd
 setopt no_case_glob
-setopt nomatch
+unsetopt nomatch
+unsetopt flowcontrol
 
 unsetopt beep # beep is the strongest warrior!
 
@@ -67,11 +68,11 @@ export GIT_PS1_SHOWDIRTYSTATE=1
 export GIT_PS1_SHOWUNTRACKEDFILES=1
 export GIT_PS1_SHOWUPSTREAM="auto"
 
-PS1="[%B%F{80}%n@%m%f%b]"\
+PS1="[%B%F{green}%n@%m%f%b]"\
 "[%B%F{blue}%~%f%b]"\
 $'$(__git_ps1 "[%%F{212}%s%%f]")'\
 "%(?..[%B%F{red}%?%f%b])"\
-$'\n%(?.%F{green}.%F{red})>%f%{\a%} '
+$'\n%(?.%F{green}.%F{red})$%f%{\a%} '
 
 PS2="... "
 

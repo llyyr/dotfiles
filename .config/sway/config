@@ -14,10 +14,13 @@ set $menu fuzzel -f "Iosevka Aile Custom" -x 5 -y 5 -r 0 -b 000000d0 -t ddccbbff
 font pango:Iosevka Term Custom 9
 
 ### Output configuration
-output * {
+output HDMI-A-5 {
+    mode 1920x1080@144.013Hz
+    adaptive_sync on
+    max_render_time 1
     bg /mnt/c/Users/llyyr/Desktop/4chan/jp/1637197847029.jpg fit #000000
-    #bg /mnt/e/Images/Altina/鮫島タムラ \(2830191\)/88663225_p0 - アルティナ雑まとめv2.png fill #000000
 }
+    #bg /mnt/e/Images/Altina/鮫島タムラ \(2830191\)/88663225_p0 - アルティナ雑まとめv2.png fill #000000
 #
 # Example configuration:
 #
@@ -36,11 +39,17 @@ exec swayidle -w timeout 900 'swaymsg "output * dpms off"' resume 'swaymsg "outp
 # You can get the names of your inputs by running: swaymsg -t get_inputs
 # Read `man 5 sway-input` for more information about this section.
 input "1241:4611:HID_04d9:1203" {
-    xkb_options caps:return_shifted_capslock
     xkb_numlock enabled
 }
 
 input "12538:768:USB_OPTICAL_MOUSE" {
+    accel_profile flat
+    pointer_accel 0
+}
+
+input "1386:768:Wacom_Bamboo_One_S_Pen" {
+    left_handed enabled
+    map_from_region 0.0x0.0 0.65x0.65
     accel_profile flat
     pointer_accel 0
 }
@@ -254,10 +263,11 @@ bindsym $mod+Shift+R exec 'bash ~/.local/bin/toggle-screen-recorder.sh'
 # set $fgu #555555
 # set $btf #000000
 # bar {
-# 	status_command /home/llyyr/.cargo/bin/i3status-rs /home/llyyr/config.toml
+# 	status_command /home/llyyr/.cargo/bin/i3status-rs
 #     font pango:Iosevka Aile Custom, Font Awesome 6 Free 9
 # 	position top
-#     separator_symbol ""
+#     tray_output none
+#     wrap_scroll yes
 # 	colors {
 # 		statusline $fg
 # 		background $bg
@@ -265,8 +275,7 @@ bindsym $mod+Shift+R exec 'bash ~/.local/bin/toggle-screen-recorder.sh'
 # 		focused_workspace $bg $bg $fg
 # 		active_workspace $bg $bg $fg
 # 		inactive_workspace $bg $bg $fgi
-# 	}
-#     tray_output none
+#     }
 # }
 
 bar {
@@ -294,8 +303,8 @@ gaps left 0
 # Misc settings
 for_window [app_id="(pavucontrol|psensor)"] floating enable, move position cursor, move down 35
 for_window [class="feh"] floating enable
-for_window [app_id="org.kde.kcalc"] floating enable
 for_window [app_id="imv"] floating enable
+for_window [app_id="org.kde.kcalc"] floating enable
 for_window [app_id="electron"] floating enable
 for_window [app_id="firefox"] move container to workspace 1
 for_window [class="krita"] move container to workspace 5
@@ -305,11 +314,11 @@ for_window [app_id="thunderbird"] move container to workspace 9
 for_window [app_id="org.qbittorrent.qBittorrent"] move container to workspace 10
 for_window [app_id="org.kde.dolphin"] floating enable, move scratchpad, scratchpad show
 for_window [app_id="org.keepassxc.KeePassXC"] floating enable, move scratchpad, scratchpad show
-for_window [app_id="WebCord"] floating enable, move scratchpad, scratchpad show, move position 0 239
+for_window [app_id="WebCord"] floating enable, move scratchpad, scratchpad show, move position 0 414
 for_window [app_id="termfloat"] floating enable, move scratchpad, scratchpad show
 for_window [app_id="com.chatterino.https:\/\/www.chatterino"] floating enable, move scratchpad, scratchpad show
 for_window [app_id="mpv"] floating enable, move scratchpad, scratchpad show
-for_window [floating app_id="mpv"] move position 0 0
+# for_window [floating app_id="mpv"] move position 0 0
 for_window [window_role="pop-up"] floating enable
 for_window [window_role="task_dialog"] floating enable
 
@@ -329,4 +338,4 @@ exec /usr/libexec/kdeconnectd
 exec swaymsg "workspace 2; exec $term"
 
 
-# vim: set filetype=i3config:
+# vim: set filetype=swayconfig:

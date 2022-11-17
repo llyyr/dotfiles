@@ -1,12 +1,15 @@
 * {
   font-family: Iosevka Aile Custom;
-  font-size: 10pt;
+  font-size: 9pt;
   color: white;
   border: none;
   border-radius: 0;
   box-shadow: none;
   text-shadow: none;
   transition-duration: 0s;
+  padding-top: 0;
+  padding-bottom: 0;
+  min-height: 0;
 }
 
 window#waybar {
