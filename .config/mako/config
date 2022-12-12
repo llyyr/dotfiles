@@ -9,7 +9,7 @@ border-size=2
 border-color=#88c0d0
 border-radius=4
 max-icon-size=64
-default-timeout=15000
+default-timeout=10000
 ignore-timeout=1
 font=Iosevka Aile Custom 10
 
@@ -35,3 +35,6 @@ group-by=app-name
 [summary=Bell]
 default-timeout=1000
 group-by=summary
+
+[mode=dnd]
+invisible=1

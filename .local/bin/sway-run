@@ -19,3 +19,4 @@ export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
 # export WLR_RENDERER=vulkan
 
 systemd-cat --identifier=sway sway $@
+# sway $@

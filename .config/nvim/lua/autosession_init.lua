@@ -3,7 +3,3 @@ require('auto-session').setup({
     auto_session_suppress_dirs = { '~/', '~/projects', '~/.config/nvim' },
     auto_session_enable_last_session = false,
 })
-
-require('session-lens').setup({
-    previewer = false,
-})

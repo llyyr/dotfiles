@@ -43,9 +43,9 @@ require('bufferline').setup({
     animation = false,
     auto_hide = false,
     tabpages = true,
-    closable = false,
+    closable = true,
     clickable = true,
-    icons = 'both',
+    icons = 'numbers',
     icon_custom_colors = true,
 
     icon_separator_active = '▎',

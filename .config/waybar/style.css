@@ -1,5 +1,5 @@
 * {
-  font-family: Iosevka Aile Custom;
+  font-family: Sarasa Term J;
   font-size: 9pt;
   color: white;
   border: none;
@@ -23,16 +23,16 @@ window#waybar {
 #pulseaudio,
 #custom-weather,
 #cpu,
-#temperature {
+#temperature,
+#custom-weather,
+#clock,
+#network,
+#idle_inhibitor,
+#custom-recorder {
   padding-left: 0.5rem;
   padding-right: 0.5rem;
 }
 
-#custom-weather {
-  padding-right: 2rem;
-  font-weight: bold;
-}
-
 #workspaces button.focused {
-  background: #4c7899;
+  background: #2772C8;
 }

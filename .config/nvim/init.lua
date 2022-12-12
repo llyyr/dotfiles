@@ -25,12 +25,19 @@ vim.opt.clipboard     = 'unnamedplus'          -- copy/paste to system clipboard
 vim.opt.hidden        = true
 vim.opt.signcolumn    = 'no'                   -- disable signscolumn
 vim.g.mapleader       = ','
+vim.g.netrw_fastbrowse = 0
 vim.o.sessionoptions  = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal"
+vim.filetype.add({
+    extension = {
+        h = "c",
+        asm = "nasm",
+        S = "asm",
+    },
+})
 
 require('impatient') -- .enable_profile()
 require('packer_init')
-require('filetype_init')
-require('kanagawa_init')
+require('theme_init')
 require('lualine_init')
 require('treesitter_init')
 require('cmp_init')
@@ -98,10 +105,6 @@ vim.api.nvim_set_keymap('n', '<leader>fl', ':lua require(\'telescope.builtin\').
 
 --[[ Clipboard ]]--
 vim.api.nvim_set_keymap('n', '<leader>cc', ':lua require(\'telescope\').extensions.neoclip.default()<cr>',
-                        { noremap = true, silent = true })
-
---[[ Session manager ]]--
-vim.api.nvim_set_keymap('n', '<leader>qq', ':lua require(\'session-lens\').search_session()<cr>',
                         { noremap = true, silent = true })
 
 --[[ Custom commands ]]--

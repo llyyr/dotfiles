@@ -4,7 +4,7 @@ packer = require('packer')
 
 packer.init({
     git = {
-        clone_timeout = 300,
+        clone_timeout = 600,
     },
     luarocks = {
         python_cmd = 'python3.10'
@@ -16,22 +16,21 @@ packer.init({
 
 return packer.startup(function()
     use { 'wbthomason/packer.nvim' }
-    use { 'kyazdani42/nvim-web-devicons' }
+    use { 'nvim-tree/nvim-web-devicons' }
     use { 'nvim-lua/plenary.nvim' }
-    
-    use { 'rebelot/kanagawa.nvim', as = "kanagawa" }
-    use { 'hoob3rt/lualine.nvim', requires = { 'kyazdani42/nvim-web-devicons' } }
+
+    use { 'luisiacc/gruvbox-baby' }
+    use { 'hoob3rt/lualine.nvim' }
     use { 'folke/todo-comments.nvim' }
     use { 'numToStr/Comment.nvim' }
-    use { 'lewis6991/gitsigns.nvim', requires = { 'nvim-lua/plenary.nvim' } }
-    use { 'romgrk/barbar.nvim', requires = { 'kyazdani42/nvim-web-devicons' } }
+    use { 'lewis6991/gitsigns.nvim' }
+    use { 'romgrk/barbar.nvim', wants = "nvim-web-devicons" }
     use { 'dstein64/nvim-scrollview' }
     use { 'windwp/nvim-autopairs' }
     use { 'lukas-reineke/indent-blankline.nvim' }
     use { 'ggandor/leap.nvim' }
     use { 'AckslD/nvim-neoclip.lua' }
-    use { 'nathom/filetype.nvim' }
-    
+
     use { 'lewis6991/impatient.nvim' }
     use { 'https://github.com/NMAC427/guess-indent.nvim' }
 
@@ -44,15 +43,12 @@ return packer.startup(function()
                                                                              { 'nvim-treesitter/nvim-treesitter-textobjects' },
                                                                              { 'JoosepAlviste/nvim-ts-context-commentstring' } } }
 
-    use { 'hrsh7th/nvim-cmp', requires = { { 'saadparwaiz1/cmp_luasnip', requires = { 'L3MON4D3/LuaSnip' } },
-                                           { 'hrsh7th/cmp-nvim-lsp', requires = { 'neovim/nvim-lspconfig' } },
+    use { 'hrsh7th/nvim-cmp', requires = { { 'saadparwaiz1/cmp_luasnip' },
+                                           { 'hrsh7th/cmp-nvim-lsp' },
                                            { 'onsails/lspkind-nvim' },
-                                           { 'ray-x/cmp-treesitter', requires = { 'nvim-treesitter/nvim-treesitter' } },
+                                           { 'ray-x/cmp-treesitter' },
                                            { 'hrsh7th/cmp-path' },
                                            { 'hrsh7th/cmp-cmdline' } } }
 
-    use { 'nvim-telescope/telescope.nvim', requires = { { 'nvim-lua/plenary.nvim' },
-                                                        { 'kyazdani42/nvim-web-devicons' },
-                                                        { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
-                                                        { 'rmagatti/session-lens', requires = { 'rmagatti/auto-session' } } } }
+    use { 'nvim-telescope/telescope.nvim', requires = { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' } }
 end)
