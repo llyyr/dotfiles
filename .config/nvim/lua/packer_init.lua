@@ -18,8 +18,10 @@ return packer.startup(function()
     use { 'wbthomason/packer.nvim' }
     use { 'nvim-tree/nvim-web-devicons' }
     use { 'nvim-lua/plenary.nvim' }
+    use { 'gpanders/editorconfig.nvim' }
 
     use { 'luisiacc/gruvbox-baby' }
+    use { 'https://gitlab.com/__tpb/acme.nvim', as = 'acme'}
     use { 'hoob3rt/lualine.nvim' }
     use { 'folke/todo-comments.nvim' }
     use { 'numToStr/Comment.nvim' }

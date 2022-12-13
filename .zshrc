@@ -58,6 +58,7 @@ zstyle ':fzf-tab:*' default-color $'\033[0;10m' # else fg+ won't work (and maybe
 zstyle ':fzf-tab:*' fzf-flags --info=hidden $fzf_colors
 
 
+# zmodload zsh/zprof
 
 
 setopt prompt_subst
@@ -80,15 +81,6 @@ __git_files () {
     # git tab completion is really slow otherwise
     _wanted files expl 'local files' _files
 }
-
-# Update prompt before running commands
-function _update-prompt {
-    zle reset-prompt
-    zle .accept-line
-}
-
-zle -N accept-line _update-prompt
-
 
 # Fix special keys
 bindkey "${terminfo[kpp]}" history-beginning-search-backward
