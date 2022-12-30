@@ -19,7 +19,8 @@
         "icon-theme": "Numix-Circle",
         "tooltip-format": "{title}",
         "on-click": "activate",
-        "on-click-middle": "close"
+        "on-click-middle": "close",
+        "ignore-list": ["org.kde.dolphin",],
     },
     "memory": {
         "interval": 30,
@@ -72,7 +73,7 @@
         }
     },
     "network": {
-        "format": "↓{bandwidthDownBytes} ↑{bandwidthUpBytes}",
+        "format": "↓ {bandwidthDownBytes} ↑ {bandwidthUpBytes}",
         "interval": 1,
     },
 }

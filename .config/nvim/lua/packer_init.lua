@@ -19,7 +19,8 @@ return packer.startup(function()
     use { 'nvim-tree/nvim-web-devicons' }
     use { 'nvim-lua/plenary.nvim' }
     use { 'gpanders/editorconfig.nvim' }
-
+    
+    use { 'catppuccin/nvim', as = "catppuccin" }
     use { 'luisiacc/gruvbox-baby' }
     use { 'https://gitlab.com/__tpb/acme.nvim', as = 'acme'}
     use { 'hoob3rt/lualine.nvim' }
@@ -34,7 +35,7 @@ return packer.startup(function()
     use { 'AckslD/nvim-neoclip.lua' }
 
     use { 'lewis6991/impatient.nvim' }
-    use { 'https://github.com/NMAC427/guess-indent.nvim' }
+    use { 'NMAC427/guess-indent.nvim' }
 
     use { 'rmagatti/auto-session' }
     use { 'L3MON4D3/LuaSnip' }

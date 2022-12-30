@@ -15,6 +15,7 @@ export ZYPP_MEDIANETWORK=1
 # export WINEDEBUG=-all
 eval $(dircolors ~/.dir_colors)
 source ~/.aliases
+source ~/.secrets
 
 export HISTFILE=~/.zsh_history
 export HISTSIZE=10000
@@ -51,8 +52,8 @@ export FZF_DEFAULT_OPTS="$fzf_colors --pointer='█' --prompt='█ ' --reverse"
 if ! [ -d "$HOME/.config/zsh/fzf-tab" ]; then
   git clone https://github.com/Aloxaf/fzf-tab "$HOME/.config/zsh/fzf-tab"
 fi
-
 source $HOME/.config/zsh/fzf-tab/fzf-tab.plugin.zsh
+
 
 zstyle ':fzf-tab:*' default-color $'\033[0;10m' # else fg+ won't work (and maybe something else)
 zstyle ':fzf-tab:*' fzf-flags --info=hidden $fzf_colors
@@ -69,11 +70,15 @@ export GIT_PS1_SHOWDIRTYSTATE=1
 export GIT_PS1_SHOWUNTRACKEDFILES=1
 export GIT_PS1_SHOWUPSTREAM="auto"
 
-PS1="[%B%F{green}%n@%m%f%b]"\
-"[%B%F{blue}%~%f%b]"\
+PS1="[%B%F{blue}%~%f%b]"\
 $'$(__git_ps1 "[%%F{212}%s%%f]")'\
 "%(?..[%B%F{red}%?%f%b])"\
 $'\n%(?.%F{green}.%F{red})$%f%{\a%} '
+# PS1="[%B%F{green}%n@%m%f%b]"\
+# "[%B%F{blue}%~%f%b]"\
+# $'$(__git_ps1 "[%%F{212}%s%%f]")'\
+# "%(?..[%B%F{red}%?%f%b])"\
+# $'\n%(?.%F{green}.%F{red})$%f%{\a%} '
 
 PS2="... "
 

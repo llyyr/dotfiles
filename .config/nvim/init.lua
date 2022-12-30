@@ -34,8 +34,7 @@ vim.filetype.add({
         S = "asm",
     },
 })
-
-require('impatient') -- .enable_profile()
+require('impatient')--.enable_profile()
 require('packer_init')
 require('theme_init')
 require('lualine_init')
@@ -75,10 +74,10 @@ vim.api.nvim_create_autocmd({ "BufReadPost" }, {
 vim.api.nvim_set_keymap('n', '<C-h>', ':wincmd h<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<C-l>', ':wincmd l<CR>', { noremap = true, silent = true })
 
-vim.api.nvim_set_keymap('n', '<A-j>', 'mz:m+<CR>`z', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<A-k>', 'mz:m-2<CR>`z', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('v', '<A-j>', ':m\'>+<cr>`<my`>mzgv`yo`z', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('v', '<A-k>', ':m\'<-2<cr>`>my`<mzgv`yo`z', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<A-j>', ":m .+1<CR>==", { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<A-k>', ":m .-2<CR>==", { noremap = true, silent = true })
+vim.api.nvim_set_keymap('v', '<A-j>', ":m '>+1<CR>gv=gv", { noremap = true, silent = true })
+vim.api.nvim_set_keymap('v', '<A-k>', ":m '<-2<CR>gv=gv", { noremap = true, silent = true })
 
 vim.api.nvim_set_keymap('n', '<leader>.', '/<c-r>=expand("<cword>")<CR><CR>N', { noremap = true, silent = true })
 
@@ -108,4 +107,4 @@ vim.api.nvim_set_keymap('n', '<leader>cc', ':lua require(\'telescope\').extensio
                         { noremap = true, silent = true })
 
 --[[ Custom commands ]]--
-vim.api.nvim_set_keymap('c', 'w!!', 'w !sudo tee % > /dev/null', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>ww', ':w !sudo tee % > /dev/null<cr>', { noremap = true, silent = true })

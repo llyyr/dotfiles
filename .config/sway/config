@@ -61,7 +61,7 @@ input "1386:768:Wacom_Bamboo_One_S_Pen" {
 # Basics:
 #
     # Start a floating terminal
-    bindsym $mod+Return exec $term --app-id="termfloat" --override=colors.alpha=0.9
+    bindsym $mod+Return exec $term --app-id="termfloat"
     # Start a terminal
     bindsym $mod+Shift+Return exec $term
 
@@ -255,9 +255,9 @@ bindsym alt+Print exec grimshot --notify copy active
 # Record screen
 bindsym $mod+Shift+R exec 'bash ~/.local/bin/toggle-screen-recorder.sh'
 
-#
+
 # Status Bar:
-#
+
 # set $bg #000000
 # set $bga #444444
 # set $fg #ffffff
@@ -265,7 +265,6 @@ bindsym $mod+Shift+R exec 'bash ~/.local/bin/toggle-screen-recorder.sh'
 # set $fgu #555555
 # set $btf #000000
 # bar {
-# 	status_command /home/llyyr/.cargo/bin/i3status-rs
 #     font pango:Iosevka Aile Custom, Font Awesome 6 Free 9
 # 	position top
 #     tray_output none
@@ -314,6 +313,7 @@ for_window [app_id="cantata"] move container to workspace 7
 for_window [class="^.*[sS]team.*$"] move container to workspace 8
 for_window [app_id="thunderbird"] move container to workspace 9
 for_window [app_id="org.qbittorrent.qBittorrent"] move container to workspace 10
+for_window [app_id="transmission-gtk"] move container to workspace 10
 for_window [app_id="org.kde.dolphin"] floating enable, move scratchpad, scratchpad show
 for_window [app_id="org.keepassxc.KeePassXC"] floating enable, move scratchpad, scratchpad show
 for_window [app_id="WebCord"] floating enable, move scratchpad, scratchpad show, move position 0 414

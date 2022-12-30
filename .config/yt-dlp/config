@@ -1,0 +1,12 @@
+--all-subs
+--embed-subs
+--no-mtime
+--postprocessor-args '-movflags +faststart'
+--concurrent-fragments 10
+
+#--buffer-size 4096
+#--external-downloader=aria2c
+#--user-agent='Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:85.0) Gecko/20100101 Firefox/85.0'
+#--external-downloader-args 'aria2c:--continue true --retry-wait=30 -j 5 -x 5 -s 5 -k 1M'
+#--extractor-args="youtube:player-client=android"
+

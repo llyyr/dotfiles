@@ -1,0 +1,61 @@
+#!/bin/sh
+
+FILE_DIR=~/.todos
+FILE_TODO=$FILE_DIR"/todos.txt"
+FILE_DONE=$FILE_DIR"/done.txt"
+if [[ ! -d $FILE_DIR ]]; then 
+  echo "directory '$FILE_DIR' not found";
+  exit 1;
+fi
+touch $FILE_TODO $FILE_DONE
+TODOS=$(<"$FILE_TODO")
+DONES=$(<"$FILE_DONE")
+
+GE='\033[0m'
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+CYAN='\033[0;36m'
+YELLOW='\033[1;33m'
+G=($RED"  o "$GE $GREEN"  x "$GE $YELLOW"^ "$GE $CYAN"v "$GE)
+
+move_tasks() {
+  for i in "$s";
+    do echo "$1" | awk 'NR=='"$i"' {print;exit}' >> "$2"; sed -i "$i"'d' "$3";
+  done
+}
+
+if [[ $# -ne 0 ]]; then
+  COMMAND=$1
+  shift
+  IFS=$'\n' s=($(sort -nr <<<"$*")); unset IFS;
+  case $COMMAND in
+    add|a)      echo "$*" >> $FILE_TODO ;;
+    clean|c)    echo -n "" > $FILE_DONE ;;
+    done|d)     move_tasks "$TODOS" $FILE_DONE $FILE_TODO ;;
+    rename|r)   sed -i $1'd' $FILE_TODO; shift; echo "$*" >> $FILE_TODO ;;
+    trash|t)    for i in "$s"; do sed -i "$i"'d' $FILE_TODO; done ;;
+    undo|u)     move_tasks "$DONES" $FILE_TODO $FILE_DONE ;;
+    *)
+      SELF=`basename $0`
+      echo "Usage: $SELF (add|clean|done|rename|trash|undo|)"
+      echo "  $SELF                        prints current open and completed todos"
+      echo "  $SELF add some task          adds 'some task' as open todo"
+      echo "  $SELF clean                  clears completed todos off the list"
+      echo "  $SELF done N                 marks the Nth todo as completed"
+      echo "  $SELF rename N new task.     renames Nth open task to 'new task.'"
+      echo "  $SELF trash N                deletes the Nth open todo"
+      echo "  $SELF undo N                 marks the Nth completed todo as not done" ;;
+  esac
+
+  grep -v -E "(^#|^\s*$)" $FILE_TODO | sort -u -o $FILE_TODO -
+  grep -v -E "(^#|^\s*$)" $FILE_DONE | sort -u -o $FILE_DONE -
+else
+  if [[ -n $TODOS ]]; then
+    echo -e "$TODOS" | awk '{ print NR") "$0 }' | sed "s/^/`printf "${G[0]}"`/;s/:high:/`printf "${G[2]}"`/;s/:low:/`printf "${G[3]}"`/"
+  fi
+  if [[ -n $DONES ]]; then
+    echo -e "$YELLOW""  ────────────────────────────────────────────""$GE"
+    echo -e "$DONES" | awk '{ print NR") "$0 }' | sed -E "s/^/`printf "${G[1]}"`/;s/(:high:|:low:)\s*//"
+  fi
+fi
+

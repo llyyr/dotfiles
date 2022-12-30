@@ -4,7 +4,7 @@ alias dotfiles='git --git-dir=$HOME/dotfiles --work-tree=$HOME'
 
 # INIT
 ```
-git init --bare $HOME/.dotfiles
+git init --bare $HOME/dotfiles
 dotfiles config --local status.showUntrackedFiles no
 ```
 
