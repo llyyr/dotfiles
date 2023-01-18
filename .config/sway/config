@@ -10,7 +10,8 @@ set $down j
 set $up k
 set $right l
 set $term foot
-set $menu fuzzel -f "Iosevka Aile Custom" -x 5 -y 5 -r 0 -b 000000d0 -t ddccbbff -s 0E0E0Eff -S 72767dff --show-actions -w 50 -T "foot --app-id='termfloat'"
+set $menu fuzzel -f "Iosevka Aile Custom" -x 5 -y 5 -r 0 -b 000000fa -t ddccbbff -s 0E0E0Eff -S 72767dff --show-actions -w 50 -T "foot --app-id='termfloat'"
+# set $menu dmenu_path | wmenu | xargs swaymsg exec --
 font pango:Iosevka Term Custom 9
 
 ### Output configuration
@@ -19,7 +20,7 @@ output HDMI-A-1 {
     adaptive_sync on
     max_render_time 1
     subpixel rgb
-    bg /mnt/c/Users/llyyr/Desktop/4chan/jp/1637197847029.jpg fit #000000
+    bg /mnt/e/Images/bg.png stretch
 }
 
 #bg /mnt/e/Images/Altina/鮫島タムラ \(2830191\)/88663225_p0 - アルティナ雑まとめv2.png fill #000000
@@ -249,8 +250,11 @@ bindsym $mod+ctrl+Print exec grimshot --notify save window
 # Current display to clipboard
 bindsym ctrl+alt+Print exec grimshot --notify copy output
 
-# Current window to clipboard (doesn't work on floating windows tho)
+# Current window to clipboard
 bindsym alt+Print exec grimshot --notify copy active
+
+# Current window to file
+bindsym $mod+alt+Print exec grimshot --notify save active
 
 # Record screen
 bindsym $mod+Shift+R exec 'bash ~/.local/bin/toggle-screen-recorder.sh'

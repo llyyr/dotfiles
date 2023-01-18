@@ -16,6 +16,7 @@ alias diff="diff -Naup --color=auto"
 alias traffic="sudo ss -tp4"
 alias rg="rg --smart-case"
 alias lsd="lsd -AF --date=relative --icon=never --group-directories-first"
+alias tree="lsd --tree"
 alias dotfiles="/usr/bin/git --git-dir=$HOME/dotfiles --work-tree=$HOME"
 alias localejp="LC_ALL=ja_JP.UTF-8 LANG=ja_JP.UTF-8"
 alias cpug="sudo cpupower frequency-set -g $1"
@@ -122,4 +123,23 @@ function rm() {
     [ -d "$v" ] && ls "$v"
   done
   command rm -Iv "$@"
+}
+
+fkill() {
+  local pid
+  if [ "$UID" != "0" ]; then
+    pid=$(ps -f -u $UID | sed 1d | fzf -m | awk '{print $2}')
+  else
+    pid=$(ps -ef | sed 1d | fzf -m | awk '{print $2}')
+  fi
+
+  if [ "x$pid" != "x" ]; then
+    echo "$pid" | xargs kill "-${1:-9}"
+  fi
+}
+
+function tmuxrefresh {
+export $(tmux show-environment | grep "^SSH_AUTH_SOCK")
+export $(tmux show-environment | grep "^SWAYSOCK")
+export $(tmux show-environment | grep "^DISPLAY")
 }

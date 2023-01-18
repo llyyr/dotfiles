@@ -13,16 +13,6 @@ snippet uni
 snippet from
 	from ${1:package} import ${0:module}
 
-# Module Docstring
-snippet docs
-	"""
-	File: ${1:`vim_snippets#Filename('$1.py', 'foo.py')`}
-	Author: `g:snips_author`
-	Email: `g:snips_email`
-	Github: `g:snips_github`
-	Description: ${0}
-	"""
-
 # Unittest skip
 snippet sk "skip unittests" b
 	@unittest.skip(${1:skip_reason})

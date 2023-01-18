@@ -1,10 +1,14 @@
-:not(.fa):not(.fas):not(.glyphicon):not(i) {
-    font-family: "Noto Sans JP" !important;
-    /*font-size: 12pt !important;
-	line-height: 1.3 !important;*/
+/*:not(.fa):not(.fas):not(.glyphicon):not(i):not(pre):not(code):not(.material-icons) {
+    font-family: "Noto Sans CJK JP";
+    font-size: 12pt !important;
+	line-height: 1.3 !important;
     text-shadow: none !important;
     user-select: text !important;
 }
+.blob-code-content * {
+    font-family: "Iosevka Term Custom" !important;
+}
+
 
 pre, code {
     color: #cba !important;
@@ -15,28 +19,13 @@ pre, code {
 
 pre code {
     border: none !important;
-    padding: none !important;
+    padding: 0 !important;
 	color: #DDCCBB !important;
 }
 
 div.sourceCode > pre, td.sourceCode > pre {
     border: none !important;
 }
-
-/* Syntax highlighting */
-code span.kw { color: #ffa600 !important; } /* Keyword */
-code span.dt { color: #85c600 !important; } /* DataType */
-code span.dv { color: #e0374f !important; } /* DecVal */
-code span.bn { color: #e0374f !important; } /* BaseN */
-code span.fl { color: #e0374f !important; } /* Float */
-code span.ch { color: #e0374f !important; } /* Char */
-code span.st { color: #e0374f !important; } /* String */
-code span.co { color: #0099bc !important; } /* Comment */
-code span.ot { color: #e50c88 !important; } /* Other */
-code span.al { color: #e0374f !important; } /* Alert */
-code span.fu { color: #d78787 !important; } /* Function */
-code span.re { } /* RegionMarker */
-code span.er { color: #ff0000 !important; font-weight: bold !important; } /* Error */
 
 span.qutehint {
     opacity: 100% !important;
@@ -51,21 +40,10 @@ span.qutehint > font {
 }
 
 /* github */
-.mt-5, .mt-3 {
-	margin-top: 0 !important;
-}
-
-.bg-gray, .btn, .bg-gray-light, .bg-blue-light {
-    background-color: black !important;
-    background-image: none !important;
-}
 
 .container-lg {
 	max-width: none !important;
 }
-
-.pl-c{color:#959da5}.pl-c1,.pl-s .pl-v{color:#c8e1ff}.pl-e,.pl-en{color:#b392f0}.pl-s .pl-s1,.pl-smi{color:#f6f8fa}.pl-ent{color:#7bcc72}.pl-k{color:#ea4a5a}.pl-pds,.pl-s,.pl-s .pl-pse .pl-s1,.pl-sr,.pl-sr .pl-cce,.pl-sr .pl-sra,.pl-sr .pl-sre{color:#79b8ff}.pl-ml,.pl-v{color:#fb8532}.pl-bu{color:#d73a49}.pl-ii{color:#fafbfc;background-color:#d73a49}.pl-c2{color:#fafbfc;background-color:#d73a49}.pl-c2::before{content:"^M"}.pl-sr .pl-cce{font-weight:700;color:#7bcc72}.pl-mh,.pl-mh .pl-en,.pl-ms{font-weight:700;color:#0366d6}.pl-mi{font-style:italic;color:#f6f8fa}.pl-mb{font-weight:700;color:#f6f8fa}.pl-md{color:#b31d28;background-color:#ffeef0}.pl-mi1{color:#176f2c;background-color:#f0fff4}.pl-mc{color:#b08800;background-color:#fffdef}.pl-mi2{color:#2f363d;background-color:#959da5}.pl-mdr{font-weight:700;color:#b392f0}.pl-mo{color:#0366d6}.pl-ba{color:#ffeef0}.pl-sg{color:#6a737d}.pl-corl{text-decoration:underline;color:#79b8ff}.pl-token.active,.pl-token:hover{background:#b392f0;color:#141414}
-
 
 /* jpopsuki */
 
@@ -82,12 +60,6 @@ span.qutehint > font {
 
 div.jscroll-inner > div.link {
 	padding-left:0px !important;
-}
-
-#header-bottom-right {
-	position: fixed !important;
-	bottom: 0px !important;
-	top: auto !important;
 }
 
 .separator {
@@ -117,10 +89,9 @@ div.jscroll-inner > div.link {
 
 /* For 4chan */
 
-pre.prettyprint {
-	font: sundae;
-	background-color: #020202;
-	max-width: 100%;
+pre.prettyprint, pre.prettyprint * {
+    font-family: "Iosevka Term Custom" !important;
+	max-width: 130vh;
 }
 
 
@@ -199,18 +170,6 @@ span.math {
     border-color: black !important;
 }
 
-/* For wikipedia */
-
-div[style^="position: absolute"] {
-    background: none !important;
-}
-
-/* For youtube */
-
-div#yt-dialog-bg, div.yt-dialog {
-    display: none !important;
-}
-
 /* for nyaa.si */
 .container {
 	width: 100% !important;
@@ -226,8 +185,21 @@ div.pyv-afc-ads-container { /* youtube search results */
     display: none !important;
 }
 
-div.ad-wrapper, div.sponsored-headlines { /* ESPNCricinfo ads */
+/* ESPNCricinfo */
+div.ad-wrapper, div.sponsored-headlines {
 	display: none !important;
+}
+
+.container {
+    min-width: 100%;
+}
+.d-flex > .col-lg-3 {
+    flex: 0 0 10%;
+}
+
+.col-md-15, .col-14, .col-lg-13 {
+    flex: 0 0 95%;
+    max-width: 95%;
 }
 
 .layout-full, .layout-abc, .layout-bc, .layout-bc-large, .layout-cb, .layout-dbc, .layout-cbc {
@@ -242,10 +214,6 @@ header#global-header {
 	display: none !important;
 }
 
-section#pane-main {
-	padding-top: 50px !important;
-}
-
 span.c00 {
 	color: #DDCCBB !important;
 }
@@ -255,6 +223,11 @@ span.c00 {
 html.dark .is-narrow-columns .column {
     width: 220px;
     margin-right: 3px;
+}
+
+/* brawlhalla */
+.cli-barmodal-open {
+    overflow: unset !important;
 }
 /* Color overrides
 
@@ -274,4 +247,13 @@ a:visited, a:visited * {
     overflow-y: scroll !important;
     margin-right: -17px !important;
     padding-right: 10px !important;
+}
+
+
+.entry-content {
+    width: unset;
+}
+
+a[title~="Shorts"] {
+    display: none!important;
 }

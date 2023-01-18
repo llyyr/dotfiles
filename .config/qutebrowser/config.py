@@ -287,8 +287,7 @@ c.content.blocking.enabled = True
 # extracting it from the `location` parameter of the subscribe URL and
 # URL-decoding it).
 # Type: List of Url
-
-c.content.blocking.adblock.lists = ['https://easylist.to/easylist/easylist.txt','https://easylist.to/easylist/easyprivacy.txt', 'https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/filters.txt', 'https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_2_English/filter.txt', 'https://secure.fanboy.co.nz/fanboy-cookiemonster.txt', 'https://easylist.to/easylist/fanboy-social.txt', 'https://secure.fanboy.co.nz/fanboy-annoyance.txt']
+c.content.blocking.adblock.lists = ['https://easylist.to/easylist/easylist.txt', 'https://easylist.to/easylist/easyprivacy.txt', 'https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/filters.txt', 'https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_2_English/filter.txt', 'https://secure.fanboy.co.nz/fanboy-cookiemonster.txt', 'https://easylist.to/easylist/fanboy-social.txt', 'https://secure.fanboy.co.nz/fanboy-annoyance.txt']
 
 # Enable hyperlink auditing (`<a ping>`).
 # Type: Bool
@@ -309,12 +308,6 @@ config.set('content.images', True, 'devtools://*')
 # Show javascript alerts.
 # Type: Bool
 c.content.javascript.alert = True
-
-# Allow JavaScript to read from or write to the clipboard. With
-# QtWebEngine, writing the clipboard as response to a user interaction
-# is always allowed.
-# Type: Bool
-c.content.javascript.can_access_clipboard = True
 
 # Allow JavaScript to open new tabs without user interaction.
 # Type: Bool
@@ -410,9 +403,17 @@ c.content.javascript.prompt = True
 # Type: Bool
 c.content.local_content_can_access_remote_urls = True
 
+# Allow locally loaded documents to access remote URLs.
+# Type: Bool
+config.set('content.local_content_can_access_remote_urls', True, 'file:///home/llyyr/.local/share/qutebrowser/userscripts/*')
+
 # Allow locally loaded documents to access other local URLs.
 # Type: Bool
 c.content.local_content_can_access_file_urls = True
+
+# Allow locally loaded documents to access other local URLs.
+# Type: Bool
+config.set('content.local_content_can_access_file_urls', False, 'file:///home/llyyr/.local/share/qutebrowser/userscripts/*')
 
 # Enable support for HTML 5 local storage and Web SQL.
 # Type: Bool
@@ -594,7 +595,7 @@ c.downloads.remove_finished = -1
 # `{line0}`: Same as `{line}`, but starting from index 0. * `{column0}`:
 # Same as `{column}`, but starting from index 0.
 # Type: ShellCommand
-c.editor.command = ['konsole', '-e', 'nvim', '+call cursor({line}, {column})', '{file}']
+c.editor.command = ['foot', 'nvim', '+call cursor({line}, {column})', '{file}']
 
 # Encoding to use for the editor.
 # Type: Encoding
@@ -693,11 +694,11 @@ c.input.mouse.rocker_gestures = False
 c.input.partial_timeout = 5000
 
 # Enable spatial navigation. Spatial navigation consists in the ability
-# to navigate between focusable elements in a Web page, such as
-# hyperlinks and form controls, by using Left, Right, Up and Down arrow
-# keys. For example, if the user presses the Right key, heuristics
-# determine whether there is an element he might be trying to reach
-# towards the right and which element he probably wants.
+# to navigate between focusable elements, such as hyperlinks and form
+# controls, on a web page by using the Left, Right, Up and Down arrow
+# keys. For example, if a user presses the Right key, heuristics
+# determine whether there is an element they might be trying to reach
+# towards the right and which element they probably want.
 # Type: Bool
 c.input.spatial_navigation = False
 
@@ -924,7 +925,8 @@ c.tabs.title.alignment = 'left'
 # the current web page. * `{title_sep}`: The string `" - "` if a title
 # is set, empty otherwise. * `{index}`: Index of this tab. *
 # `{aligned_index}`: Index of this tab padded with spaces to have the
-# same   width. * `{id}`: Internal tab ID of this tab. * `{scroll_pos}`:
+# same   width. * `{relative_index}`: Index of this tab relative to the
+# current tab. * `{id}`: Internal tab ID of this tab. * `{scroll_pos}`:
 # Page scroll position. * `{host}`: Host of the current web page. *
 # `{backend}`: Either `webkit` or `webengine` * `{private}`: Indicates
 # when private mode is enabled. * `{current_url}`: URL of the current
@@ -999,7 +1001,7 @@ c.url.incdec_segments = ['path', 'query']
 # the search engine name to the search term, e.g. `:open google
 # qutebrowser`.
 # Type: Dict
-c.url.searchengines = {'DEFAULT': 'https://encrypted.google.com/search?q={}', 'ddg': 'https://duckduckgo.com/?q={}', 'sx': 'https://searx.me/?q={}&categories=general&language=en-IN', '4': 'https://boards.4chan.org/{}', '8': 'https://8ch.net/{}', 'r': 'https://old.reddit.com/r/{}', 'yt': 'https://www.youtube.com/results?search_query={}', 'gh': 'https://github.com/{}', 'nyaa': 'https://nyaa.si/?f=0&c=0_0&q={}', 'sukebei': 'https://sukebei.nyaa.si/?f=0&c=0_0&q={}', 'exh': 'https://exhentai.org/?f_doujinshi=1&f_manga=1&f_artistcg=1&f_gamecg=1&f_western=0&f_non-h=0&f_imageset=1&f_cosplay=1&f_asianporn=1&f_misc=0&f_search={}', 'nh': 'https://nhentai.net/search/?q={}', 'ji': 'https://jisho.org/search/{}', 'adb': 'https://anidb.net/perl-bin/animedb.pl?show=animelist&noalias=1&do.update=Search&adb.search={}'}
+c.url.searchengines = {'DEFAULT': 'https://google.com/search?q={}', 'ddg': 'https://duckduckgo.com/?q={}', 'sx': 'https://searx.me/?q={}&categories=general&language=en-IN', '4': 'https://boards.4chan.org/{}', '8': 'https://8ch.net/{}', 'r': 'https://old.reddit.com/r/{}', 'yt': 'https://www.youtube.com/results?search_query={}', 'gh': 'https://github.com/{}', 'nyaa': 'https://nyaa.si/?f=0&c=0_0&q={}', 'sukebei': 'https://sukebei.nyaa.si/?f=0&c=0_0&q={}', 'exh': 'https://exhentai.org/?f_doujinshi=1&f_manga=1&f_artistcg=1&f_gamecg=1&f_western=0&f_non-h=0&f_imageset=1&f_cosplay=1&f_asianporn=1&f_misc=0&f_search={}', 'nh': 'https://nhentai.net/search/?q={}', 'ji': 'https://jisho.org/search/{}', 'adb': 'https://anidb.net/perl-bin/animedb.pl?show=animelist&noalias=1&do.update=Search&adb.search={}'}
 
 # Page(s) to open at the start.
 # Type: List of FuzzyUrl, or FuzzyUrl
@@ -1008,10 +1010,6 @@ c.url.start_pages = 'about:blank'
 # URL parameters to strip with `:yank url`.
 # Type: List of String
 c.url.yank_ignored_parameters = ['ref', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content']
-
-# Default zoom level.
-# Type: Perc
-c.zoom.default = '80%'
 
 # Available zoom levels.
 # Type: List of Perc
@@ -1253,16 +1251,11 @@ c.colors.tabs.selected.even.fg = '#85C600'
 # Type: QtColor
 c.colors.tabs.selected.even.bg = '#283B00'
 
-# Background color for webpages if unset (or empty to use the theme's
-# color).
-# Type: QtColor
-c.colors.webpage.bg = '#000'
-
 # Default font families to use. Whenever "default_family" is used in a
 # font setting, it's replaced with the fonts listed here. If set to an
 # empty value, a system-specific monospace default is used.
 # Type: List of Font, or Font
-c.fonts.default_family = 'Cascadia Code'
+c.fonts.default_family = 'Iosevka Term Custom'
 
 # Font used in the completion widget.
 # Type: Font
@@ -1298,8 +1291,8 @@ c.fonts.tabs.unselected = '8pt default_family'
 
 # Bindings for normal mode
 config.bind(';I', 'hint links spawn -d mpv --profile=image {hint-url}')
-config.bind(';S', 'hint links spawn -d streamlink {hint-url} best')
 config.bind(';M', 'hint links spawn --userscript view_in_mpv {hint-url}')
+config.bind(';S', 'hint links spawn -d streamlink {hint-url} best')
 config.bind(';T', 'open -t https://translate.google.com/#auto/en/{url}')
 config.bind('cc', 'config-cycle -t content.user_stylesheets "css/colors.css" "css/global.css"')
 config.bind('cg', 'config-cycle -t content.user_stylesheets "css/global.css" ""')

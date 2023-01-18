@@ -156,7 +156,7 @@ lsp.clangd.setup({
             "--inlay-hints",
             "--header-insertion-decorators=false",
             "--header-insertion=never",
-            "--log=error"
+            "--log=error",
     },
     filetypes = { "c", "h", "cpp", "hpp", "objc", "objcpp" },
 })
