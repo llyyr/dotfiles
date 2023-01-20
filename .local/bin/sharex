@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+# requirements: sway, grim, slurp, mpv, ffmpeg, wl-clipboard
+# Freezes the screen, allows capturing an area.
+# first argument: path to temporary file
+# second argument: the classname to use for swayimg
+#
+# In sway config add:
+# `for_window [app_id="sharex"] fullscreen enable global`
+# to ensure that fullscreen spans all outputs
+# alternatively, use swaymsg to set that in this script based on IMGCLASS
+#
+# Configure DESKTOPSIZE variable to match your total desktop size
+
+TMPIMG=${1:-"$(mktemp --suffix ss.png)"}
+IMGCLASS=${2:-"sharex"}
+SLURPARG="-f %w:%h:%x:%y -d -b 00000066"
+DESKTOPSIZE="0,0 1920x1080"
+
+grim -c -t png -l 0 -s 1 -g "$DESKTOPSIZE" "$TMPIMG"
+mpv --wayland-app-id="$IMGCLASS" "$TMPIMG" &
+
+(ffmpeg -loglevel warning -i "$TMPIMG" -vf "crop=$(slurp $SLURPARG)" -y \
+        -c:v png -f image2pipe -pred 2 -compression_level 1 - ; \
+        swaymsg -q "[app_id=$IMGCLASS] focus; kill" 1>&2) \
+| wl-copy --type image/png
+
+rm "$TMPIMG"

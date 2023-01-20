@@ -2,7 +2,10 @@ alias wdesktop="cd /mnt/c/Users/llyyr/Desktop/"
 alias brplay="cd ~/.local/share/Steam/steamapps/compatdata/291550/pfx/drive_c/users/steamuser/BrawlhallaReplays"
 alias aoc="cd ~/projects/aoc/aoc-2022"
 alias vim="$EDITOR"
-alias ls="ls -AhF --color=auto --group-directories-first"
+alias lsd="lsd -AF --date=relative --icon=never --group-directories-first"
+alias lt="lsd --tree"
+alias ls="lsd"
+# alias ls="ls -AhF --color=auto --group-directories-first"
 alias browse='fzf --bind="enter:execute(echo -n {} | wl-copy)" --preview="pygmentize {} 2>/dev/null || cat {}" --preview-window=up'
 alias grep="grep --color=auto --binary-files=without-match --devices=skip"
 alias psg="ps aux | grep -v grep | grep -i -e VSZ -e"
@@ -15,8 +18,6 @@ alias du="du -ach | sort -h"
 alias diff="diff -Naup --color=auto"
 alias traffic="sudo ss -tp4"
 alias rg="rg --smart-case"
-alias lsd="lsd -AF --date=relative --icon=never --group-directories-first"
-alias tree="lsd --tree"
 alias dotfiles="/usr/bin/git --git-dir=$HOME/dotfiles --work-tree=$HOME"
 alias localejp="LC_ALL=ja_JP.UTF-8 LANG=ja_JP.UTF-8"
 alias cpug="sudo cpupower frequency-set -g $1"
@@ -138,8 +139,8 @@ fkill() {
   fi
 }
 
-function tmuxrefresh {
-export $(tmux show-environment | grep "^SSH_AUTH_SOCK")
-export $(tmux show-environment | grep "^SWAYSOCK")
-export $(tmux show-environment | grep "^DISPLAY")
+function envref {
+    export $(tmux show-environment | grep "^SSH_AUTH_SOCK")
+    export $(tmux show-environment | grep "^SWAYSOCK")
+    export $(tmux show-environment | grep "^DISPLAY")
 }

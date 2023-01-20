@@ -327,6 +327,7 @@ for_window [app_id="mpv"] floating enable, move scratchpad, scratchpad show
 # for_window [floating app_id="mpv"] move position 0 0
 for_window [window_role="pop-up"] floating enable
 for_window [window_role="task_dialog"] floating enable
+for_window [app_id="sharex"] fullscreen enable global
 
 exec_always {
     systemctl --user import-environment
