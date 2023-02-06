@@ -28,7 +28,8 @@ window#waybar {
 #clock,
 #network,
 #idle_inhibitor,
-#custom-recorder {
+#custom-recorder,
+#custom-dnd {
   padding-left: 0.5rem;
   padding-right: 0.5rem;
 }
@@ -36,3 +37,4 @@ window#waybar {
 #workspaces button.focused {
   background: #2772C8;
 }
+

@@ -2,7 +2,7 @@
     "height": 17,
     "modules-left": ["sway/workspaces", "sway/mode", "sway/window"],
     "modules-center": ["custom/weather", "clock",],
-    "modules-right": ["custom/recorder", "wlr/taskbar", "pulseaudio", "memory", "cpu", "temperature", "network", "idle_inhibitor"],
+    "modules-right": ["custom/recorder", "wlr/taskbar", "pulseaudio", "memory", "cpu", "temperature", "network", "idle_inhibitor", "custom/dnd"],
     "sway/window": {
         "max-length": 50
     },
@@ -75,4 +75,17 @@
         "format": "↓ {bandwidthDownBytes} ↑ {bandwidthUpBytes}",
         "interval": 1,
     },
+    "custom/dnd": {
+        "interval": "once",
+        "return-type": "json",
+        "format": "{}{icon}",
+        "format-icons": {
+            "default": "◯",
+            "dnd": "✖"
+        },
+        "on-click": "makoctl mode | grep 'dnd' && makoctl mode -r dnd || makoctl mode -a dnd; pkill -RTMIN+11 waybar",
+        "on-click-right": "makoctl restore",
+        "exec": "printf '{\"alt\":\"%s\",\"tooltip\":\"mode: %s\"}' $(makoctl mode | grep -q 'dnd' && echo dnd || echo default) $(makoctl mode | tail -1)",
+        "signal": 11
+    }
 }

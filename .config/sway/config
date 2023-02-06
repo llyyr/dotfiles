@@ -176,7 +176,7 @@ input "1386:768:Wacom_Bamboo_One_S_Pen" {
 
     bindsym $mod+z exec 'swaymsg [app_id="com.chatterino.https:\/\/www.chatterino"] scratchpad show'
     bindsym $mod+x exec 'swaymsg [app_id="org.kde.dolphin"] scratchpad show'
-    bindsym $mod+c exec 'swaymsg [app_id="WebCord"] scratchpad show'
+    bindsym $mod+c exec 'swaymsg [app_id="discord"] scratchpad show'
     bindsym $mod+m exec 'swaymsg [app_id="mpv"] scratchpad show'
     bindsym $mod+semicolon exec 'swaymsg [app_id="org.keepassxc.KeePassXC"] scratchpad show'
     bindsym $mod+t exec 'swaymsg [app_id="termfloat"] scratchpad show'
@@ -320,7 +320,7 @@ for_window [app_id="org.qbittorrent.qBittorrent"] move container to workspace 10
 for_window [app_id="transmission-gtk"] move container to workspace 10
 for_window [app_id="org.kde.dolphin"] floating enable, move scratchpad, scratchpad show
 for_window [app_id="org.keepassxc.KeePassXC"] floating enable, move scratchpad, scratchpad show
-for_window [app_id="WebCord"] floating enable, move scratchpad, scratchpad show, move position 0 414
+for_window [app_id="discord"] floating enable, move scratchpad, scratchpad show, move position 0 414
 for_window [app_id="termfloat"] floating enable, resize set height 600, resize set width 800, move scratchpad, scratchpad show
 for_window [app_id="com.chatterino.https:\/\/www.chatterino"] floating enable, move scratchpad, scratchpad show
 for_window [app_id="mpv"] floating enable, move scratchpad, scratchpad show
