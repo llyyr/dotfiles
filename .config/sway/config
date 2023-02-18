@@ -229,6 +229,36 @@ mode music {
     bindsym q exec playerctl stop
 }
 
+bindsym $mod+Shift+m mode move
+mode "move" {
+    bindsym Left  exec sway-move-to left; mode "default"
+    bindsym Right exec sway-move-to right; mode "default"
+    bindsym Down  exec sway-move-to bottom; mode "default"
+    bindsym Up    exec sway-move-to top; mode "default"
+    bindsym h     exec sway-move-to left; mode "default"
+    bindsym l     exec sway-move-to right; mode "default"
+    bindsym j     exec sway-move-to bottom; mode "default"
+    bindsym k     exec sway-move-to top; mode "default"
+    
+    # these reflect the position on the keyboard:
+    # w e r
+    # s d f
+    # x c v
+    bindsym w     exec sway-move-to top-left; mode "default"
+    bindsym e     exec sway-move-to mid-top; mode "default"
+    bindsym r     exec sway-move-to top-right; mode "default"
+    bindsym s     exec sway-move-to mid-left; mode "default"
+    bindsym d     exec sway-move-to centre; mode "default"
+    bindsym f     exec sway-move-to mid-right; mode "default"
+    bindsym x     exec sway-move-to bottom-left; mode "default"
+    bindsym c     exec sway-move-to mid-bottom; mode "default"
+    bindsym v     exec sway-move-to bottom-right ; mode "default"
+
+    # Return to default mode
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
 # wlsunset on/off
 bindsym $mod+n exec sunset
 
@@ -324,7 +354,7 @@ for_window [app_id="discord"] floating enable, move scratchpad, scratchpad show,
 for_window [app_id="termfloat"] floating enable, resize set height 600, resize set width 800, move scratchpad, scratchpad show
 for_window [app_id="com.chatterino.https:\/\/www.chatterino"] floating enable, move scratchpad, scratchpad show
 for_window [app_id="mpv"] floating enable, move scratchpad, scratchpad show
-# for_window [floating app_id="mpv"] move position 0 0
+for_window [floating app_id="mpv"] exec sway-move-to top-right
 for_window [window_role="pop-up"] floating enable
 for_window [window_role="task_dialog"] floating enable
 for_window [app_id="sharex"] fullscreen enable global

@@ -17,6 +17,9 @@ eval $(dircolors ~/.dir_colors)
 source ~/.aliases
 source ~/.secrets
 
+# This is needed because intel-media-driver sets it to iHD by default
+export LIBVA_DRIVER_NAME=radeonsi
+
 export HISTFILE=~/.zsh_history
 export HISTSIZE=10000
 export SAVEHIST=100000

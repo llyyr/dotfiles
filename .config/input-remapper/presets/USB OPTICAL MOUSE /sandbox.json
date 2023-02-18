@@ -1,8 +1,0 @@
-{
-    "mapping": {
-        "1,274,1": [
-            "k(BackSpace).w(100).m(Shift_L, k(BackSpace))\n# Broken mapping:\n# No target can handle all specified keycodes",
-            "keyboard"
-        ]
-    }
-}
