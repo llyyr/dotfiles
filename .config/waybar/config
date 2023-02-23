@@ -1,10 +1,41 @@
 {
     "height": 17,
-    "modules-left": ["sway/workspaces", "sway/mode", "sway/window"],
-    "modules-center": ["custom/weather", "clock",],
-    "modules-right": ["custom/recorder", "wlr/taskbar", "pulseaudio", "memory", "cpu", "temperature", "network", "idle_inhibitor", "custom/dnd"],
+    "modules-left": ["sway/workspaces", 
+                    // "sway/scratchpad",
+                    "sway/mode",
+                    "sway/window"
+                    ],
+    "modules-center": ["custom/weather", 
+                    "custom/separator",
+                    "clock"
+                    ],
+    "modules-right": ["custom/recorder",
+                    "tray", 
+                    "wlr/taskbar",
+                    "custom/separator",
+                    "pulseaudio",
+                    "custom/separator",
+                    "memory",
+                    "custom/separator",
+                    "cpu",
+                    "custom/separator",
+                    "temperature",
+                    "custom/separator",
+                    "network",
+                    "custom/separator",
+                    "idle_inhibitor",
+                    "custom/separator",
+                    "custom/dnd"
+                    ],
     "sway/window": {
-        "max-length": 50
+        "max-length": 50,
+    },
+    "sway/scratchpad": {
+        "format": "{icon} {count}",
+        "show-empty": false,
+        "format-icons": ["", ""],
+        "tooltip": true,
+        "tooltip-format": "{app}: {title}"
     },
     "clock": {
         "timezones": ["Asia/Kolkata", "Asia/Tokyo"],
@@ -37,9 +68,12 @@
         "format": "{temperatureC}°C "
     },
     "pulseaudio": {
-        "format": "{volume}% {icon}",
-        "format-bluetooth": "{volume}% {icon}",
-        "format-muted": "",
+        "format": "{volume}% {icon} {format_source}",
+        "format-bluetooth": "{volume}% {icon} {format_source}",
+        "format-bluetooth-muted": " {icon} {format_source}",
+        "format-muted": " {format_source}",
+        "format-source": "{volume}% ",
+        "format-source-muted": "",
         "format-icons": {
             "headphone": "",
             "hands-free": "",
@@ -47,7 +81,7 @@
             "phone": "",
             "portable": "",
             "car": "",
-            "default": ["", ""]
+            "default": ["", "", ""]
         },
         "scroll-step": 1,
         "on-click": "pavucontrol"
@@ -87,5 +121,8 @@
         "on-click-right": "makoctl restore",
         "exec": "printf '{\"alt\":\"%s\",\"tooltip\":\"mode: %s\"}' $(makoctl mode | grep -q 'dnd' && echo dnd || echo default) $(makoctl mode | tail -1)",
         "signal": 11
+    },
+    "custom/separator": {
+        "format": "|"
     }
 }

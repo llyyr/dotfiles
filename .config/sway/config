@@ -23,6 +23,8 @@ output HDMI-A-1 {
     bg /mnt/e/Images/bg.png stretch
 }
 
+# for_window [app_id="^.*"] max_render_time 1
+
 #bg /mnt/e/Images/Altina/鮫島タムラ \(2830191\)/88663225_p0 - アルティナ雑まとめv2.png fill #000000
 #
 # Example configuration:
@@ -174,7 +176,6 @@ input "1386:768:Wacom_Bamboo_One_S_Pen" {
     # If there are multiple scratchpad windows, this command cycles through them.
     bindsym $mod+minus scratchpad show
 
-    bindsym $mod+z exec 'swaymsg [app_id="com.chatterino.https:\/\/www.chatterino"] scratchpad show'
     bindsym $mod+x exec 'swaymsg [app_id="org.kde.dolphin"] scratchpad show'
     bindsym $mod+c exec 'swaymsg [app_id="discord"] scratchpad show'
     bindsym $mod+m exec 'swaymsg [app_id="mpv"] scratchpad show'
@@ -352,13 +353,18 @@ for_window [app_id="org.kde.dolphin"] floating enable, move scratchpad, scratchp
 for_window [app_id="org.keepassxc.KeePassXC"] floating enable, move scratchpad, scratchpad show
 for_window [app_id="discord"] floating enable, move scratchpad, scratchpad show, move position 0 414
 for_window [app_id="termfloat"] floating enable, resize set height 600, resize set width 800, move scratchpad, scratchpad show
-for_window [app_id="com.chatterino.https:\/\/www.chatterino"] floating enable, move scratchpad, scratchpad show
-for_window [app_id="mpv"] floating enable, move scratchpad, scratchpad show
-for_window [floating app_id="mpv"] exec sway-move-to top-right
+for_window [app_id="mpv"] floating enable, exec sway-move-to top-right, move scratchpad, scratchpad show
 for_window [window_role="pop-up"] floating enable
 for_window [window_role="task_dialog"] floating enable
 for_window [app_id="sharex"] fullscreen enable global
-
+for_window [title="^Picture-in-Picture$"] {
+   floating enable
+   sticky enable
+   resize set height 280px
+   resize set width 500px
+   opacity 0.8
+   exec sway-move-to bottom-right
+}
 exec_always {
     systemctl --user import-environment
     dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP

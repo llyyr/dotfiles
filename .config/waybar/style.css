@@ -1,7 +1,6 @@
 * {
-  font-family: Sarasa Term J;
+  font-family: "Sarasa Term J";
   font-size: 9pt;
-  color: white;
   border: none;
   border-radius: 0;
   box-shadow: none;
@@ -9,12 +8,12 @@
   transition-duration: 0s;
   padding-top: 0;
   padding-bottom: 0;
-  min-height: 0;
 }
 
 window#waybar {
-  background: #000;
-  opacity: 0.8;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.9) 10%, rgba(0,0,0,0.8) 100%);
+  min-height: 17px;
+  /* background: rgba(0, 0, 0, 0.8); */
 }
 
 #window,
@@ -29,12 +28,23 @@ window#waybar {
 #network,
 #idle_inhibitor,
 #custom-recorder,
-#custom-dnd {
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
+#custom-dnd,
+/* #custom-separator, */
+#taskbar,
+#tray, 
+#language, #scratchpad, #mode, #workspaces {
+  padding: 0 0.5rem;
 }
 
-#workspaces button.focused {
+#workspaces, #taskbar {
+  padding-left: 0;
+}
+
+#custom-separator {
+}
+
+#workspaces button.focused, #mode {
   background: #2772C8;
 }
+
 
