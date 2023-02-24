@@ -337,34 +337,65 @@ gaps bottom 0
 gaps left 0
 
 # Misc settings
-for_window [app_id="(pavucontrol|psensor)"] floating enable, move position cursor, move down 35
-for_window [class="feh"] floating enable
-for_window [app_id="imv"] floating enable
-for_window [app_id="org.kde.kcalc"] floating enable
-for_window [app_id="electron"] floating enable
-for_window [app_id="firefox"] move container to workspace 1
-for_window [class="krita"] move container to workspace 5
-for_window [app_id="cantata"] move container to workspace 7
-for_window [class="^.*[sS]team.*$"] move container to workspace 8
-for_window [app_id="thunderbird"] move container to workspace 9
-for_window [app_id="org.qbittorrent.qBittorrent"] move container to workspace 10
-for_window [app_id="transmission-gtk"] move container to workspace 10
-for_window [app_id="org.kde.dolphin"] floating enable, move scratchpad, scratchpad show
-for_window [app_id="org.keepassxc.KeePassXC"] floating enable, move scratchpad, scratchpad show
-for_window [app_id="discord"] floating enable, move scratchpad, scratchpad show, move position 0 414
-for_window [app_id="termfloat"] floating enable, resize set height 600, resize set width 800, move scratchpad, scratchpad show
-for_window [app_id="mpv"] floating enable, exec sway-move-to top-right, move scratchpad, scratchpad show
-for_window [window_role="pop-up"] floating enable
-for_window [window_role="task_dialog"] floating enable
-for_window [app_id="sharex"] fullscreen enable global
-for_window [title="^Picture-in-Picture$"] {
-   floating enable
-   sticky enable
-   resize set height 280px
-   resize set width 500px
-   opacity 0.8
-   exec sway-move-to bottom-right
+for_window {
+    [class="feh"] floating enable
+    [app_id="imv"] floating enable
+    [app_id="org.kde.kcalc"] floating enable
+    [app_id="electron"] floating enable
+    [app_id="firefox"] move container to workspace 1
+    [class="krita"] move container to workspace 5
+    [app_id="cantata"] move container to workspace 7
+    [class="^.*[sS]team.*$"] move container to workspace 8
+    [app_id="thunderbird"] move container to workspace 9
+    [app_id="org.qbittorrent.qBittorrent"] move container to workspace 10
+    [app_id="transmission-gtk"] move container to workspace 10
+    [window_role="pop-up"] floating enable
+    [window_role="task_dialog"] floating enable
+    [app_id="sharex"] fullscreen enable global
+    [app_id="(pavucontrol|psensor)"] {
+        floating enable
+            move position cursor
+            move down 35
+    }
+    [app_id="org.kde.dolphin"] {
+        floating enable
+        move scratchpad
+        scratchpad show
+    }
+    [app_id="org.keepassxc.KeePassXC"] {
+        floating enable
+        move scratchpad
+        scratchpad show
+    }
+    [app_id="discord"] {
+        floating enable
+        move position 0 414
+        move scratchpad
+        scratchpad show
+    }
+    [app_id="termfloat"] {
+        floating enable
+        resize set height 600
+        resize set width 800
+        move scratchpad
+        scratchpad show
+    }
+    [app_id="mpv"] {
+        floating enable
+        exec sway-move-to top-right
+        move scratchpad
+        scratchpad show
+    }
+    [title="^Picture-in-Picture$"] {
+        floating enable
+        sticky enable
+        resize set height 280px
+        resize set width 500px
+        opacity 0.8
+        exec sway-move-to bottom-right
+    }
 }
+
 exec_always {
     systemctl --user import-environment
     dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP

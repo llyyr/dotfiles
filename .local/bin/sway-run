@@ -26,5 +26,3 @@ export WLR_RENDERER=vulkan
 
 systemd-cat --identifier=sway sway $@
 # sway $@ -dV 2> ~/tmp/sway.log
-# Hyprland $@
-
