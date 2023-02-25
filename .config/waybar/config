@@ -1,5 +1,4 @@
 {
-    "height": 17,
     "modules-left": ["sway/workspaces", 
                     // "sway/scratchpad",
                     "sway/mode",

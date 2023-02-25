@@ -13,6 +13,7 @@ export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 export ZYPP_MEDIANETWORK=1
 export WINEDEBUG=-all
+export DEBUGINFOD_URLS="https://debuginfod.opensuse.org/"
 eval $(dircolors ~/.dir_colors)
 source ~/.aliases
 source ~/.secrets

@@ -1,16 +1,11 @@
 [icons]
 icons = "awesome6"
 
-[theme]
-theme = "plain"
-[theme.overrides]
-separator = "/"
-
 [[block]]
 block = "focused_window"
 [block.format]
 full = " $title |"
-short = " $title.str(0,50) |"
+short = " $title.str(max_w:50) |"
 
 [[block]]
 block = "custom"
@@ -25,12 +20,11 @@ interval = 600
 [[block]]
 block = "time"
 interval = 1
-timezone = "Asia/Kolkata"
-format = " %a, %d %b. %r %Z "
+timezone = ["Asia/Kolkata", "Asia/Tokyo"]
+format = " $timestamp.datetime(f:'%a, %d %b. %r %Z') "
 [[block.click]]
-button = "left"
+button = "right"
 cmd = "zenity --calendar --text=Calendar"
-# cmd = "TZ=Asia/Tokyo date +'%a, %d %b. %r %Z'"
 
 [[block]]
 block = "kdeconnect"
@@ -43,8 +37,8 @@ cmd = "pavucontrol"
 
 [[block]]
 block = "memory"
-format = " $icon $mem_used.eng(4,B,M) "
-format_alt = " $icon_swap $swap_used.eng(4,B,M) "
+format = " $icon $mem_used.eng(w:4,u:B,p:M) "
+format_alt = " $icon_swap $swap_used.eng(w:4,u:B,p:M) "
 
 [[block]]
 block = "cpu"
@@ -58,3 +52,15 @@ chip = "coretemp-isa-0000"
 
 [[block]]
 block = "net"
+
+[[block]]
+block = "custom"
+command = "printf '%s' $(makoctl mode | grep -q 'dnd' && echo dnd || echo default)"
+signal = 11
+[[block.click]]
+button = "left"
+cmd = "makoctl mode | grep 'dnd' && makoctl mode -r dnd || makoctl mode -a dnd; pkill -RTMIN+11 i3status-rs"
+[[button.click]]
+button = "right"
+cmd = "makoctl restore"
+
