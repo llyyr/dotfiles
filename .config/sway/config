@@ -63,8 +63,6 @@ input "1386:768:Wacom_Bamboo_One_S_Pen" {
 #
 # Basics:
 #
-    # Start a floating terminal
-    bindsym $mod+Return exec $term --app-id="termfloat"
     # Start a terminal
     bindsym $mod+Shift+Return exec $term
 
@@ -73,7 +71,8 @@ input "1386:768:Wacom_Bamboo_One_S_Pen" {
 
     # Start your launcher
     bindsym $mod+d exec $menu
-    bindsym $mod+Shift+d exec dolphin
+
+    bindsym Pause exec 'swaymsg output HDMI-A-1 power toggle'
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
@@ -178,19 +177,18 @@ input "1386:768:Wacom_Bamboo_One_S_Pen" {
     # Show the next scratchpad window or hide the focused scratchpad window.
     # If there are multiple scratchpad windows, this command cycles through them.
     bindsym $mod+minus scratchpad show
-
-    bindsym $mod+x exec 'swaymsg [app_id="org.kde.dolphin"] scratchpad show'
-    bindsym $mod+c exec 'swaymsg [app_id="discord"] scratchpad show'
+    bindsym $mod+x exec 'swaymsg [app_id="org.kde.dolphin"] scratchpad show || exec dolphin'
+    bindsym $mod+c exec 'swaymsg [app_id="^discord$"] scratchpad show || exec discord-canary --disable-smooth-scrolling --ozone-platform-hint=auto'
+    bindsym $mod+semicolon exec 'swaymsg [app_id="org.keepassxc.KeePassXC"] scratchpad show || exec keepassxc'
+    bindsym $mod+t exec 'swaymsg [app_id="termfloat"] scratchpad show || exec $term --app-id="termfloat"'
     bindsym $mod+m exec 'swaymsg [app_id="mpv"] scratchpad show'
-    bindsym $mod+semicolon exec 'swaymsg [app_id="org.keepassxc.KeePassXC"] scratchpad show'
-    bindsym $mod+t exec 'swaymsg [app_id="termfloat"] scratchpad show'
     bindsym $mod+p exec 'swaymsg [title="^Picture-in-Picture$"] scratchpad show'
 
-bindsym Pause exec 'swaymsg output HDMI-A-1 power toggle'
 
 #
 # Resizing containers:
 #
+bindsym $mod+r mode "resize"
 mode "resize" {
     # left will shrink the containers width
     # right will grow the containers width
@@ -222,7 +220,6 @@ mode "resize" {
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
-bindsym $mod+r mode "resize"
 
 bindsym $mod+comma mode music
 mode music {
@@ -234,30 +231,30 @@ mode music {
     bindsym q exec playerctl stop
 }
 
-bindsym $mod+Shift+m mode move
-mode "move" {
-    bindsym Left  exec sway-move-to left; mode "default"
-    bindsym Right exec sway-move-to right; mode "default"
-    bindsym Down  exec sway-move-to bottom; mode "default"
-    bindsym Up    exec sway-move-to top; mode "default"
-    bindsym h     exec sway-move-to left; mode "default"
-    bindsym l     exec sway-move-to right; mode "default"
-    bindsym j     exec sway-move-to bottom; mode "default"
-    bindsym k     exec sway-move-to top; mode "default"
+bindsym $mod+Shift+m mode move-to
+mode "move-to" {
+    bindsym Left  exec sway-grid-move left; mode "default"
+    bindsym Right exec sway-grid-move right; mode "default"
+    bindsym Down  exec sway-grid-move bottom; mode "default"
+    bindsym Up    exec sway-grid-move top; mode "default"
+    bindsym h     exec sway-grid-move left; mode "default"
+    bindsym l     exec sway-grid-move right; mode "default"
+    bindsym j     exec sway-grid-move bottom; mode "default"
+    bindsym k     exec sway-grid-move top; mode "default"
     
     # these reflect the position on the keyboard:
-    # w e r
-    # s d f
-    # x c v
-    bindsym w     exec sway-move-to top-left; mode "default"
-    bindsym e     exec sway-move-to mid-top; mode "default"
-    bindsym r     exec sway-move-to top-right; mode "default"
-    bindsym s     exec sway-move-to mid-left; mode "default"
-    bindsym d     exec sway-move-to centre; mode "default"
-    bindsym f     exec sway-move-to mid-right; mode "default"
-    bindsym x     exec sway-move-to bottom-left; mode "default"
-    bindsym c     exec sway-move-to mid-bottom; mode "default"
-    bindsym v     exec sway-move-to bottom-right ; mode "default"
+    # q w e
+    # a s d
+    # z x c
+    bindsym q     exec sway-grid-move top-left; mode "default"
+    bindsym w     exec sway-grid-move top-mid; mode "default"
+    bindsym e     exec sway-grid-move top-right; mode "default"
+    bindsym a     exec sway-grid-move mid-left; mode "default"
+    bindsym s     exec sway-grid-move mid-mid; mode "default"
+    bindsym d     exec sway-grid-move mid-right; mode "default"
+    bindsym z     exec sway-grid-move bottom-left; mode "default"
+    bindsym x     exec sway-grid-move bottom-mid; mode "default"
+    bindsym c     exec sway-grid-move bottom-right ; mode "default"
 
     # Return to default mode
     bindsym Return mode "default"
@@ -298,23 +295,25 @@ bindsym $mod+Shift+R exec 'bash ~/.local/bin/toggle-screen-recorder.sh'
 # Status Bar:
 
 set $bg #000000e6
+set $bgf #2772C8
 set $bga #444444
-set $fg #ddccbb
+set $fg #ffffff
 set $fgi #888888
-set $fgu #555555
-set $btf #000000
 bar {
     status_command /home/llyyr/.cargo/bin/i3status-rs
     font pango:Sarasa Term J 9
 	position top
     wrap_scroll yes
-    height 16
+    tray_padding 0
+    status_padding 0
+    status_edge_padding 0
+    height 15
 	colors {
 		statusline $fg
 		background $bg
 		focused_background $bg
-		focused_workspace $bg $bg $fg
-		active_workspace $bg $bg $fg
+		focused_workspace $bg $bgf $fg
+		active_workspace $bg $bga $fg
 		inactive_workspace $bg $bg $fgi
     }
 }
@@ -348,6 +347,7 @@ for_window {
     [app_id="org.kde.kcalc"] floating enable
     [app_id="electron"] floating enable
     [app_id="firefox"] move container to workspace 1
+    [class="gamescope"] move container to workspace 3
     [class="krita"] move container to workspace 5
     [app_id="cantata"] move container to workspace 7
     [class="^.*[sS]team.*$"] move container to workspace 8
@@ -372,9 +372,9 @@ for_window {
         move scratchpad
         scratchpad show
     }
-    [app_id="discord"] {
+    [app_id="^discord$"] {
         floating enable
-        move position 0 414
+        exec sway-grid-move bottom-left
         move scratchpad
         scratchpad show
     }
@@ -387,7 +387,7 @@ for_window {
     }
     [app_id="mpv"] {
         floating enable
-        exec sway-move-to top-right
+        exec sway-grid-move top-right
         move scratchpad
         scratchpad show
     }
@@ -396,7 +396,7 @@ for_window {
         sticky enable
         resize set height 280px
         resize set width 500px
-        exec sway-move-to bottom-right
+        exec sway-grid-move bottom-right
         move scratchpad
         scratchpad show
     }
@@ -417,5 +417,5 @@ exec /usr/libexec/polkit-gnome-authentication-agent-1
 exec /usr/libexec/kdeconnectd
 exec swaymsg "workspace 2; exec $term"
 
-
 # vim: set filetype=swayconfig:
+

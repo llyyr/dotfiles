@@ -486,7 +486,7 @@ c.content.user_stylesheets = 'css/global.css'
 
 # Enable WebGL.
 # Type: Bool
-c.content.webgl = False
+c.content.webgl = True
 
 # Which interfaces to expose via WebRTC.
 # Type: String

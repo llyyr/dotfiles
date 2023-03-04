@@ -39,9 +39,6 @@ window#waybar {
   padding-left: 0;
 }
 
-#custom-separator {
-}
-
 #workspaces button.focused, #mode {
   background: #2772C8;
 }

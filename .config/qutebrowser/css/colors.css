@@ -1,3 +1,14 @@
+span.qutehint {
+    opacity: 100% !important;
+    background: rgba(0, 0, 0, 0.8) !important;
+    color: #B3FF1D !important;
+    outline: 1px solid rgba(179,255,29,1) !important;
+    padding: 2px !important;
+}
+
+span.qutehint > font {
+    color: #e51688 !important;
+}
 /* Color overrides */
 
 :not(img):not(pre):not(code):not(span) {
@@ -21,50 +32,6 @@ a:visited, a:visited * {
     text-shadow: none !important;
     user-select: text !important;
 }
-
-/*:not(.fa):not(.fas):not(.glyphicon):not(i):not(pre):not(code):not(.material-icons) {
-    font-family: "Noto Sans CJK JP";
-    font-size: 12pt !important;
-	line-height: 1.3 !important;
-    text-shadow: none !important;
-    user-select: text !important;
-}
-.blob-code-content * {
-    font-family: "Iosevka Term Custom" !important;
-}
-
-
-pre, code {
-    color: #cba !important;
-	background-color: #111 !important;
-    border: 1px dashed #555 !important;
-    padding: 1px !important;
-}
-
-pre code {
-    border: none !important;
-    padding: 0 !important;
-	color: #DDCCBB !important;
-}
-
-div.sourceCode > pre, td.sourceCode > pre {
-    border: none !important;
-}
-
-span.qutehint {
-    opacity: 100% !important;
-    background: rgba(0, 0, 0, 0.8) !important;
-    color: #B3FF1D !important;
-    outline: 1px solid rgba(179,255,29,1) !important;
-    padding: 2px !important;
-}
-
-span.qutehint > font {
-    color: #e51688 !important;
-}
-
-/* github */
-
 .container-lg {
 	max-width: none !important;
 }
@@ -242,37 +209,10 @@ span.c00 {
 	color: #DDCCBB !important;
 }
 
-/* tweetdeck */
-
-html.dark .is-narrow-columns .column {
-    width: 220px;
-    margin-right: 3px;
-}
-
 /* brawlhalla */
 .cli-barmodal-open {
     overflow: unset !important;
 }
-/* Color overrides
-
-:not(img):not(pre):not(code):not(span):not(p):not(h):not(a):not(strong):not(ul) {
-    background-color: black !important;
-	color: #DDCCBB !important;
-}
-
-a[href], a[href] * {
-    color: #FFAA0F !important;
-}
-
-a:visited, a:visited * {
-    color: #FF5D4A !important;
-}*/
-.column-scroller {
-    overflow-y: scroll !important;
-    margin-right: -17px !important;
-    padding-right: 10px !important;
-}
-
 
 .entry-content {
     width: unset;

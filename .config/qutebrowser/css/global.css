@@ -218,37 +218,10 @@ span.c00 {
 	color: #DDCCBB !important;
 }
 
-/* tweetdeck */
-
-html.dark .is-narrow-columns .column {
-    width: 220px;
-    margin-right: 3px;
-}
-
 /* brawlhalla */
 .cli-barmodal-open {
     overflow: unset !important;
 }
-/* Color overrides
-
-:not(img):not(pre):not(code):not(span):not(p):not(h):not(a):not(strong):not(ul) {
-    background-color: black !important;
-	color: #DDCCBB !important;
-}
-
-a[href], a[href] * {
-    color: #FFAA0F !important;
-}
-
-a:visited, a:visited * {
-    color: #FF5D4A !important;
-}*/
-.column-scroller {
-    overflow-y: scroll !important;
-    margin-right: -17px !important;
-    padding-right: 10px !important;
-}
-
 
 .entry-content {
     width: unset;
