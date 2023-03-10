@@ -1,0 +1,18 @@
+bind ,m hint -W mpvsafe
+
+bind J tabnext_gt
+bind K tabprev
+bind gC tabduplicate
+unbind d
+unbind D
+bind dd composite tabprev; tabclose #
+
+
+
+"" Page Interaction
+bind / fillcmdline find
+bind ? fillcmdline find -?
+bind n findnext 1
+bind N findnext --reverse 1
+
+set hintchars yuiophjklbnm

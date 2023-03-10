@@ -143,3 +143,7 @@ function envref {
     export $(tmux show-environment | grep "^SWAYSOCK")
     export $(tmux show-environment | grep "^DISPLAY")
 }
+
+function genshin_wish {
+    strings "/home/llyyr/.local/share/anime-game-launcher/game/drive_c/Program Files/Genshin Impact/GenshinImpact_Data/webCaches/Cache/Cache_Data/data_2" | rg -o "https://.*/e20190909gacha-v2/.*" | tail -n 1
+    }

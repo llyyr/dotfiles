@@ -10,6 +10,7 @@ short = " $title.str(max_w:50) |"
 [[block]]
 block = "custom"
 command = " pgrep wf-recorder > /dev/null && echo "
+signal = 11
 hide_when_empty = true
 
 [[block]]
