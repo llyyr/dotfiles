@@ -33,7 +33,7 @@ return packer.startup(function()
     use { 'lukas-reineke/indent-blankline.nvim' }
     use { 'ggandor/leap.nvim' }
     use { 'AckslD/nvim-neoclip.lua' }
-
+    use { 'andweeb/presence.nvim' }
     use { 'lewis6991/impatient.nvim' }
     use { 'NMAC427/guess-indent.nvim' }
 
@@ -51,6 +51,7 @@ return packer.startup(function()
                                            { 'onsails/lspkind-nvim' },
                                            { 'ray-x/cmp-treesitter' },
                                            { 'hrsh7th/cmp-path' },
+                                           { 'hrsh7th/cmp-buffer' },
                                            { 'hrsh7th/cmp-cmdline' } } }
 
     use { 'nvim-telescope/telescope.nvim', requires = { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' } }

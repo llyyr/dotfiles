@@ -15,6 +15,7 @@ vim.opt.smd           = true
 vim.opt.number        = true
 vim.opt.termguicolors = true
 vim.opt.ignorecase    = true
+vim.opt.relativenumber = true
 vim.opt.smartcase     = true
 vim.opt.magic         = true
 vim.opt.showmatch     = false                  -- highlight matching parenthesis
@@ -52,6 +53,7 @@ require('telescope_init')
 require('indent_blankline_init')
 require('guess-indent_init')
 require('autopairs_init')
+require('presence_init')
 
 vim.cmd[[
 fun! SetupCommandAlias(from, to)
@@ -100,6 +102,8 @@ vim.api.nvim_set_keymap('n', '<leader>fr', ':lua require(\'telescope.builtin\').
 vim.api.nvim_set_keymap('n', '<leader>fs', ':lua require(\'telescope.builtin\').lsp_dynamic_workspace_symbols()<cr>',
                         { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>fl', ':lua require(\'telescope.builtin\').lsp_document_diagnostics()<cr>',
+                        { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>ca', ':lua vim.lsp.buf.code_action()<cr>',
                         { noremap = true, silent = true })
 
 --[[ Clipboard ]]--

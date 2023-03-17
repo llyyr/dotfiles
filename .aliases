@@ -24,7 +24,7 @@ alias cpug="sudo cpupower frequency-set -g $1"
 alias runvenv="source venv/bin/activate"
 alias ghc="ghc -no-keep-hi-files -no-keep-o-files $1"
 alias gbf2="microsoft-edge-beta --profile-directory='Profile 2' --ozone-platform-hint=auto --disable-backgrounding-occluded-windows"
-alias discord="discord-canary --disable-smooth-scrolling --ozone-platform-hint=auto"
+alias discord="discord-canary --disable-smooth-scrolling --ozone-platform-hint=auto --enable-experimental-web-platform-features"
 alias pypy="/opt/pypy/bin/pypy"
 
 colpick() {
@@ -147,3 +147,18 @@ function envref {
 function genshin_wish {
     strings "/home/llyyr/.local/share/anime-game-launcher/game/drive_c/Program Files/Genshin Impact/GenshinImpact_Data/webCaches/Cache/Cache_Data/data_2" | rg -o "https://.*/e20190909gacha-v2/.*" | tail -n 1
     }
+
+function gli {
+    _gitLogLineToHash="echo {} | grep -o '[a-f0-9]\{7\}' | head -1 | xargs git rev-parse"
+    _viewGitLogLine="$_gitLogLineToHash | xargs -I % sh -c 'git show --color=always %'"
+    _viewGitLogLineUnfancy="$_gitLogLineToHash | xargs -I % sh -c 'git show %'"
+
+    git log --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr% C(auto)%an" "$@" |
+        fzf --no-sort --reverse --tiebreak=index --no-multi \
+            --ansi --preview="$_viewGitLogLine" \
+                --header "enter to view, ctrl-y to copy hash, ctrl-v to open in nvim" \
+                --bind "enter:execute:$_viewGitLogLine   | less -R" \
+                --bind "ctrl-v:execute:$_viewGitLogLineUnfancy | nvim -" \
+                --bind "ctrl-y:execute:$_gitLogLineToHash | wl-copy"
+}
+

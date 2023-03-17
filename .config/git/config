@@ -4,6 +4,9 @@
 [init]
 	defaultBranch = master
 
+[core]
+	editor = nvim
+
 [user]
 	email = llyyr.public@gmail.com
 	name = llyyr
@@ -15,27 +18,47 @@
 	pushInsteadOf = "https://github.com/"
 	pushInsteadOf = "git@github.com:"
 
+[alias]
+	s = status
+	co = checkout
+	b = branch
+	l = log --oneline
+	logt = log --graph --decorate --color=auto --oneline --all
+	fp = format-patch --signoff --stdout -M -C
+	df = diff
+	ds = diff --staged
+	cp = cherry-pick
+
 [sendemail]
 	smtpserver = smtp.gmail.com
 	smtpuser = llyyr.public@gmail.com
 	smtpencryption = tls
     smtpserverport = 587
 
+[rebase]
+	autosquash = true
+	autostash = true
+
 [pull]
 	rebase = true
 
 [push]
-	default = simple
+	default = current
+	gpgSign = if-asked
 	autoSetupRemote = true
 
 [fetch]
 	prune = true
 
 [commit]
-	gpgsign = true
+	gpgsign = false
+	verbose = true
 
 [tag]
 	gpgsign = true
+
+[grep]
+	lineNumber = true
 
 [color]
 	diff = auto

@@ -1,3 +1,7 @@
+" General Settings
+set update.lastchecktime 1678179395866
+set configversion 2.0
+
 bind ,m hint -W mpvsafe
 
 bind J tabnext_gt
@@ -5,9 +9,10 @@ bind K tabprev
 bind gC tabduplicate
 unbind d
 unbind D
+unbind <C-f>
 bind dd composite tabprev; tabclose #
 
-
+set editorcmd foot --app-id=termfloat nvim
 
 "" Page Interaction
 bind / fillcmdline find
@@ -16,3 +21,7 @@ bind n findnext 1
 bind N findnext --reverse 1
 
 set hintchars yuiophjklbnm
+
+" For syntax highlighting see https://github.com/tridactyl/vim-tridactyl
+" vim: set filetype=tridactyl
+

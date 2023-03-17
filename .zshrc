@@ -14,12 +14,10 @@ export LANG=en_US.UTF-8
 export ZYPP_MEDIANETWORK=1
 export WINEDEBUG=-all
 export DEBUGINFOD_URLS="https://debuginfod.opensuse.org/"
+export SSH_AUTH_SOCK="${XDG_RUNTIME_DIR}/ssh-agent.socket"
 eval $(dircolors ~/.dir_colors)
 source ~/.aliases
 source ~/.secrets
-
-# This is needed because intel-media-driver sets it to iHD by default
-export LIBVA_DRIVER_NAME=radeonsi
 
 export HISTFILE=~/.zsh_history
 export HISTSIZE=10000
@@ -157,6 +155,8 @@ zle -N self-insert url-quote-magic
   fi
   return 0
 }
+
+ZSH_AUTOSUGGEST_USE_ASYNC=true
 
 zle -N ::fuzzy_history::keybind
 bindkey -a "/" ::fuzzy_history::keybind

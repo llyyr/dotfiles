@@ -5,7 +5,7 @@ require('nvim-treesitter.configs').setup({
     ensure_installed = { "c", "cpp", "bash", "comment", "css",
                          "dot", "glsl", "go", "html", "haskell" ,"javascript", 
                          "julia", "latex", "lua", "make", "python", "rst", 
-                         "json", "yaml", "meson", "markdown", "rust",},
+                         "json", "yaml", "meson", "markdown", "rust", "scss"},
 
     ignore_install = { },        -- List of parsers to ignore installing
     refactor = {

@@ -177,10 +177,11 @@ input "1386:768:Wacom_Bamboo_One_S_Pen" {
     # Show the next scratchpad window or hide the focused scratchpad window.
     # If there are multiple scratchpad windows, this command cycles through them.
     bindsym $mod+minus scratchpad show
+    bindsym $mod+z exec 'swaymsg [app_id="com.chatterino.chatterino"] scratchpad show || exec chatterino'
     bindsym $mod+x exec 'swaymsg [app_id="org.kde.dolphin"] scratchpad show || exec dolphin'
     bindsym $mod+c exec 'swaymsg [app_id="^discord$"] scratchpad show || exec discord-canary --disable-smooth-scrolling --ozone-platform-hint=auto'
     bindsym $mod+semicolon exec 'swaymsg [app_id="org.keepassxc.KeePassXC"] scratchpad show || exec keepassxc'
-    bindsym $mod+t exec 'swaymsg [app_id="termfloat"] scratchpad show || exec $term --app-id="termfloat"'
+    bindsym $mod+t exec 'swaymsg [app_id="termfloat"] scratchpad show || exec $term --app-id="termfloat" -ocolors.alpha=0.995'
     bindsym $mod+m exec 'swaymsg [app_id="mpv"] scratchpad show'
     bindsym $mod+p exec 'swaymsg [title="^Picture-in-Picture$"] scratchpad show'
 
@@ -228,6 +229,8 @@ mode music {
     bindsym Space exec playerctl play-pause
     bindsym Left exec playerctl previous
     bindsym Right exec playerctl next
+    bindsym h exec playerctl previous
+    bindsym l exec playerctl next
     bindsym q exec playerctl stop
 }
 
@@ -254,7 +257,7 @@ mode "move-to" {
     bindsym d     exec sway-grid-move mid-right; mode "default"
     bindsym z     exec sway-grid-move bottom-left; mode "default"
     bindsym x     exec sway-grid-move bottom-mid; mode "default"
-    bindsym c     exec sway-grid-move bottom-right ; mode "default"
+    bindsym c     exec sway-grid-move bottom-right; mode "default"
 
     # Return to default mode
     bindsym Return mode "default"
@@ -362,6 +365,11 @@ for_window {
             move position cursor
             move down 35
     }
+    [app_id="com.chatterino.chatterino"] {
+        floating enable
+        move scratchpad
+        scratchpad show
+    }
     [app_id="org.kde.dolphin"] {
         floating enable
         move scratchpad
@@ -394,8 +402,6 @@ for_window {
     [title="^Picture-in-Picture$"] {
         floating enable
         sticky enable
-        resize set height 280px
-        resize set width 500px
         exec sway-grid-move bottom-right
         move scratchpad
         scratchpad show
