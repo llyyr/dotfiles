@@ -40,11 +40,19 @@ gbfrc() {
     wf-recorder -g "1046,144 320x581" -f ~/Videos/$(date +'%Y%m%d-%H%M').mp4
 }
 
-upload-file() {
+upload-0x0() {
     if [ $# -eq 0 ]; then
         curl -s -F file=@- https://0x0.st
     else
         curl -s -F file=@"$1" https://0x0.st
+    fi
+}
+
+upload-yukari() {
+    if [ $# -eq 0 ]; then
+        curl -X POST -u "llyyr:$YUKARI_PASS" -s -F file=@- https://i.yukari.in/upload
+    else
+        curl -X POST -u "llyyr:$YUKARI_PASS" -s -F file=@"$1" https://i.yukari.in/upload
     fi
 }
 
@@ -162,3 +170,6 @@ function gli {
                 --bind "ctrl-y:execute:$_gitLogLineToHash | wl-copy"
 }
 
+function ythttp {
+     yt-dlp -f bestvideo*[vcodec*=av01]+bestaudio/bestvideo*[vcodec=vp9]+bestaudio/bestvideo*+bestaudio "$1" -o - | mpv --no-ytdl -
+}

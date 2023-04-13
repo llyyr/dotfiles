@@ -27,6 +27,7 @@ return packer.startup(function()
     use { 'folke/todo-comments.nvim' }
     use { 'numToStr/Comment.nvim' }
     use { 'lewis6991/gitsigns.nvim' }
+    use { 'akinsho/git-conflict.nvim' }
     use { 'romgrk/barbar.nvim', wants = "nvim-web-devicons" }
     use { 'dstein64/nvim-scrollview' }
     use { 'windwp/nvim-autopairs' }
@@ -40,7 +41,7 @@ return packer.startup(function()
     use { 'L3MON4D3/LuaSnip' }
     use { 'neovim/nvim-lspconfig' }
 
-    use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate', requires = { { 'p00f/nvim-ts-rainbow' },
+    use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate', requires = { { 'HiPhish/nvim-ts-rainbow2' },
                                                                              { 'nvim-treesitter/nvim-treesitter-refactor' },
                                                                              { 'nvim-treesitter/nvim-treesitter-textobjects' },
                                                                              { 'JoosepAlviste/nvim-ts-context-commentstring' } } }

@@ -10,7 +10,7 @@ set $down j
 set $up k
 set $right l
 set $term foot
-set $menu fuzzel -f "Iosevka Aile Custom" -x 5 -y 5 -r 0 -b 000000fa -t ddccbbff -s 0E0E0Eff -S 72767dff --show-actions -w 50 -T "foot --app-id='termfloat'"
+set $menu fuzzel
 # set $menu dmenu_path | wmenu | xargs swaymsg exec --
 font pango:Iosevka Term Custom 9
 
@@ -359,11 +359,12 @@ for_window {
     [app_id="com.transmissionbt.transmission_2068_24379607"] move container to workspace 10
     [window_role="pop-up"] floating enable
     [window_role="task_dialog"] floating enable
+    [app_id="qalculate-gtk"] floating enable
     [app_id="sharex"] fullscreen enable global
     [app_id="(pavucontrol|psensor)"] {
         floating enable
-            move position cursor
-            move down 35
+        move position cursor
+        move down 35
     }
     [app_id="com.chatterino.chatterino"] {
         floating enable

@@ -53,6 +53,7 @@ require('telescope_init')
 require('indent_blankline_init')
 require('guess-indent_init')
 require('autopairs_init')
+require('git-conflict').setup()
 
 vim.cmd[[
 fun! SetupCommandAlias(from, to)

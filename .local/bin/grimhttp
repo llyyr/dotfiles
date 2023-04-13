@@ -1,0 +1,3 @@
+#!/bin/zsh
+source ~/.secrets
+grimshot copy window && wl-paste | curl -X POST -s -u "llyyr:$YUKARI_PASS" -F file=@- https://i.yukari.in/upload | wl-copy && notify-send $(wl-paste)
