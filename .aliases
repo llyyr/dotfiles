@@ -146,7 +146,7 @@ fkill() {
   fi
 }
 
-function envref {
+function refenv {
     export $(tmux show-environment | grep "^SSH_AUTH_SOCK")
     export $(tmux show-environment | grep "^SWAYSOCK")
     export $(tmux show-environment | grep "^DISPLAY")

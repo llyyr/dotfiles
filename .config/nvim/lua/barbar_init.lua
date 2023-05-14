@@ -65,7 +65,7 @@ require('bufferline').setup({
           custom_colors = false,
 
           -- Requires `nvim-web-devicons` if `true`
-          enabled = true,
+          enabled = false,
         },
         separator = {left = '▎', right = ''},
 

@@ -62,8 +62,8 @@ require('nvim-treesitter.configs').setup({
         additional_vim_regex_highlighting = false,
     },
     rainbow = {
-        enable = true,
-        strategy = require('ts-rainbow').strategy['local'],
+        enable = false,
+        --strategy = require('ts-rainbow').strategy['local'],
     },
     incremental_selection = {
         enable = true,
