@@ -3,8 +3,8 @@ alias brplay="cd ~/.local/share/Steam/steamapps/compatdata/291550/pfx/drive_c/us
 alias aoc="cd ~/projects/aoc/aoc-2022"
 alias vim="$EDITOR"
 alias lsd="lsd -AF --date=relative --icon=never --group-directories-first"
-alias lt="lsd --tree"
 alias ls="lsd"
+alias lt="ls --tree"
 # alias ls="ls -AhF --color=auto --group-directories-first"
 alias browse='fzf --bind="enter:execute(echo -n {} | wl-copy)" --preview="pygmentize {} 2>/dev/null || cat {}" --preview-window=up'
 alias grep="grep --color=auto --binary-files=without-match --devices=skip"
@@ -21,10 +21,10 @@ alias rg="rg --smart-case"
 alias dotfiles="/usr/bin/git --git-dir=$HOME/dotfiles --work-tree=$HOME"
 alias localejp="LC_ALL=ja_JP.UTF-8 LANG=ja_JP.UTF-8"
 alias cpug="sudo cpupower frequency-set -g $1"
+alias makevenv="python3.11 -m venv venv"
 alias runvenv="source venv/bin/activate"
 alias ghc="ghc -no-keep-hi-files -no-keep-o-files $1"
 alias gbf2="microsoft-edge-beta --profile-directory='Profile 2' --ozone-platform-hint=auto --disable-backgrounding-occluded-windows"
-alias discord="discord-canary --disable-smooth-scrolling --ozone-platform-hint=auto --enable-experimental-web-platform-features"
 alias pypy="/opt/pypy/bin/pypy"
 
 colpick() {
@@ -50,9 +50,9 @@ upload-0x0() {
 
 upload-yukari() {
     if [ $# -eq 0 ]; then
-        curl -X POST -u "llyyr:$YUKARI_PASS" -s -F file=@- https://i.yukari.in/upload
+        curl -X POST -u "llyyr:$YUKARI_PASS" -s -F file=@- https://host.yukari.in/upload
     else
-        curl -X POST -u "llyyr:$YUKARI_PASS" -s -F file=@"$1" https://i.yukari.in/upload
+        curl -X POST -u "llyyr:$YUKARI_PASS" -s -F file=@"$1" https://host.yukari.in/upload
     fi
 }
 

@@ -1,34 +1,37 @@
-vim.opt.shell         = '/bin/sh'
-vim.opt.undofile      = true
-vim.opt.undodir       = '/home/llyyr/.cache/undo'
-vim.opt.mouse         = 'a'
-vim.opt.expandtab     = true                   -- tabs instead of spaces
-vim.opt.shiftwidth    = 4                      -- shift 4 spaces when tab
-vim.opt.tabstop       = 4                      -- 1 tab == 4 spaces
-vim.opt.softtabstop   = 4                      -- same
-vim.opt.smartindent   = true                   -- autoindent new lines
-vim.opt.wrap          = true
-vim.opt.linebreak     = true
-vim.opt.splitbelow    = true
-vim.opt_splitright    = true
-vim.opt.smd           = true
-vim.opt.number        = true
-vim.opt.termguicolors = true
-vim.opt.ignorecase    = true
-vim.opt.relativenumber = true
-vim.opt.smartcase     = true
-vim.opt.magic         = true
-vim.opt.showmatch     = false                  -- highlight matching parenthesis
-vim.opt.textwidth     = 0
-vim.opt.colorcolumn   = '81'
-vim.opt.completeopt   = 'menu,menuone,noselect'
-vim.opt.clipboard     = 'unnamedplus'          -- copy/paste to system clipboard
-vim.opt.hidden        = true
-vim.opt.signcolumn    = 'no'                   -- disable signscolumn
-vim.g.mapleader       = ','
-vim.g.netrw_fastbrowse = 0
+vim.opt.shell           = '/bin/sh'
+vim.opt.undofile        = true
+vim.opt.undodir         = '/home/llyyr/.cache/undo'
+vim.opt.mouse           = 'a'
+vim.opt.expandtab       = true                   -- tabs instead of spaces
+vim.opt.shiftwidth      = 4                      -- shift 4 spaces when tab
+vim.opt.tabstop         = 4                      -- 1 tab == 4 spaces
+vim.opt.softtabstop     = 4                      -- same
+vim.opt.smartindent     = true                   -- autoindent new lines
+vim.opt.wrap            = true
+vim.opt.linebreak       = true
+vim.opt.splitbelow      = true
+vim.opt_splitright      = true
+vim.opt.smd             = true
+vim.opt.number          = true
+vim.opt.termguicolors   = true
+vim.opt.ignorecase      = true
+vim.opt.relativenumber  = true
+vim.opt.smartcase       = true
+vim.opt.magic           = true
+vim.opt.showmatch       = false                  -- highlight matching parenthesis
+vim.opt.textwidth       = 0
+vim.opt.colorcolumn     = '81'
+vim.opt.foldenable      = false
+vim.opt.foldmethod      = "expr"
+vim.opt.foldexpr        = "nvim_treesitter#foldexpr()"
+vim.opt.completeopt     = 'menu,menuone,noselect'
+vim.opt.clipboard       = 'unnamedplus'          -- copy/paste to system clipboard
+vim.opt.hidden          = true
+vim.opt.signcolumn      = 'no'                   -- disable signscolumn
+vim.g.mapleader         = ','
+vim.g.netrw_fastbrowse  = 0
 vim.g.python3_host_prog = 'python3.11'
-vim.o.sessionoptions  = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal"
+vim.o.sessionoptions    = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal"
 vim.filetype.add({
     extension = {
         h = "c",
@@ -38,6 +41,7 @@ vim.filetype.add({
 })
 require('impatient')--.enable_profile()
 require('packer_init')
+require('barbar_init')
 require('theme_init')
 require('lualine_init')
 require('treesitter_init')
@@ -47,7 +51,6 @@ require('leap_init')
 require('scrollview_init')
 require('comment_init')
 require('gitsigns_init')
-require('barbar_init')
 require('neoclip_init')
 require('telescope_init')
 require('indent_blankline_init')

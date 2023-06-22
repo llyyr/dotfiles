@@ -21,8 +21,8 @@
                     "temperature",
                     "custom/separator",
                     "network",
-                    "custom/separator",
-                    "idle_inhibitor",
+                    //"custom/separator",
+                    //"idle_inhibitor",
                     "custom/separator",
                     "custom/dnd"
                     ],

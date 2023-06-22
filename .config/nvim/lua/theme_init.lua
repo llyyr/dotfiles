@@ -8,3 +8,4 @@ vim.g.gruvbox_baby_highlights = {
 }
 vim.cmd.colorscheme "gruvbox-baby"
 vim.api.nvim_set_hl(0, 'StatusLine', {bg='none'})
+vim.cmd('hi BufferTabpageFill guibg=NONE')

@@ -32,7 +32,7 @@ return packer.startup(function()
     use { 'AckslD/nvim-neoclip.lua' }
     use { 'lewis6991/impatient.nvim' }
     use { 'NMAC427/guess-indent.nvim' }
-
+    
     use { 'L3MON4D3/LuaSnip' }
     use { 'neovim/nvim-lspconfig' }
 

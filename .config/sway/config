@@ -15,11 +15,13 @@ set $menu fuzzel
 font pango:Iosevka Term Custom 9
 
 ### Output configuration
-output HDMI-A-1 {
-    mode 1920x1080@144Hz
+output DP-1 {
+    # mode 1920x1080@144Hz
+    mode 1920x1080@119.982Hz
     adaptive_sync on
     max_render_time 1
     subpixel rgb
+    # bg /mnt/c/Users/llyyr/Desktop/4chan/jp/1637197847029.jpg fill #000000
     bg /mnt/e/Images/bg.png stretch
 }
 
@@ -55,7 +57,7 @@ input "12538:768:USB_OPTICAL_MOUSE" {
 
 input "1386:768:Wacom_Bamboo_One_S_Pen" {
     left_handed enabled
-    map_from_region 0.0x0.0 0.5x0.5
+    map_from_region 0.0x0.0 0.526x0.526
     accel_profile flat
     pointer_accel 0
 }
@@ -73,7 +75,7 @@ input "1386:768:Wacom_Bamboo_One_S_Pen" {
     # Start your launcher
     bindsym $mod+d exec $menu
 
-    bindsym Pause exec 'swaymsg output HDMI-A-1 power toggle'
+    bindsym Pause exec 'swaymsg output DP-1 power toggle'
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
@@ -180,7 +182,7 @@ input "1386:768:Wacom_Bamboo_One_S_Pen" {
     bindsym $mod+minus scratchpad show
     bindsym $mod+z exec 'swaymsg [app_id="com.chatterino.chatterino"] scratchpad show || exec chatterino'
     bindsym $mod+x exec 'swaymsg [app_id="org.kde.dolphin"] scratchpad show || exec dolphin'
-    bindsym $mod+c exec 'swaymsg [app_id="^discord$"] scratchpad show || exec discord-canary --disable-smooth-scrolling --ozone-platform-hint=auto'
+    bindsym $mod+c exec 'swaymsg [app_id="^discord$"] scratchpad show || exec discord'
     bindsym $mod+semicolon exec 'swaymsg [app_id="org.keepassxc.KeePassXC"] scratchpad show || exec keepassxc'
     bindsym $mod+t exec 'swaymsg [app_id="termfloat"] scratchpad show || exec $term --app-id="termfloat" -ocolors.alpha=0.995'
     bindsym $mod+m exec 'swaymsg [app_id="mpv"] scratchpad show'
@@ -266,7 +268,7 @@ mode "move-to" {
 }
 
 # wlsunset on/off
-bindsym $mod+n exec sunset
+# bindsym $mod+n exec sunset
 
 # Screenshot to clipboard (all displays)
 bindsym Print exec grimshot --notify --cursor copy
@@ -311,7 +313,7 @@ bar {
     tray_padding 0
     status_padding 0
     status_edge_padding 0
-    height 15
+    height 14
 	colors {
 		statusline $fg
 		background $bg
@@ -328,6 +330,10 @@ bar {
 
 # set $XCURSOR_{THEME,SIZE}
 seat seat0 xcursor_theme suo_sango 24
+
+# Set floating window constraints
+floating_maximum_size -1 x -1
+floating_minimum_size 0 x 0
 
 # Hide borders for XWayland
 default_border pixel 1
@@ -422,7 +428,7 @@ exec_always {
     gsettings set org.gnome.desktop.interface cursor-theme 'suo_sango'
 }
 
-exec sunset
+# exec sunset
 exec mako
 exec fcitx5 -rd
 exec /usr/libexec/polkit-gnome-authentication-agent-1

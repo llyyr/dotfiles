@@ -1,4 +1,5 @@
 typeset -U PATH path # ensure only unique entries in $PATH
+path+="${HOME}/go/bin/"
 path+="${HOME}/.dotnet/"
 path+="${HOME}/.local/bin/"
 path+="${HOME}/.cargo/bin/"
@@ -38,6 +39,8 @@ unsetopt beep # beep is the strongest warrior!
 
 KEYTIMEOUT=1
 
+ZSH_AUTOSUGGEST_USE_ASYNC=true
+
 zle_highlight[(r)suffix:*]="suffix:fg=foreground" # remove that annoying bold slash at the end of paths
 autoload -U colors && colors	# Load colors
 
@@ -68,7 +71,7 @@ setopt prompt_subst
 if [ -r /usr/share/bash-completion/completions/git-prompt.sh ]; then
 	. /usr/share/bash-completion/completions/git-prompt.sh
 fi
-export GIT_PS1_SHOWDIRTYSTATE=1
+export GIT_PS1_SHOWDIRTYSTATE=0
 export GIT_PS1_SHOWUNTRACKEDFILES=1
 export GIT_PS1_SHOWUPSTREAM="auto"
 
@@ -124,40 +127,53 @@ bindkey '^[m' copy-earlier-word
 autoload -Uz url-quote-magic
 zle -N self-insert url-quote-magic
 
-
-# simple fuzzy history
-::fuzzy_history() {
-  local output
-  output=$( \
-    history 1 \
-    | awk '{ $1=""; print substr($0,2) }' \
-    | fzf \
-      --query="$BUFFER" \
-      --no-hscroll \
-      --bind change:first \
-      --tac \
-      --no-sort \
-      --height "15" \
-      --no-info \
-      --reverse \
-      --bind=tab:down,shift-tab:up
-  )
-  echo "$output"
-}
-
-::fuzzy_history::keybind() {
-  local output
-  output="$(::fuzzy_history)"
-  zle reset-prompt
-  if [ ! "$output" = "" ]; then
-    BUFFER=""             # clear whatever is on the line
-    LBUFFER+="${output//$'\n'/\\n}"  # append selection from fzf, keeping \n as is
+fzf_history_search() {
+  setopt extendedglob
+  local ret=$?
+  candidates=(${(f)"$(eval "fc -n -l -1 0 | awk '!seen[\$0]++'" | fzf +s +m -x -e --preview-window=hidden --no-info -q "$BUFFER")"})
+  if [ -n "$candidates" ]; then
+    BUFFER="${candidates[@]}"
+    BUFFER=$(printf "${BUFFER[@]//\\\\n/\\\\\\n}")
+    zle vi-fetch-history -n $BUFFER
   fi
-  return 0
+  zle reset-prompt
+  return $ret
 }
 
-ZSH_AUTOSUGGEST_USE_ASYNC=true
+autoload fzf_history_search
+zle -N fzf_history_search
 
-zle -N ::fuzzy_history::keybind
-bindkey -a "/" ::fuzzy_history::keybind
-bindkey "" ::fuzzy_history::keybind # <- much easier to press the up arrow on a 60%
+bindkey '^r' fzf_history_search
+
+# # simple fuzzy history
+# ::fuzzy_history() {
+#   local output
+#   output=$( \
+#     history 1 \
+#     | awk '{ $1=""; print substr($0,2) }' \
+#     | fzf \
+#       --query="$BUFFER" \
+#       --bind change:first \
+#       --tac \
+#       --no-sort \
+#       --no-info \
+#       --reverse \
+#       --bind=tab:down,shift-tab:up
+#   )
+#   echo "$output"
+# }
+#
+# ::fuzzy_history::keybind() {
+#   local output
+#   output="$(::fuzzy_history)"
+#   zle reset-prompt
+#   if [ ! "$output" = "" ]; then
+#     BUFFER=""             # clear whatever is on the line
+#     LBUFFER+="${output//$'\n'/\\n}"  # append selection from fzf, keeping \n as is
+#   fi
+#   return 0
+# }
+#
+# zle -N ::fuzzy_history::keybind
+# bindkey -a "/" ::fuzzy_history::keybind
+# bindkey "" ::fuzzy_history::keybind # <- much easier to press the up arrow on a 60%
