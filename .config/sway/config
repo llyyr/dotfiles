@@ -15,9 +15,9 @@ set $menu fuzzel
 font pango:Iosevka Term Custom 9
 
 ### Output configuration
-output DP-1 {
-    # mode 1920x1080@144Hz
-    mode 1920x1080@119.982Hz
+output * {
+    mode 1920x1080@144Hz
+    # mode 1920x1080@119.982Hz
     adaptive_sync on
     max_render_time 1
     subpixel rgb
@@ -27,6 +27,7 @@ output DP-1 {
 
 for_window [class="gamescope"] max_render_time 1
 for_window [app_id="osu!"] max_render_time 1
+for_window [app_id="genshinimpact.exe"] max_render_time 1
 
 #bg /mnt/e/Images/Altina/鮫島タムラ \(2830191\)/88663225_p0 - アルティナ雑まとめv2.png fill #000000
 #
@@ -268,7 +269,7 @@ mode "move-to" {
 }
 
 # wlsunset on/off
-# bindsym $mod+n exec sunset
+bindsym $mod+n exec sunset
 
 # Screenshot to clipboard (all displays)
 bindsym Print exec grimshot --notify --cursor copy
@@ -358,6 +359,7 @@ for_window {
     [app_id="electron"] floating enable
     [app_id="firefox"] move container to workspace 1
     [class="gamescope"] move container to workspace 3
+    [app_id="genshinimpact.exe"] move container to workspace 3
     [class="krita"] move container to workspace 5
     [app_id="cantata"] move container to workspace 7
     [class="^.*[sS]team.*$"] move container to workspace 8
@@ -428,7 +430,7 @@ exec_always {
     gsettings set org.gnome.desktop.interface cursor-theme 'suo_sango'
 }
 
-# exec sunset
+exec sunset
 exec mako
 exec fcitx5 -rd
 exec /usr/libexec/polkit-gnome-authentication-agent-1

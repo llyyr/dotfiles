@@ -71,7 +71,7 @@ setopt prompt_subst
 if [ -r /usr/share/bash-completion/completions/git-prompt.sh ]; then
 	. /usr/share/bash-completion/completions/git-prompt.sh
 fi
-export GIT_PS1_SHOWDIRTYSTATE=0
+export GIT_PS1_SHOWDIRTYSTATE=1
 export GIT_PS1_SHOWUNTRACKEDFILES=1
 export GIT_PS1_SHOWUPSTREAM="auto"
 

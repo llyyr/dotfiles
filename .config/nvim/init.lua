@@ -30,7 +30,7 @@ vim.opt.hidden          = true
 vim.opt.signcolumn      = 'no'                   -- disable signscolumn
 vim.g.mapleader         = ','
 vim.g.netrw_fastbrowse  = 0
-vim.g.python3_host_prog = 'python3.11'
+vim.g.python3_host_prog = 'python3'
 vim.o.sessionoptions    = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal"
 vim.filetype.add({
     extension = {

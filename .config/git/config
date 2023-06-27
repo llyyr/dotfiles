@@ -6,6 +6,7 @@
 
 [core]
 	editor = nvim
+	pager = less -x4
 
 [user]
 	email = llyyr.public@gmail.com
@@ -24,6 +25,12 @@
 	b = branch
 	l = log --oneline
 	logt = log --graph --decorate --color=auto --oneline --all
+	brlog = log -p --reverse origin/master..HEAD
+    lb = branch --list --format=\
+'%(HEAD) \
+%(align:width=48)%(color:yellow)%(refname:short)%(color:reset)%(end)\
+%(contents:subject) - \
+(%(color:green)%(committerdate:relative)%(color:reset))'
 	fp = format-patch --signoff --stdout -M -C
 	df = diff
 	ds = diff --staged
@@ -44,6 +51,7 @@ cccmd ="`pwd`/scripts/get_maintainer.pl --nogit --nogit-fallback --norolestats -
 	autostash = true
 
 [pull]
+	ff = only
 	rebase = true
 
 [push]
@@ -69,3 +77,6 @@ cccmd ="`pwd`/scripts/get_maintainer.pl --nogit --nogit-fallback --norolestats -
 	status = auto
 	branch = auto
 	ui = true
+[diff]
+    colorMoved = true
+    algorithm  = histogram
