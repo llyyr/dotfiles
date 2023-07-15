@@ -48,13 +48,15 @@ local options = {
 	strict_audio_bitrate = 64,
 	-- Sets the output format, from a few predefined ones.
 	-- Currently we have:
-	-- webm-vp8 (libvpx/libvorbis)
+	-- av1
+	-- hevc
 	-- webm-vp9 (libvpx-vp9/libopus)
 	-- mp4 (h264/AAC)
 	-- mp4-nvenc (h264-NVENC/AAC)
-	-- raw (rawvideo/pcm_s16le).
+	-- webm-vp8 (libvpx/libvorbis)
+	-- gif
 	-- mp3 (libmp3lame)
-	-- and gif
+	-- and raw (rawvideo/pcm_s16le).
 	output_format = "webm-vp8",
 	twopass = true,
 	-- If set, applies the video filters currently used on the playback to the encode.
@@ -62,7 +64,7 @@ local options = {
 	-- If set, writes the video's filename to the "Title" field on the metadata.
 	write_filename_on_metadata = false,
 	-- Set the number of encoding threads, for codecs libvpx and libvpx-vp9
-	libvpx_threads = 4,
+	threads = 4,
 	additional_flags = "",
 	-- Constant Rate Factor (CRF). The value meaning and limits may change,
 	-- from codec to codec. Set to -1 to disable.
@@ -939,7 +941,7 @@ do
     end,
     getFlags = function(self)
       return {
-        "--ovcopts-add=threads=" .. tostring(options.libvpx_threads),
+        "--ovcopts-add=threads=" .. tostring(options.threads),
         "--ovcopts-add=auto-alt-ref=1",
         "--ovcopts-add=lag-in-frames=25",
         "--ovcopts-add=quality=good",
@@ -993,7 +995,7 @@ do
   local _base_0 = {
     getFlags = function(self)
       return {
-        "--ovcopts-add=threads=" .. tostring(options.libvpx_threads)
+        "--ovcopts-add=threads=" .. tostring(options.threads)
       }
     end
   }
@@ -1036,16 +1038,22 @@ do
   WebmVP9 = _class_0
 end
 formats["webm-vp9"] = WebmVP9()
-local MP4
+local AVC
 do
   local _class_0
   local _parent_0 = Format
-  local _base_0 = { }
+  local _base_0 = {
+    getFlags = function(self)
+      return {
+        "--ovcopts-add=threads=" .. tostring(options.threads)
+      }
+    end
+  }
   _base_0.__index = _base_0
   setmetatable(_base_0, _parent_0.__base)
   _class_0 = setmetatable({
     __init = function(self)
-      self.displayName = "MP4 (h264/AAC)"
+      self.displayName = "AVC (h264/AAC)"
       self.supportsTwopass = true
       self.videoCodec = "libx264"
       self.audioCodec = "aac"
@@ -1053,7 +1061,7 @@ do
       self.acceptsBitrate = true
     end,
     __base = _base_0,
-    __name = "MP4",
+    __name = "AVC",
     __parent = _parent_0
   }, {
     __index = function(cls, name)
@@ -1077,10 +1085,10 @@ do
   if _parent_0.__inherited then
     _parent_0.__inherited(_parent_0, _class_0)
   end
-  MP4 = _class_0
+  AVC = _class_0
 end
-formats["mp4"] = MP4()
-local MP4NVENC
+formats["avc"] = AVC()
+local AVCNVENC
 do
   local _class_0
   local _parent_0 = Format
@@ -1089,7 +1097,7 @@ do
   setmetatable(_base_0, _parent_0.__base)
   _class_0 = setmetatable({
     __init = function(self)
-      self.displayName = "MP4 (h264-NVENC/AAC)"
+      self.displayName = "AVC (h264-NVENC/AAC)"
       self.supportsTwopass = true
       self.videoCodec = "h264_nvenc"
       self.audioCodec = "aac"
@@ -1097,7 +1105,7 @@ do
       self.acceptsBitrate = true
     end,
     __base = _base_0,
-    __name = "MP4NVENC",
+    __name = "AVCNVENC",
     __parent = _parent_0
   }, {
     __index = function(cls, name)
@@ -1121,9 +1129,109 @@ do
   if _parent_0.__inherited then
     _parent_0.__inherited(_parent_0, _class_0)
   end
-  MP4NVENC = _class_0
+  AVCNVENC = _class_0
 end
-formats["mp4-nvenc"] = MP4NVENC()
+formats["avc-nvenc"] = AVCNVENC()
+local AV1
+do
+  local _class_0
+  local _parent_0 = Format
+  local _base_0 = {
+    getFlags = function(self)
+      return {
+        "--ovcopts-add=threads=" .. tostring(options.threads)
+      }
+    end
+  }
+  _base_0.__index = _base_0
+  setmetatable(_base_0, _parent_0.__base)
+  _class_0 = setmetatable({
+    __init = function(self)
+      self.displayName = "AV1"
+      self.supportsTwopass = true
+      self.videoCodec = "libaom-av1"
+      self.audioCodec = "aac"
+      self.outputExtension = "mp4"
+      self.acceptsBitrate = true
+    end,
+    __base = _base_0,
+    __name = "AV1",
+    __parent = _parent_0
+  }, {
+    __index = function(cls, name)
+      local val = rawget(_base_0, name)
+      if val == nil then
+        local parent = rawget(cls, "__parent")
+        if parent then
+          return parent[name]
+        end
+      else
+        return val
+      end
+    end,
+    __call = function(cls, ...)
+      local _self_0 = setmetatable({}, _base_0)
+      cls.__init(_self_0, ...)
+      return _self_0
+    end
+  })
+  _base_0.__class = _class_0
+  if _parent_0.__inherited then
+    _parent_0.__inherited(_parent_0, _class_0)
+  end
+  AV1 = _class_0
+end
+formats["av1"] = AV1()
+local HEVC
+do
+  local _class_0
+  local _parent_0 = Format
+  local _base_0 = {
+    getFlags = function(self)
+      return {
+        "--ovcopts-add=threads=" .. tostring(options.threads)
+      }
+    end
+  }
+  _base_0.__index = _base_0
+  setmetatable(_base_0, _parent_0.__base)
+  _class_0 = setmetatable({
+    __init = function(self)
+      self.displayName = "HEVC"
+      self.supportsTwopass = true
+      self.videoCodec = "libx265"
+      self.audioCodec = "aac"
+      self.outputExtension = "mp4"
+      self.acceptsBitrate = true
+    end,
+    __base = _base_0,
+    __name = "HEVC",
+    __parent = _parent_0
+  }, {
+    __index = function(cls, name)
+      local val = rawget(_base_0, name)
+      if val == nil then
+        local parent = rawget(cls, "__parent")
+        if parent then
+          return parent[name]
+        end
+      else
+        return val
+      end
+    end,
+    __call = function(cls, ...)
+      local _self_0 = setmetatable({}, _base_0)
+      cls.__init(_self_0, ...)
+      return _self_0
+    end
+  })
+  _base_0.__class = _class_0
+  if _parent_0.__inherited then
+    _parent_0.__inherited(_parent_0, _class_0)
+  end
+  HEVC = _class_0
+end
+formats["hevc"] = HEVC()
 local MP3
 do
   local _class_0
@@ -2418,13 +2526,15 @@ do
         }
       }
       local formatIds = {
-        "webm-vp8",
+        "av1",
+        "hevc",
         "webm-vp9",
-        "mp4",
-        "mp4-nvenc",
-        "raw",
+        "avc",
+        "avc-nvenc",
+        "webm-vp8",
+        "gif",
         "mp3",
-        "gif"
+        "raw"
       }
       local formatOpts = {
         possibleValues = (function()

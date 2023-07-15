@@ -51,7 +51,6 @@ cccmd ="`pwd`/scripts/get_maintainer.pl --nogit --nogit-fallback --norolestats -
 	autostash = true
 
 [pull]
-	ff = only
 	rebase = true
 
 [push]
