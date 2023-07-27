@@ -1,1 +1,1 @@
-discord-canary --disable-smooth-scrolling --ozone-platform-hint=auto --enable-experimental-web-platform-features
+/opt/Discord/Discord --disable-smooth-scrolling --ozone-platform-hint=auto --enable-experimental-web-platform-features

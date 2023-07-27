@@ -21,7 +21,7 @@ output * {
     adaptive_sync on
     max_render_time 1
     subpixel rgb
-    render_bit_depth 10
+    render_bit_depth 8
     # bg /mnt/c/Users/llyyr/Desktop/4chan/jp/1637197847029.jpg fill #000000
     bg /mnt/e/Images/bg.png stretch
 }
@@ -182,13 +182,13 @@ input "1386:768:Wacom_Bamboo_One_S_Pen" {
     # Show the next scratchpad window or hide the focused scratchpad window.
     # If there are multiple scratchpad windows, this command cycles through them.
     bindsym $mod+minus scratchpad show
-    bindsym $mod+z exec 'swaymsg [app_id="com.chatterino.chatterino"] scratchpad show || exec chatterino'
-    bindsym $mod+x exec 'swaymsg [app_id="org.kde.dolphin"] scratchpad show || exec dolphin'
-    bindsym $mod+c exec 'swaymsg [app_id="^discord$"] scratchpad show || exec discord'
-    bindsym $mod+semicolon exec 'swaymsg [app_id="org.keepassxc.KeePassXC"] scratchpad show || exec keepassxc'
-    bindsym $mod+t exec 'swaymsg [app_id="termfloat"] scratchpad show || exec $term --app-id="termfloat" -ocolors.alpha=0.995'
-    bindsym $mod+m exec 'swaymsg [app_id="mpv"] scratchpad show'
-    bindsym $mod+p exec 'swaymsg [title="^Picture-in-Picture$"] scratchpad show'
+    bindsym $mod+z exec 'swaymsg -q [app_id="com.chatterino.chatterino"] scratchpad show || exec chatterino'
+    bindsym $mod+x exec 'swaymsg -q [app_id="org.kde.dolphin"] scratchpad show || exec dolphin'
+    bindsym $mod+c exec 'swaymsg -q [app_id="^discord$"] scratchpad show || exec discord'
+    bindsym $mod+semicolon exec 'swaymsg -q [app_id="org.keepassxc.KeePassXC"] scratchpad show || exec keepassxc'
+    bindsym $mod+t exec 'swaymsg -q [app_id="termfloat"] scratchpad show || exec $term --app-id="termfloat" -ocolors.alpha=0.995'
+    bindsym $mod+m exec 'swaymsg -q [app_id="mpv"] scratchpad show'
+    bindsym $mod+p exec 'swaymsg -q [title="^Picture-in-Picture$"] scratchpad show'
 
 
 #
@@ -340,9 +340,8 @@ floating_minimum_size 0 x 0
 
 # Hide borders for XWayland
 default_border pixel 1
-default_floating_border pixel 0
+default_floating_border none
 hide_edge_borders smart
-for_window [class="^.*"] border pixel 0
 
 gaps inner 0
 gaps outer 0
@@ -425,8 +424,8 @@ for_window {
 }
 
 exec_always {
-    systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP DISPLAY DBUS_SESSION_BUS_ADDRESS
-    dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP DISPLAY DBUS_SESSION_BUS_ADDRESS
+    systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP DISPLAY
+    dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP DISPLAY
     gsettings set org.gnome.desktop.interface gtk-theme 'Breeze'
     gsettings set org.gnome.desktop.interface icon-theme 'Breeze'
     gsettings set org.gnome.desktop.interface cursor-theme 'suo_sango'
@@ -437,7 +436,7 @@ exec mako
 exec fcitx5 -rd
 exec /usr/libexec/polkit-gnome-authentication-agent-1
 exec /usr/libexec/kdeconnectd
-exec swaymsg "workspace 2; exec $term"
+exec swaymsg -q "workspace 2; exec $term"
 exec keepassxc
 
 # vim: set filetype=swayconfig:
