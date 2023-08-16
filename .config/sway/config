@@ -22,8 +22,8 @@ output * {
     max_render_time 1
     subpixel rgb
     render_bit_depth 8
-    # bg /mnt/c/Users/llyyr/Desktop/4chan/jp/1637197847029.jpg fill #000000
-    bg /mnt/e/Images/bg.png stretch
+    bg /mnt/c/Users/llyyr/Desktop/4chan/jp/1637197847029.jpg fill #000000
+    # bg /mnt/e/Images/bg.png stretch
 }
 
 for_window [class="gamescope"] max_render_time 1
@@ -50,7 +50,10 @@ exec swayidle -w timeout 900 'swaymsg "output * power off"' resume 'swaymsg "out
 # Read `man 5 sway-input` for more information about this section.
 input "1241:4611:HID_04d9:1203" {
     xkb_numlock enabled
+    repeat_rate 50
+    repeat_delay 300
 }
+
 
 input "12538:768:USB_OPTICAL_MOUSE" {
     accel_profile flat
@@ -229,14 +232,14 @@ mode "resize" {
 
 bindsym $mod+comma mode music
 mode music {
-    bindsym Escape mode default
-    bindsym Return mode default
-    bindsym Space exec playerctl play-pause
-    bindsym Left exec playerctl previous
-    bindsym Right exec playerctl next
-    bindsym h exec playerctl previous
-    bindsym l exec playerctl next
-    bindsym q exec playerctl stop
+    bindsym Escape mode default; mode "default"
+    bindsym Return mode default; mode "default"
+    bindsym Space exec playerctl play-pause; mode "default"
+    bindsym Left exec playerctl previous; mode "default"
+    bindsym Right exec playerctl next; mode "default"
+    bindsym h exec playerctl previous; mode "default"
+    bindsym l exec playerctl next; mode "default"
+    bindsym q exec playerctl stop; mode "default"
 }
 
 bindsym $mod+Shift+m mode move-to
@@ -397,8 +400,8 @@ for_window {
     }
     [app_id="^discord$"] {
         floating enable
-        exec sway-grid-move bottom-left
         move scratchpad
+        exec sway-grid-move bottom-left
         scratchpad show
     }
     [app_id="termfloat"] {
@@ -410,15 +413,15 @@ for_window {
     }
     [app_id="mpv"] {
         floating enable
-        exec sway-grid-move top-right
         move scratchpad
+        exec sway-grid-move top-right
         scratchpad show
     }
     [title="^Picture-in-Picture$"] {
         floating enable
         sticky enable
-        exec sway-grid-move bottom-right
         move scratchpad
+        exec sway-grid-move bottom-right
         scratchpad show
     }
 }

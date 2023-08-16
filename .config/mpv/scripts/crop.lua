@@ -299,7 +299,7 @@ function crop_video(x1, y1, x2, y2)
             params= { x = tostring(x), y = tostring(y), w = tostring(w), h = tostring(h) }
         }
         mp.set_property_native("vf", vf_table)
-        local dim = mp.get_property_native("osd-dimensions")
+        -- local dim = mp.get_property_native("osd-dimensions")
         -- local vidh = dim.h - dim.mt - dim.mb
         -- local vidw = dim.w - dim.ml - dim.mr
         -- mp.set_property_native("sub-ass-force-style", "PlayResX=" .. tostring(h * (w/h)))

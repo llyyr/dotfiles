@@ -4,7 +4,6 @@ path+="${HOME}/.dotnet/"
 path+="${HOME}/.local/bin/"
 path+="${HOME}/.cargo/bin/"
 
-
 if [[ -O "${BASH_SOURCE[0]:-${(%):-%x}}" && $- == *i* && ! $VIM_TERMINAL ]] && [ -n "${DISPLAY}" ] && [ -z "${TMUX}" ]; then # && (SHLVL <3)
 	command tmux attach || command tmux 
 fi
@@ -35,7 +34,7 @@ setopt no_case_glob
 unsetopt nomatch
 unsetopt flowcontrol
 
-unsetopt beep # beep is the strongest warrior!
+unsetopt beep
 
 KEYTIMEOUT=1
 
@@ -47,6 +46,7 @@ autoload -U colors && colors	# Load colors
 # Custom completion settings
 setopt globdots
 zstyle ":completion:*:default" list-colors ${(s.:.)LS_COLORS} "ma=48;5;25;1"
+zstyle ':completion:*' menu select
 autoload -Uz compinit
 compinit
 
@@ -71,7 +71,7 @@ setopt prompt_subst
 if [ -r /usr/share/bash-completion/completions/git-prompt.sh ]; then
 	. /usr/share/bash-completion/completions/git-prompt.sh
 fi
-export GIT_PS1_SHOWDIRTYSTATE=1
+# export GIT_PS1_SHOWDIRTYSTATE=1
 export GIT_PS1_SHOWUNTRACKEDFILES=1
 export GIT_PS1_SHOWUPSTREAM="auto"
 
