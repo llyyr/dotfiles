@@ -35,7 +35,8 @@ export WLR_RENDERER=vulkan
 
 case "$1" in
 debug)
-	~/workspace/sway/build/sway/sway -d >~/sway.log 2>&1
+	# ~/workspace/sway/build/sway/sway -d >~/sway.log 2>&1
+	sway -d >~/sway.log 2>&1
 	;;
 drm-debug)
 	dmesg -W >~/dmesg.log &

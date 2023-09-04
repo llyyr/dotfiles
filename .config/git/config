@@ -39,7 +39,7 @@
 	df = diff
 	ds = diff --staged
 	cp = cherry-pick
-	ss = "!f(){ git stash push \"$@\" -- $(git diff --staged --name-only); }; f"
+	ss = stash show -p
 	sp = stash pop
 	sa = stash apply
 	sd = stash drop

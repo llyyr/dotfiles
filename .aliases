@@ -26,6 +26,7 @@ alias runvenv="source venv/bin/activate"
 alias ghc="ghc -no-keep-hi-files -no-keep-o-files $1"
 alias gbf2="microsoft-edge-beta --profile-directory='Profile 2' --ozone-platform-hint=auto --disable-backgrounding-occluded-windows"
 alias pypy="/opt/pypy/bin/pypy"
+alias rsync='rsync --info=progress2 --sparse --progress --human-readable'
 
 colpick() {
     grim -g "$(slurp -p)" -t ppm - | convert - -format '%[pixel:p{0,0}]' txt:-

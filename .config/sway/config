@@ -15,22 +15,24 @@ set $menu fuzzel
 font pango:Iosevka Term Custom 9
 
 ### Output configuration
-output * {
+output DP-1 {
     mode 1920x1080@144Hz
     # mode 1920x1080@119.982Hz
     adaptive_sync on
     max_render_time 1
     subpixel rgb
     render_bit_depth 8
-    bg /mnt/c/Users/llyyr/Desktop/4chan/jp/1637197847029.jpg fill #000000
-    # bg /mnt/e/Images/bg.png stretch
+    scale_filter linear
+    bg /mnt/c/Users/llyyr/Desktop/4chan/jp/1637197847029.jpg fit #000000
+    # bg /mnt/e/Images/bg.png fit #000000
+    # bg /mnt/e/Images/Altina/鮫島タムラ \(2830191\)/88663225_p0 - アルティナ雑まとめv2.png stretch #000000
+    # bg #8003FF solid_color
 }
 
 for_window [class="gamescope"] max_render_time 1
 for_window [app_id="osu!"] max_render_time 1
 for_window [app_id="genshinimpact.exe"] max_render_time 1
 
-#bg /mnt/e/Images/Altina/鮫島タムラ \(2830191\)/88663225_p0 - アルティナ雑まとめv2.png fill #000000
 #
 # Example configuration:
 #
@@ -401,8 +403,8 @@ for_window {
     [app_id="^discord$"] {
         floating enable
         move scratchpad
-        exec sway-grid-move bottom-left
         scratchpad show
+        exec sway-grid-move bottom-left
     }
     [app_id="termfloat"] {
         floating enable
@@ -414,15 +416,15 @@ for_window {
     [app_id="mpv"] {
         floating enable
         move scratchpad
-        exec sway-grid-move top-right
         scratchpad show
+        exec sway-grid-move top-right
     }
     [title="^Picture-in-Picture$"] {
         floating enable
         sticky enable
         move scratchpad
-        exec sway-grid-move bottom-right
         scratchpad show
+        exec sway-grid-move bottom-right
     }
 }
 
