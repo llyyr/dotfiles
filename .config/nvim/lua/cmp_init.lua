@@ -161,7 +161,7 @@ lsp.clangd.setup({
             "--header-insertion=never",
             "--log=error",
     },
-    filetypes = { "c", "h", "cpp", "hpp", "objc", "objcpp" },
+    filetypes = { "c", "h", "cc", "cpp", "hpp", "objc", "objcpp" },
 })
 
 lsp.pyright.setup{}
