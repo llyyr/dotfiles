@@ -7,7 +7,7 @@ packer.init({
         clone_timeout = 600,
     },
     luarocks = {
-        python_cmd = 'python3.11'
+        python_cmd = 'python3'
     },
     profile = {
         enable = false,
@@ -17,8 +17,9 @@ packer.init({
 return packer.startup(function()
     use { 'wbthomason/packer.nvim' }
     use { 'nvim-lua/plenary.nvim' }
-    
+
     use { 'luisiacc/gruvbox-baby' }
+
     use { 'hoob3rt/lualine.nvim' }
     use { 'folke/todo-comments.nvim' }
     use { 'numToStr/Comment.nvim' }

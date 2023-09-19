@@ -44,6 +44,7 @@
 	sa = stash apply
 	sd = stash drop
 	sl = stash list
+	fixes = show -s --pretty='format:Fixes: %h (\"%s\")'
 
 [sendemail]
 	smtpserver = smtp.gmail.com
