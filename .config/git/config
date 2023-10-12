@@ -35,7 +35,7 @@
     ll = log --all --decorate --oneline --graph
 
 
-	fp = format-patch --signoff --stdout -M -C
+	fp = format-patch --stdout -M -C
 	df = diff
 	ds = diff --staged
 	cp = cherry-pick

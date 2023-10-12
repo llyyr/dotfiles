@@ -160,6 +160,11 @@ lsp.clangd.setup({
             "--header-insertion-decorators=false",
             "--header-insertion=never",
             "--log=error",
+            "--all-scopes-completion",
+            "--clang-tidy",
+            "--cross-file-rename",
+            "--completion-style=detailed",
+            "--enable-config",
     },
     filetypes = { "c", "h", "cc", "cpp", "hpp", "objc", "objcpp" },
 })

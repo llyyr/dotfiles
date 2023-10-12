@@ -154,7 +154,7 @@ function refenv {
 }
 
 function genshin_wish {
-    strings "/home/llyyr/.local/share/anime-game-launcher/game/drive_c/Program Files/Genshin Impact/GenshinImpact_Data/webCaches/2.15.0.0/Cache/Cache_Data/data_2" | rg -o "https://.*/e20190909gacha-v2/.*" | tail -n 1
+    strings "/home/llyyr/.local/share/anime-game-launcher/game/drive_c/Program Files/Genshin Impact/GenshinImpact_Data/webCaches/2.16.0.0/Cache/Cache_Data/data_2" | rg -o "https://.*/e20190909gacha-v2/.*" | tail -n 1
     }
 
 function gli {
