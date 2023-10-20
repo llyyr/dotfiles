@@ -430,7 +430,7 @@ for_window {
 
 exec_always {
     systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP DISPLAY
-    dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP DISPLAY
+    dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP DISPLAY XCURSOR_THEME XCURSOR_SIZE
     gsettings set org.gnome.desktop.interface gtk-theme 'Breeze'
     gsettings set org.gnome.desktop.interface icon-theme 'Breeze'
     gsettings set org.gnome.desktop.interface cursor-theme 'suo_sango'

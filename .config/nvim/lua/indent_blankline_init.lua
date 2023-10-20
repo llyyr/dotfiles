@@ -1,20 +1,11 @@
-require('indent_blankline').setup({
-    char = "|",
-    show_trailing_blankline_indent = true,
-    show_first_indent_level = false,
+require("ibl").setup {
+    indent = { char = "|" },
+    whitespace = {
+        remove_blankline_trail = false,
+    },
+    scope = { enabled = false },
+}
+local hooks = require "ibl.hooks"
+hooks.register( hooks.type.WHITESPACE, hooks.builtin.hide_first_tab_indent_level)
+hooks.register( hooks.type.WHITESPACE, hooks.builtin.hide_first_space_indent_level)
 
-    max_indent_increase = 1,
-
-    use_treesitter = true,
-    show_current_context = false,
-    show_current_context_start = false,
-    show_current_context_start_on_current_line = false,
-
-    show_end_of_line = false,
-
-    show_foldtext = false,
-    strict_tabs   = false,
-
-    filetype_exclude = { 'help' },
-    buftype_exclude  = { 'terminal' },
-})
