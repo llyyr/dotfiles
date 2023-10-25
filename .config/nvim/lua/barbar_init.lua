@@ -1,3 +1,75 @@
+local M = {
+  'romgrk/barbar.nvim',
+  dependencies = {
+    'lewis6991/gitsigns.nvim'
+  },
+  init = function() vim.g.barbar_auto_setup = false end,
+  opts = {
+    animation = false,
+    auto_hide = false,
+    tabpages = true,
+    closable = true,
+    clickable = true,
+    icons = 'numbers',
+
+    icons = {
+      -- Configure the base icons on the bufferline.
+      buffer_index = false,
+      buffer_number = false,
+      button = '',
+      -- Enables / disables diagnostic symbols
+      diagnostics = {
+        [vim.diagnostic.severity.ERROR] = {enabled = true, icon = 'ﬀ'},
+        [vim.diagnostic.severity.WARN] = {enabled = false},
+        [vim.diagnostic.severity.INFO] = {enabled = false},
+        [vim.diagnostic.severity.HINT] = {enabled = true},
+      },
+      filetype = {
+        -- Sets the icon's highlight group.
+        -- If false, will use nvim-web-devicons colors
+        custom_colors = false,
+
+        -- Requires `nvim-web-devicons` if `true`
+        enabled = false,
+      },
+      separator = {left = '▎', right = ''},
+
+      -- Configure the icons on the bufferline when modified or pinned.
+      -- Supports all the base icon options.
+      modified = {button = '●'},
+      pinned = {button = '車'},
+
+      -- Configure the icons on the bufferline based on the visibility of a buffer.
+      -- Supports all the base icon options, plus `modified` and `pinned`.
+      alternate = {filetype = {enabled = false}},
+      current = {buffer_index = true},
+      inactive = {button = '×'},
+      visible = {modified = {buffer_number = false}},
+    },
+    insert_at_end = false,
+    insert_at_start = false,
+
+    maximum_padding = 2, -- tabname padding
+    maximum_length = 30, -- name length
+
+    -- If set, the letters for each buffer in buffer-pick mode will be
+    -- assigned based on their name. Otherwise or in case all letters are
+    -- already assigned, the behavior is to assign letters in order of
+    -- usability (see order below)
+    semantic_letters = true,
+
+    -- New buffer letters are assigned in this order. This order is
+    -- optimal for the qwerty keyboard layout but might need adjustement
+    -- for other layouts.
+    letters = 'asdfjkl;ghnmxcvbziowerutyqpASDFJKLGHNMXCVBZIOWERUTYQP',
+
+    -- Sets the name of unnamed buffers. By default format is "[Buffer X]"
+    -- where X is the buffer number. But only a static string is accepted here.
+    no_name_title = nil,
+
+  }
+}
+
 local map = vim.api.nvim_set_keymap
 local opts = { noremap = true, silent = true }
 
@@ -39,66 +111,4 @@ map('n', '<leader>bl', ':BufferOrderByLanguage<CR>', opts)
 -- :BarbarEnable - enables barbar (enabled by default)
 -- :BarbarDisable - very bad command, should never be used
 
-require('bufferline').setup({
-    animation = false,
-    auto_hide = false,
-    tabpages = true,
-    closable = true,
-    clickable = true,
-    icons = 'numbers',
-
-    icons = {
-        -- Configure the base icons on the bufferline.
-        buffer_index = false,
-        buffer_number = false,
-        button = '',
-        -- Enables / disables diagnostic symbols
-        diagnostics = {
-          [vim.diagnostic.severity.ERROR] = {enabled = true, icon = 'ﬀ'},
-          [vim.diagnostic.severity.WARN] = {enabled = false},
-          [vim.diagnostic.severity.INFO] = {enabled = false},
-          [vim.diagnostic.severity.HINT] = {enabled = true},
-        },
-        filetype = {
-          -- Sets the icon's highlight group.
-          -- If false, will use nvim-web-devicons colors
-          custom_colors = false,
-
-          -- Requires `nvim-web-devicons` if `true`
-          enabled = false,
-        },
-        separator = {left = '▎', right = ''},
-
-        -- Configure the icons on the bufferline when modified or pinned.
-        -- Supports all the base icon options.
-        modified = {button = '●'},
-        pinned = {button = '車'},
-
-        -- Configure the icons on the bufferline based on the visibility of a buffer.
-        -- Supports all the base icon options, plus `modified` and `pinned`.
-        alternate = {filetype = {enabled = false}},
-        current = {buffer_index = true},
-        inactive = {button = '×'},
-        visible = {modified = {buffer_number = false}},
-      },
-    insert_at_end = false,
-    insert_at_start = false,
-
-    maximum_padding = 2, -- tabname padding
-    maximum_length = 30, -- name length
-
-    -- If set, the letters for each buffer in buffer-pick mode will be
-    -- assigned based on their name. Otherwise or in case all letters are
-    -- already assigned, the behavior is to assign letters in order of
-    -- usability (see order below)
-    semantic_letters = true,
-
-    -- New buffer letters are assigned in this order. This order is
-    -- optimal for the qwerty keyboard layout but might need adjustement
-    -- for other layouts.
-    letters = 'asdfjkl;ghnmxcvbziowerutyqpASDFJKLGHNMXCVBZIOWERUTYQP',
-
-    -- Sets the name of unnamed buffers. By default format is "[Buffer X]"
-    -- where X is the buffer number. But only a static string is accepted here.
-    no_name_title = nil,
-})
+return M

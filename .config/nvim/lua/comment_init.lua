@@ -1,14 +1,15 @@
-require'nvim-treesitter.configs'.setup({
-    context_commentstring = {
-        enable = true,
-        enable_autocmd = false,
-    }
-})
-
-require('Comment').setup({
+local M = {
+  'numToStr/Comment.nvim',
+  dependencies = { "JoosepAlviste/nvim-ts-context-commentstring" },
+  opts = {
     pre_hook = require('ts_context_commentstring.integrations.comment_nvim').create_pre_hook(),
-})
+  },
+}
 
-local ft = require('Comment.ft')
-ft.set('nasm', '; %s')
-ft.set('asm', { '// %s', '/* %s */' })
+M.config = function()
+  local ft = require('Comment.ft')
+  ft.set('nasm', '; %s')
+  ft.set('asm', { '// %s', '/* %s */' })
+end
+
+return M

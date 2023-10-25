@@ -1,7 +1,12 @@
-local leap = require('leap')
+local M = {
+  "ggandor/leap.nvim",
+  opts = {
+    case_insensitive = true,
+  }
+}
 
-leap.setup({
-  case_insensitive = true,
-})
+M.config = function()
+  require"leap".add_default_mappings()
+end
 
-leap.set_default_keymaps()
+return M

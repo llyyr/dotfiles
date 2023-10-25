@@ -1,14 +1,34 @@
-local telescope = require('telescope')
-
-telescope.setup({
+local M = {
+  'nvim-telescope/telescope.nvim', 
+  dependencies = 
+  { 'nvim-telescope/telescope-fzf-native.nvim',
+    build = 'make' },
+  { 'AckslD/nvim-neoclip.lua', 
+    opts = {
+      history = 256,
+      enable_persistent_history = false,
+      preview = true,
+      content_spec_column = true,
+      default_register = '+',
+      on_paste = {
+        set_reg = true,
+      },
+    }
+  },
+  opts = {
     defaults = {
-        dynamic_preview_title = true,
+      dynamic_preview_title = true,
     },
     pickers = {
-        find_files = {
-        },
+      find_files = {
+      },
     },
-})
+  }
+}
 
-telescope.load_extension('fzf')
-telescope.load_extension('neoclip')
+M.config = function()
+  telescope.load_extension('fzf')
+  telescope.load_extension('neoclip')
+end
+
+return M
