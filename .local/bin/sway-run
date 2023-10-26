@@ -19,7 +19,7 @@ export QT_IM_MODULE=fcitx
 
 export RADV_PERFTEST=video_decode
 export ANV_VIDEO_DECODE=1
-export AMD_DEBUG=noefc
+export AMD_DEBUG=noefc,useaco
 
 # card0 = intel, card1 = amd
 # export WLR_DRM_DEVICES=/dev/dri/card0:/dev/dri/card1

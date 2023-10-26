@@ -27,6 +27,7 @@ local M = {
 }
 
 M.config = function()
+  local telescope = require('telescope')
   telescope.load_extension('fzf')
   telescope.load_extension('neoclip')
 end

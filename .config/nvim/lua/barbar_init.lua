@@ -111,4 +111,16 @@ map('n', '<leader>bl', ':BufferOrderByLanguage<CR>', opts)
 -- :BarbarEnable - enables barbar (enabled by default)
 -- :BarbarDisable - very bad command, should never be used
 
+M.config = function()
+  require('gitsigns').setup({
+    signcolumn = false,
+    numhl      = true,
+    linehl     = false,
+    word_diff  = false,
+    yadm = {
+        enable = false
+    },
+  })
+end
+
 return M
