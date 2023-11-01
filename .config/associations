@@ -38,5 +38,3 @@
   #:pattern ".*"
   #:program (select-one-of "fuzzel -d")
   #:standalone #t)
-
-

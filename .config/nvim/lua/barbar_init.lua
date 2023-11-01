@@ -1,7 +1,7 @@
 local M = {
   'romgrk/barbar.nvim',
   dependencies = {
-    'lewis6991/gitsigns.nvim'
+    'lewis6991/gitsigns.nvim', opts = { numhl = true },
   },
   init = function() vim.g.barbar_auto_setup = false end,
   opts = {
@@ -110,17 +110,5 @@ map('n', '<leader>bl', ':BufferOrderByLanguage<CR>', opts)
 -- Other:
 -- :BarbarEnable - enables barbar (enabled by default)
 -- :BarbarDisable - very bad command, should never be used
-
-M.config = function()
-  require('gitsigns').setup({
-    signcolumn = false,
-    numhl      = true,
-    linehl     = false,
-    word_diff  = false,
-    yadm = {
-        enable = false
-    },
-  })
-end
 
 return M
