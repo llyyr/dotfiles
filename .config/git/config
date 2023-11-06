@@ -45,6 +45,7 @@
 	sd = stash drop
 	sl = stash list
 	fixes = show -s --pretty='format:Fixes: %h (\"%s\")'
+	pullpr = "!f() { remote=\"${2:-upstream}\"; git fetch \"$remote\" pull/$1/head:pr-$1 && git checkout pr-$1; }; f"
 
 [sendemail]
 	smtpserver = smtp.gmail.com

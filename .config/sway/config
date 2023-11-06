@@ -313,7 +313,7 @@ set $bga #444444
 set $fg #ffffff
 set $fgi #888888
 bar {
-    status_command /home/llyyr/.cargo/bin/i3status-rs
+    status_command i3status-rs
     font pango:Sarasa Term J 9
 	position top
     wrap_scroll yes
