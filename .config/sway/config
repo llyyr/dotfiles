@@ -16,8 +16,18 @@ font pango:Iosevka Term Custom 9
 
 ### Output configuration
 output DP-1 {
+    mode 2560x1440@144hz
+    pos 0 0
+    adaptive_sync on
+    max_render_time 1
+    subpixel rgb
+    render_bit_depth 8
+    scale_filter linear
+    bg /mnt/c/Users/llyyr/Desktop/4chan/jp/1637197847029.jpg fit #000000
+}
+
+output DP-2 {
     mode 1920x1080@144Hz
-    # mode 1920x1080@119.982Hz
     adaptive_sync on
     max_render_time 1
     subpixel rgb
@@ -29,9 +39,10 @@ output DP-1 {
     # bg #8003FF solid_color
 }
 
+
 for_window [class="gamescope"] max_render_time 1
 for_window [app_id="osu!"] max_render_time 1
-for_window [app_id="genshinimpact.exe"] max_render_time 1
+for_window [class="genshinimpact.exe"] max_render_time 1
 
 #
 # Example configuration:
@@ -41,21 +52,21 @@ for_window [app_id="genshinimpact.exe"] max_render_time 1
 # You can get the names of your outputs by running: swaymsg -t get_outputs
 
 ### Idle configuration
-exec swayidle -w timeout 900 'swaymsg "output * power off"' resume 'swaymsg "output * power on"'
-#exec swayidle -w \
-#        timeout 900 'swaylock -f -c 000000' \
-#        timeout 900 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
-#        before-sleep 'swaylock -f -c 000000'
+exec swayidle -w \
+        timeout 900 'swaylock -f -c 1e1e1e' \
+        timeout 900 'swaymsg "output DP-1 power off" && swaymsg "output DP-2 power off"' \
+            resume 'swaymsg "output DP-1 power on" && swaymsg "output DP-2 power on"' \
+        before-sleep 'swaylock -f -c 1e1e1e'
 
 ### Input configuration
 # You can get the names of your inputs by running: swaymsg -t get_inputs
 # Read `man 5 sway-input` for more information about this section.
 input "1241:4611:HID_04d9:1203" {
+    xkb_file /home/llyyr/keymap.xkb
     xkb_numlock enabled
     repeat_rate 50
     repeat_delay 300
 }
-
 
 input "12538:768:USB_OPTICAL_MOUSE" {
     accel_profile flat
@@ -82,7 +93,7 @@ input "1386:768:Wacom_Bamboo_One_S_Pen" {
     # Start your launcher
     bindsym $mod+d exec $menu
 
-    bindsym Pause exec 'swaymsg "output DP-1 power toggle"'
+    bindsym Pause exec 'swaymsg "output DP-1 power toggle" && swaymsg "output DP-2 power toggle"'
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
@@ -147,6 +158,9 @@ input "1386:768:Wacom_Bamboo_One_S_Pen" {
     bindsym $mod+Shift+0 move container to workspace number 10
     # Note: workspaces can have any name you want, not just numbers.
     # We just use 1-10 as the default.
+
+    bindsym $mod+greater move workspace to output right
+    bindsym $mod+less move workspace to output left
 #
 # Layout stuff:
 #
@@ -277,11 +291,11 @@ mode "move-to" {
 # wlsunset on/off
 bindsym $mod+n exec sunset
 
-# Screenshot to clipboard (all displays)
-bindsym Print exec grimshot --notify --cursor copy
+# Screenshot output to clipboard
+bindsym Print exec grimshot --notify --cursor copy output
 
-# Screenshot to file (all displays)
-bindsym $mod+Print exec grimshot --notify --cursor save
+# Screenshot output to file
+bindsym $mod+Print exec grimshot --notify --cursor save output
 
 # Region-select-screenshot to clipboard
 bindsym ctrl+Print exec grimshot --notify copy window
@@ -292,8 +306,8 @@ bindsym ctrl+Shift+Print exec "grimshot copy window && wl-paste | curl -s -F fil
 # Region-select-screenshot to file
 bindsym $mod+ctrl+Print exec grimshot --notify save window
 
-# Current display to clipboard
-bindsym ctrl+alt+Print exec grimshot --notify copy output
+# Screenshot to clipboard
+bindsym ctrl+alt+Print exec grimshot --notify copy
 
 # Current window to clipboard
 bindsym alt+Print exec grimshot --notify copy active
@@ -356,6 +370,16 @@ gaps top 0
 gaps right 0
 gaps bottom 0
 gaps left 0
+workspace 1 output DP-1
+workspace 2 output DP-1
+workspace 3 output DP-1
+workspace 4 output DP-2 DP-1
+workspace 5 output DP-2 DP-1
+workspace 6 output DP-1
+workspace 7 output DP-1
+workspace 8 output DP-1
+workspace 9 output DP-1
+workspace 10 output DP-1
 
 # Misc settings
 for_window {
@@ -365,8 +389,7 @@ for_window {
     [app_id="electron"] floating enable
     [app_id="firefox"] move container to workspace 1
     [class="gamescope"] move container to workspace 3
-    [app_id="genshinimpact.exe"] move container to workspace 3
-    [class="krita"] move container to workspace 5
+    [class="krita"] move container to workspace 6
     [app_id="cantata"] move container to workspace 7
     [class="^.*[sS]team.*$"] move container to workspace 8
     [app_id="thunderbird"] move container to workspace 9
@@ -376,6 +399,10 @@ for_window {
     [window_role="task_dialog"] floating enable
     [app_id="qalculate-gtk"] floating enable
     [app_id="sharex"] fullscreen enable global
+    [class="genshinimpact.exe"] {
+        move container to workspace 3
+        # input "12538:768:USB_OPTICAL_MOUSE" map_to_output "DP-1"
+    }
     [title="Sharing.Indicator$"] {
         floating enable
         move scratchpad

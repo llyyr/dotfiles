@@ -13,24 +13,27 @@ case $1 in
         ;;
 esac
 
-wintree=($(swaymsg -t get_tree | jq -r '..|select(.type? == "root")|(.rect.width,.rect.height),(..|select(.type? == "output") | select(.active? == true) | .nodes|.[0]|.rect|.width,.height), (..|select(.focused? == true) | .id,.rect.width,.rect.height,.rect.x,.rect.y,.deco_rect.width,.deco_rect.height,.type)'))
+workspace_dimensions=$( swaymsg -t get_workspaces |
+    jq -r '.. | select(.focused?) | select(.type=="workspace") | .rect | "\(.width)x\(.height)"' )
+workspace_width=${workspace_dimensions%x*}
+workspace_height=${workspace_dimensions#*x}
+
+wintree=($(swaymsg -t get_tree | jq -r '..|select(.type? == "root")|(.rect.width,.rect.height), (..|select(.focused? == true) | .id,.rect.width,.rect.height,.rect.x,.rect.y,.deco_rect.width,.deco_rect.height,.type)'))
 output_width=${wintree[0]}
 output_height=${wintree[1]}
-workspace_width=${wintree[2]}
-workspace_height=${wintree[3]}
 
 bar_width=$(( output_width - workspace_width ))
 bar_height=$(( output_height - workspace_height ))
 
-win_id=${wintree[4]}
-win_width=${wintree[5]}
-win_height=${wintree[6]}
-new_x=${wintree[7]}
-new_y=${wintree[8]}
-deco_width=${wintree[9]}
-deco_height=${wintree[10]}
-win_type=${wintree[11]}
-
+win_id=${wintree[2]}
+win_width=${wintree[3]}
+win_height=${wintree[4]}
+new_x=${wintree[5]}
+new_y=${wintree[6]}
+deco_width=${wintree[7]}
+deco_height=${wintree[8]}
+win_type=${wintree[9]}
+echo "$win_type"
 case "$win_type" in
     "floating_con")
         case $dest in
@@ -96,7 +99,6 @@ case "$win_type" in
                 new_y=$(( workspace_height - win_height - deco_height ))
                 ;;
         esac
-
         swaymsg "[con_id=$win_id] move position $new_x $new_y"
         ;;
 

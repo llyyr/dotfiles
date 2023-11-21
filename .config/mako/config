@@ -1,4 +1,5 @@
-anchor=top-right
+output=DP-2
+anchor=top-left
 sort=-time
 layer=top
 background-color=#080C0D

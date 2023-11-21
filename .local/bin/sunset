@@ -2,7 +2,7 @@
 
 if [ -z $(pgrep wlsunset) ]
 then
-    nohup wlsunset -l 25.609 -L 85.14 > /dev/null &
+    nohup wlsunset -l 25.609 -L 85.14 -t 4500 > /dev/null &
 else
     pkill wlsunset
 fi
