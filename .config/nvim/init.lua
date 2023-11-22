@@ -74,6 +74,7 @@ require("lazy").setup({
   },
   { 'nvim-lua/plenary.nvim' },
   { 'neovim/nvim-lspconfig' },
+  { 'JoosepAlviste/nvim-ts-context-commentstring' },
   { import = 'treesitter_init'},
   { import = 'cmp_init'},
   { import = 'telescope_init'},
