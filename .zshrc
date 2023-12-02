@@ -78,7 +78,7 @@ export GIT_PS1_SHOWUPSTREAM="auto"
 PS1="%B%F{blue}%~%f%b"\
 $'$(__git_ps1 " on %%F{212}%s%%f")'\
 "%(?.. %B%F{red}%?%f%b)"\
-$'\n%F{cyan}%(1j.+%j .)%f%F{yellow}❯%f '
+$'\n%F{cyan}%(1j.+%j .)%f%F{yellow}$%f '
 PS2="... "
 
 __git_files () {

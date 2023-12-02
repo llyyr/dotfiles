@@ -185,6 +185,7 @@ M.config = function()
   })
 
   lsp.pyright.setup{}
+  lsp.zls.setup{}
 
 
 

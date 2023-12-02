@@ -203,7 +203,7 @@ input "1386:768:Wacom_Bamboo_One_S_Pen" {
     bindsym $mod+minus scratchpad show
     bindsym $mod+z exec 'swaymsg -q [app_id="com.chatterino.chatterino"] scratchpad show || exec chatterino'
     bindsym $mod+x exec 'swaymsg -q [app_id="org.kde.dolphin"] scratchpad show || exec dolphin'
-    bindsym $mod+c exec 'swaymsg -q [app_id="^discord$"] scratchpad show || exec discord'
+    bindsym $mod+c exec 'swaymsg -q [app_id="^discord$"] scratchpad show && exec sway-grid-move bottom-left || exec discord'
     bindsym $mod+semicolon exec 'swaymsg -q [app_id="org.keepassxc.KeePassXC"] scratchpad show || exec keepassxc'
     bindsym $mod+t exec 'swaymsg -q [app_id="termfloat"] scratchpad show || exec $term --app-id="termfloat" -ocolors.alpha=0.995'
     bindsym $mod+m exec 'swaymsg -q [app_id="mpv"] scratchpad show'
@@ -387,7 +387,6 @@ for_window {
     [app_id="imv"] floating enable
     [app_id="org.kde.kcalc"] floating enable
     [app_id="electron"] floating enable
-    [app_id="firefox"] move container to workspace 1
     [class="gamescope"] move container to workspace 3
     [class="krita"] move container to workspace 6
     [app_id="cantata"] move container to workspace 7
@@ -402,10 +401,6 @@ for_window {
     [class="genshinimpact.exe"] {
         move container to workspace 3
         # input "12538:768:USB_OPTICAL_MOUSE" map_to_output "DP-1"
-    }
-    [title="Sharing.Indicator$"] {
-        floating enable
-        move scratchpad
     }
     [app_id="(pavucontrol|psensor)"] {
         floating enable

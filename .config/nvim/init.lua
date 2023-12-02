@@ -39,6 +39,8 @@ vim.filetype.add({
     S = "asm",
   },
 })
+vim.g.skip_ts_context_commentstring_module = true
+vim.g.zig_fmt_autosave = false
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
