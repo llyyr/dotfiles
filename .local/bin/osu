@@ -1,10 +1,10 @@
 #!/bin/sh
-# WINEPREFIX="$HOME/.wine_osu" WINEARCH=win32
+# WINEPREFIX="$HOME/.wineosu" WINEARCH=win32
 
-export WINEPREFIX="$HOME/.wine_osu"
-# export WINEARCH=win32
+export WINEPREFIX="$HOME/.wineosu"
+export WINEARCH=win32
 # export DISPLAY=
-# export WINEESYNC=1
+export WINEESYNC=1
 export vblank_mode=0
 
 cd /mnt/e/osu!/ # Or wherever you installed osu! in

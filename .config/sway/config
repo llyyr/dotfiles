@@ -203,7 +203,7 @@ input "1386:768:Wacom_Bamboo_One_S_Pen" {
     bindsym $mod+minus scratchpad show
     bindsym $mod+z exec 'swaymsg -q [app_id="com.chatterino.chatterino"] scratchpad show || exec chatterino'
     bindsym $mod+x exec 'swaymsg -q [app_id="org.kde.dolphin"] scratchpad show || exec dolphin'
-    bindsym $mod+c exec 'swaymsg -q [app_id="^discord$"] scratchpad show && exec sway-grid-move bottom-left || exec discord'
+    bindsym $mod+c exec 'swaymsg -q [app_id="^VencordDesktop$"] scratchpad show && exec sway-grid-move bottom-left || exec discord'
     bindsym $mod+semicolon exec 'swaymsg -q [app_id="org.keepassxc.KeePassXC"] scratchpad show || exec keepassxc'
     bindsym $mod+t exec 'swaymsg -q [app_id="termfloat"] scratchpad show || exec $term --app-id="termfloat" -ocolors.alpha=0.995'
     bindsym $mod+m exec 'swaymsg -q [app_id="mpv"] scratchpad show'
@@ -422,7 +422,7 @@ for_window {
         move scratchpad
         scratchpad show
     }
-    [app_id="^discord$"] {
+    [app_id="^VencordDesktop$"] {
         floating enable
         move scratchpad
         scratchpad show

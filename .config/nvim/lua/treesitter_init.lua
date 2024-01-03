@@ -17,7 +17,7 @@ M.config = function()
   require('nvim-treesitter.configs').setup({
     -- one of "all", "maintained", or a list
     ensure_installed = { "c", "cpp", "bash", "comment", "css",
-      "dot", "glsl", "go", "html", "haskell" ,"javascript", 
+      "dot", "glsl", "go", "html", "haskell" ,"javascript", "java",
       "julia", "latex", "lua", "make", "python", "rst", 
       "json", "yaml", "meson", "markdown", "rust", "scss", "zig"},
     ignore_install = { },        -- List of parsers to ignore installing
