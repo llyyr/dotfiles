@@ -17,7 +17,7 @@ export QT_AUTO_SCREEN_SCALE_FACTOR=1
 export QT_IM_MODULE=fcitx
 # export QT_WAYLAND_DISABLE_WINDOWDECORATION=1 # Causes banding issue in qtwebengine
 
-export RADV_PERFTEST=video_decode
+export RADV_PERFTEST=video_decode,transfer_queue
 export ANV_VIDEO_DECODE=1
 export AMD_DEBUG=noefc,useaco
 
@@ -35,17 +35,17 @@ export WLR_RENDERER=vulkan
 
 case "$1" in
 debug)
-	# ~/workspace/sway/build/sway/sway -d >~/sway.log 2>&1
-	sway -d >~/sway.log 2>&1
+	# ~/workspace/sway/build/sway/sway -Dlegacy-wl-drm -d >~/sway.log 2>&1
+	sway -Dlegacy-wl-drm -d >~/sway.log 2>&1
 	;;
 drm-debug)
 	dmesg -W >~/dmesg.log &
-	sway -d > ~/sway.log 2>&1
+	sway -Dlegacy-wl-drm -d > ~/sway.log 2>&1
 	;;
 "")
-    systemd-cat --identifier=sway sway
-	# sway > ~/sway.log 2>&1
-    # sway $@ -d > ~/sway.log 2>&1
+    systemd-cat --identifier=sway sway -Dlegacy-wl-drm
+	# sway -Dlegacy-wl-drm > ~/sway.log 2>&1
+    # sway -Dlegacy-wl-drm $@ -d > ~/sway.log 2>&1
 	;;
 *)
 	echo >&2 "Invalid argument: $1"

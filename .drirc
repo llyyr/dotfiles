@@ -1,0 +1,8 @@
+<device>
+    <application name="Genshin Impact" executable="GenshinImpact.exe">
+        <option name="ignore_discard_framebuffer" value="true" />
+    </application>
+    <application name="Vesktop" executable="vesktop">
+        <option name="allow_bgra8_internalformat" value="true" />
+    </application>
+</device>

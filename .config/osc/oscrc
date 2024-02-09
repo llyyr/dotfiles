@@ -123,7 +123,7 @@ no_verify = 1
 # real name used in .changes, unless the one from osc meta prj <user> will be used
 # realname =
 # email used in .changes, unless the one from osc meta prj <user> will be used
-email = llyyr.public@gmail.com
+email = llyyr@yukari.in
 # additional headers to pass to a request, e.g. for special authentication
 #http_headers = Host: foofoobar,
 #       User: mumblegack

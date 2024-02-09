@@ -182,6 +182,11 @@ M.config = function()
       "--enable-config",
     },
     filetypes = { "c", "h", "cc", "cpp", "hpp", "objc", "objcpp" },
+    on_attach = function(client, bufnr)
+      local maps = vim.keymap.set
+      local opts_l = { silent = true, noremap = true }
+      maps('n', 'K', vim.lsp.buf.hover, opts_l)
+    end
   })
 
   lsp.pyright.setup{}
