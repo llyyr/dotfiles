@@ -90,6 +90,7 @@ require("lazy").setup({
   { import = 'indent_blankline_init'},
   { import = 'guess-indent_init'},
   { import = 'autopairs_init'},
+  { import = 'copilot_init'},
 })
 
 vim.cmd[[

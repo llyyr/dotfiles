@@ -6,10 +6,10 @@
 
 [core]
 	editor = nvim
-	pager = less -x4
+	pager = delta --color-only --diff-so-fancy --paging=always --tabs=4
 
 [user]
-	email = llyyr.public@gmail.com
+	email = llyyr@yukari.in
 	name = llyyr
 	signingkey = 7976433E656E4C1F
 
@@ -48,6 +48,7 @@
     pullpr = "!f() { remote=\"${2:-upstream}\"; git fetch \"$remote\" pull/$1/head:pr-$1 && git checkout pr-$1; }; f"
     undo = reset --soft HEAD~1
 	ammend = commit --ammend
+    upstream = !git rev-parse --abbrev-ref $(git symbolic-ref --short HEAD)@{u}
 
 [sendemail]
 	smtpserver = smtpout.secureserver.net
@@ -90,12 +91,12 @@
 	branch = auto
 	ui = true
 [diff]
-    colorMoved = true
+    colorMoved = default
     algorithm  = histogram
     indentHeuristic = true
 
 [credential]
-    helper = store
+    helper = manager
 
 [color "branch"]
 	current = yellow reverse
@@ -107,3 +108,21 @@
 	frag = magenta bold # line info
 	old = red # deletions
 	new = green # additions
+[merge]
+    conflictstyle = zdiff3
+
+[interactive]
+	diffFilter = delta --color-only --features=interactive --tabs=4
+[delta]
+    navigate = true  # use n and N to move between diff sections
+    line-numbers = true
+    side-by-side = true
+    commit-decoration-style = bold ol dim yellow
+	features = line-numbers decorations
+	file-decoration-style = brightyellow ul ol
+	file-style = brightyellow
+	hunk-header-decoration-style = purple box
+	whitespace-error-style = 22 reverse
+    hunk-header-style = file line-number syntax
+[delta "interactive"]
+	keep-plus-minus-markers = false

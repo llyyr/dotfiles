@@ -1,5 +1,4 @@
 alias wdesktop="cd /mnt/c/Users/llyyr/Desktop/"
-alias brplay="cd ~/.local/share/Steam/steamapps/compatdata/291550/pfx/drive_c/users/steamuser/BrawlhallaReplays"
 alias aoc="cd ~/projects/aoc/aoc-2022"
 alias vim="$EDITOR"
 alias lsd="lsd -AF --date=relative --icon=never --group-directories-first"
@@ -27,6 +26,9 @@ alias ghc="ghc -no-keep-hi-files -no-keep-o-files $1"
 alias gbf2="microsoft-edge-beta --profile-directory='Profile 2' --ozone-platform-hint=auto --disable-backgrounding-occluded-windows"
 alias pypy="/opt/pypy/bin/pypy"
 alias rsync='rsync --info=progress2 --sparse --progress --human-readable'
+alias adb='HOME="$XDG_DATA_HOME"/android adb'
+alias wget=wget --hsts-file="$XDG_DATA_HOME/wget-hsts"
+alias upload-0x0="pyup"
 
 colpick() {
     grim -g "$(slurp -p)" -t ppm - | convert - -format '%[pixel:p{0,0}]' txt:-
@@ -35,18 +37,6 @@ colpick() {
 waylandrc() {
     #wf-recorder -g "$(slurp)" -c h264_vaapi -d /dev/dri/renderD128 --force-yuv -f ~/Videos/$(date +'%Y%m%d-%H%M').mp4
     wf-recorder -g "$(slurp)" --audio -f ~/Videos/$(date +'%Y%m%d-%H%M').mp4
-}
-
-gbfrc() {
-    wf-recorder -g "1046,144 320x581" -f ~/Videos/$(date +'%Y%m%d-%H%M').mp4
-}
-
-upload-0x0() {
-    if [ $# -eq 0 ]; then
-        curl -s -F file=@- https://0x0.st
-    else
-        curl -s -F file=@"$1" https://0x0.st
-    fi
 }
 
 upload-yukari() {
@@ -159,8 +149,8 @@ function genshin_wish {
 
 function gli {
     _gitLogLineToHash="echo {} | grep -o '[a-f0-9]\{7\}' | head -1 | xargs git rev-parse"
-    _viewGitLogLine="$_gitLogLineToHash | xargs -I % sh -c 'git show --color=always %'"
-    _viewGitLogLineUnfancy="$_gitLogLineToHash | xargs -I % sh -c 'git show %'"
+    _viewGitLogLine="$_gitLogLineToHash | xargs -I % sh -c 'git show --color=always % | delta --color-only --diff-so-fancy --tabs=4'"
+    _viewGitLogLineUnfancy="$_gitLogLineToHash | xargs -I % sh -c 'git show % | delta --color-only --diff-so-fancy --tabs=4'"
 
     git log --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr% C(auto)%an" "$@" |
         fzf --no-sort --reverse --tiebreak=index --no-multi \

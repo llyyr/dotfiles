@@ -1,3 +1,8 @@
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_STATE_HOME="$HOME/.local/state"
+export XDG_CACHE_HOME="$HOME/.cache"
+
 typeset -U PATH path # ensure only unique entries in $PATH
 path+="${HOME}/go/bin/"
 path+="${HOME}/.dotnet/"
@@ -22,6 +27,7 @@ source ~/.secrets
 export HISTFILE=~/.zsh_history
 export HISTSIZE=10000
 export SAVEHIST=100000
+export HISTFILE="$XDG_STATE_HOME"/zsh/history
 setopt hist_ignore_all_dups
 setopt hist_save_no_dups
 setopt hist_reduce_blanks
@@ -45,6 +51,7 @@ autoload -U colors && colors	# Load colors
 
 # Custom completion settings
 setopt globdots
+zstyle ':completion:*' cache-path "$XDG_CACHE_HOME"/zsh/zcompcache
 zstyle ":completion:*:default" list-colors ${(s.:.)LS_COLORS} "ma=48;5;25;1"
 zstyle ':completion:*' menu select
 autoload -Uz compinit

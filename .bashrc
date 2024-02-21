@@ -23,6 +23,7 @@ HISTIGNORE="ls:bg:fg:exit:reset:clear:cd"
 HISTCONTROL="ignoreboth:erasedups"
 HISTSIZE=1000
 HISTFILESIZE=100000
+HISTFILE="${XDG_STATE_HOME}"/bash/history
 
 export ZYPP_MEDIANETWORK=1
 export WINEDEBUG=-all

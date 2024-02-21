@@ -1,2 +1,2 @@
 # /opt/Discord/Discord --disable-smooth-scrolling --ozone-platform-hint=auto --enable-experimental-web-platform-features
-/opt/Vesktop/vesktop --disable-smooth-scrolling --ozone-platform-hint=auto
+/opt/Vesktop/vesktop --disable-smooth-scrolling --ozone-platform-hint=auto --enable-webrtc-pipewire-capturer
