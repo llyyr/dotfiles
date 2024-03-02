@@ -10,7 +10,7 @@ path+="${HOME}/.local/bin/"
 path+="${HOME}/.cargo/bin/"
 
 if [[ -O "${BASH_SOURCE[0]:-${(%):-%x}}" && $- == *i* && ! $VIM_TERMINAL ]] && [ -n "${DISPLAY}" ] && [ -z "${TMUX}" ]; then # && (SHLVL <3)
-	command tmux attach || command tmux 
+  command tmux attach || command tmux 
 fi
 
 export EDITOR=/usr/bin/nvim
