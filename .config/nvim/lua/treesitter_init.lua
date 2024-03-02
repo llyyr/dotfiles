@@ -4,7 +4,7 @@ local M = {
   build = ":TSUpdate",
   dependencies = {
     { 'nvim-treesitter/nvim-treesitter-textobjects' },
-    { "nvim-treesitter/nvim-treesitter-textobjects" },
+    { "nvim-treesitter/nvim-treesitter-context" },
   },
   cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
   keys = {

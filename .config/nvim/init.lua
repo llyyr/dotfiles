@@ -93,6 +93,7 @@ require("lazy").setup({
   { import = 'copilot_init'},
 })
 
+
 vim.cmd[[
 fun! SetupCommandAlias(from, to)
 exec 'cnoreabbrev <expr> '.a:from
@@ -125,28 +126,19 @@ vim.api.nvim_set_keymap('n', '<leader>.', '/<c-r>=expand("<cword>")<CR><CR>N', {
 vim.api.nvim_set_keymap('n', '<Esc>', ':noh<cr>', { noremap = true, silent = true })
 
 --[[ Builtin ]]--
-vim.api.nvim_set_keymap('n', '<leader>ff', ':lua require(\'telescope.builtin\').find_files()<cr>',
-{ noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>fg', ':lua require(\'telescope.builtin\').live_grep()<cr>',
-{ noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>fb', ':lua require(\'telescope.builtin\').buffers()<cr>',
-{ noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>ff', ':lua require(\'telescope.builtin\').find_files()<cr>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>fg', ':lua require(\'telescope.builtin\').live_grep()<cr>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>fb', ':lua require(\'telescope.builtin\').buffers()<cr>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>fl', ':lua require(\'telescope.builtin\').diagnostics()<cr>', { noremap = true, silent = true })
 
 --[[ LSP ]]--
-vim.api.nvim_set_keymap('n', '<leader>fd', ':lua require(\'telescope.builtin\').lsp_definitions()<cr>',
-{ noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>fr', ':lua require(\'telescope.builtin\').lsp_references()<cr>',
-{ noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>fs', ':lua require(\'telescope.builtin\').lsp_dynamic_workspace_symbols()<cr>',
-{ noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>fl', ':lua require(\'telescope.builtin\').lsp_document_diagnostics()<cr>',
-{ noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>ca', ':lua vim.lsp.buf.code_action()<cr>',
-{ noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>fd', ':lua require(\'telescope.builtin\').lsp_definitions()<cr>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>fr', ':lua require(\'telescope.builtin\').lsp_references()<cr>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>fs', ':lua require(\'telescope.builtin\').lsp_dynamic_workspace_symbols()<cr>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>ca', ':lua vim.lsp.buf.code_action()<cr>', { noremap = true, silent = true })
 
 --[[ Clipboard ]]--
-vim.api.nvim_set_keymap('n', '<leader>cc', ':lua require(\'telescope\').extensions.neoclip.default()<cr>',
-{ noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>cc', ':lua require(\'telescope\').extensions.neoclip.default()<cr>', { noremap = true, silent = true })
 
 --[[ Custom commands ]]--
 vim.api.nvim_set_keymap('n', '<leader>ww', ':w !sudo tee % > /dev/null<cr>', { noremap = true, silent = true })

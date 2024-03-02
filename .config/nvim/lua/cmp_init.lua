@@ -168,7 +168,7 @@ M.config = function()
     capabilities = capabilities,
     cmd = { "clangd",
       "--malloc-trim",
-      "-j=3",
+      "-j=6",
       "--background-index",
       "--pch-storage=memory",
       "--inlay-hints",
