@@ -43,6 +43,12 @@ format_alt = " $icon_swap $swap_used.eng(w:4,u:B,p:M) "
 
 [[block]]
 block = "cpu"
+interval = 1
+
+[[block]]
+block = "load"
+interval = 1
+format = " $icon $1m.eng(w:4) "
 
 [[block]]
 block = "temperature"

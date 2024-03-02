@@ -36,7 +36,7 @@ def main():
         r = requests.post(ENDPOINT, files={"file": (f"null.{args.ext}", data)})
 
     if r.status_code == 200:
-        print(r.text)
+        print(r.text, end='')
     else:
         print(f"Error uploading file: {r.status_code}")
 

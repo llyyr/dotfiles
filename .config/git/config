@@ -7,6 +7,7 @@
 [core]
 	editor = nvim
 	pager = delta --color-only --diff-so-fancy --paging=always --tabs=4
+	abbrev = 12
 
 [user]
 	email = llyyr@yukari.in
@@ -48,12 +49,13 @@
     pullpr = "!f() { remote=\"${2:-upstream}\"; git fetch \"$remote\" pull/$1/head:pr-$1 && git checkout pr-$1; }; f"
     undo = reset --soft HEAD~1
 	ammend = commit --ammend
-    upstream = !git rev-parse --abbrev-ref $(git symbolic-ref --short HEAD)@{u}
+	upstream = !git rev-parse --abbrev-ref $(git symbolic-ref --short HEAD)@{u}
+	range-compare = "!f() { rev1=${1:?no branch to compare to}; rev2=${2:-HEAD}; git range-diff $(git merge-base $rev1 $rev2) $rev1 $rev2; }; f"
 
 [sendemail]
 	smtpserver = smtpout.secureserver.net
 	smtpuser = llyyr@yukari.in
-	smtpencryption = tls
+	smtpencryption = ssl
     smtpserverport = 465
 
 [sendemail.linux]
@@ -96,7 +98,7 @@
     indentHeuristic = true
 
 [credential]
-    helper = manager
+	helper = keepassxc --git-groups
 
 [color "branch"]
 	current = yellow reverse

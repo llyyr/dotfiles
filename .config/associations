@@ -2,37 +2,37 @@
 
 (bind
   #:pattern '("(application|text)/(x-)?(pdf|postscript|ps|epub.*)" "image/(x-)?eps" "^https?://.+/.+\\.(pdf|epub|ps)(\\?.+)?$")
-  #:program "sioyek %f")
+  #:program "sioyek '%f'")
 
 (bind
   #:pattern "^(http(s)?://)?((w){3}.)?youtu(be|.be)?(.com)?/.+"
-  #:program "firefox %f & umpv %f")
+  #:program "firefox '%f' & umpv '%f'")
 
 (bind
   #:pattern "^https?://.+/.+\\.(webm|WEBM|mp4|MP4|mkv|MKV|mov|MOV)"
-  #:program "umpv %f")
+  #:program "umpv '%f'")
 
 (bind
   #:pattern "^https?://.*.(mp3|MP3|wav|WAV)(\\?.+)?$"
-  #:program "foot --app-id='termfloat' mpv --profile=audio %f")
+  #:program "foot --app-id='termfloat' mpv --profile=audio '%f'")
 
 (bind
   #:pattern "^https?://.*"
-  #:program "qutebrowser %f"
+  #:program "qutebrowser '%f'"
   #:test "pgrep qutebrowser"
-  #:on-fail "firefox %f")
+  #:on-fail "firefox '%f'")
 
 (bind
   #:pattern ".(webm|mp4|mkv|mov)$"
-  #:program "mpv %f")
+  #:program "mpv '%f'")
 
 (bind
   #:pattern ".(png|jpg|jpeg|PNG|JPEG|JPG)$"
-  #:program "mpv %f")
+  #:program "mpv '%f'")
 
 (bind
   #:pattern "inode/directory"
-  #:program "dolphin %f")
+  #:program "dolphin '%f'")
 
 (bind
   #:pattern ".*"
