@@ -24,7 +24,6 @@ eval $(dircolors ~/.dir_colors)
 source ~/.aliases
 source ~/.secrets
 
-export HISTFILE=~/.zsh_history
 export HISTSIZE=10000
 export SAVEHIST=100000
 export HISTFILE="$XDG_STATE_HOME"/zsh/history

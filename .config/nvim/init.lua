@@ -28,6 +28,7 @@ vim.opt.completeopt     = 'menu,menuone,noselect'
 vim.opt.clipboard       = 'unnamedplus'          -- copy/paste to system clipboard
 vim.opt.hidden          = true
 vim.opt.signcolumn      = 'no'                   -- disable signscolumn
+vim.o.listchars         = 'tab:╶─╴,lead:·,trail:▒,eol:↲,extends:►,precedes:◄'
 vim.g.mapleader         = ','
 vim.g.netrw_fastbrowse  = 0
 vim.g.python3_host_prog = 'python3'

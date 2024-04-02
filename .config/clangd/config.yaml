@@ -1,2 +1,8 @@
 CompileFlags:
-  Remove: [-D_FORTIFY_SOURCE=*]
+  Remove: [-D_FORTIFY_SOURCE=2, -D_FORTIFY_SOURCE=3]
+Diagnostics:
+  ClangTidy:
+    Add: [modernize*, bugprone*, performance*, concurrency*, abseil*]
+    Remove: [bugprone-sizeof-expression, bugprone-easily-swappable-parameters, bugprone-implicit-widening-of-multiplication-result, bugprone-assignment-in-if-condition]
+    CheckOptions:
+      bugprone-narrowing-conversions.WarnOnIntegerToFloatingPointNarrowingConversion: 'false'

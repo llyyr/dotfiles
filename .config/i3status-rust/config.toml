@@ -46,11 +46,6 @@ block = "cpu"
 interval = 1
 
 [[block]]
-block = "load"
-interval = 1
-format = " $icon $1m.eng(w:4) "
-
-[[block]]
 block = "temperature"
 format = " $icon $average "
 format_alt = " $icon $min min, $max max, $average avg "
