@@ -142,12 +142,12 @@ function refenv {
 }
 
 function genshin_wish {
-    strings "/home/llyyr/.local/share/anime-game-launcher/game/drive_c/Program Files/Genshin Impact/GenshinImpact_Data/webCaches/2.22.0.0/Cache/Cache_Data/data_2" | rg -o "https://.*/getGachaLog\?.*end_id=0" | tail -n 1
+    strings "/home/llyyr/.local/share/anime-game-launcher/game/drive_c/Program Files/Genshin Impact/GenshinImpact_Data/webCaches/2.25.0.0/Cache/Cache_Data/data_2" | rg -o "https://.*/getGachaLog\?.*end_id=0" | tail -n 1
 }
 
 function gli {
     _gitLogLineToHash="echo {} | grep -o '[a-f0-9]\{7\}' | head -1 | xargs git rev-parse"
-    _viewGitLogLine="$_gitLogLineToHash | xargs -I % sh -c 'git show --color=always % | TERM=dumb delta --color-only --diff-so-fancy --tabs=4'"
+    _viewGitLogLine="$_gitLogLineToHash | xargs -I % sh -c 'git show --color=always % | TERM=dumb delta --dark --color-only --diff-so-fancy --tabs=4'"
     _viewGitLogLineUnfancy="$_gitLogLineToHash | xargs -I % sh -c 'git show % | delta --dark --color-only --diff-so-fancy --tabs=4'"
 
     git log --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr% C(auto)%an" "$@" |

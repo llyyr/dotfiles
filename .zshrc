@@ -18,7 +18,7 @@ export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 export ZYPP_MEDIANETWORK=1
 export WINEDEBUG=-all
-export DEBUGINFOD_URLS="https://debuginfod.opensuse.org/"
+# export DEBUGINFOD_URLS="https://debuginfod.opensuse.org/"
 export SSH_AUTH_SOCK="${XDG_RUNTIME_DIR}/ssh-agent.socket"
 eval $(dircolors ~/.dir_colors)
 source ~/.aliases
@@ -26,7 +26,7 @@ source ~/.secrets
 
 export HISTSIZE=10000
 export SAVEHIST=100000
-export HISTFILE="$XDG_STATE_HOME"/zsh/history
+export HISTFILE="$XDG_STATE_HOME/zsh/history"
 setopt hist_ignore_all_dups
 setopt hist_save_no_dups
 setopt hist_reduce_blanks
@@ -50,13 +50,13 @@ autoload -U colors && colors	# Load colors
 
 # Custom completion settings
 setopt globdots
-zstyle ':completion:*' cache-path "$XDG_CACHE_HOME"/zsh/zcompcache
+zstyle ':completion:*' cache-path "$XDG_CACHE_HOME/zsh/zcompcache"
 zstyle ":completion:*:default" list-colors ${(s.:.)LS_COLORS} "ma=48;5;25;1"
 zstyle ':completion:*' menu select
 autoload -Uz compinit
 compinit
 
-fzf_colors='--color=gutter:regular:0,bg:regular:-1,fg:regular:4,bg+:regular:-1,fg+:regular:2,hl:regular:3,hl+:regular:15,pointer:regular:5,prompt:regular:0,info:regular:3'
+fzf_colors='--color=gutter:regular:-1,bg:regular:-1,fg:regular:4,bg+:regular:-1,fg+:regular:2,hl:regular:3,hl+:regular:15,pointer:regular:5,prompt:regular:0,info:regular:3'
 export FZF_DEFAULT_OPTS="$fzf_colors --pointer='█' --prompt='█ ' --reverse"
 
 # fzf completion
@@ -65,10 +65,10 @@ if ! [ -d "$HOME/.config/zsh/fzf-tab" ]; then
 fi
 source $HOME/.config/zsh/fzf-tab/fzf-tab.plugin.zsh
 
-
+zstyle ':completion:*:git-checkout:*' sort false
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'lsd -1 --color=always $realpath'
 zstyle ':fzf-tab:*' default-color $'\033[0;10m' # else fg+ won't work (and maybe something else)
-zstyle ':fzf-tab:*' fzf-flags --info=hidden $fzf_colors
-
+zstyle ':fzf-tab:*' fzf-flags --no-separator --info=hidden $fzf_colors
 
 # zmodload zsh/zprof
 
@@ -82,9 +82,9 @@ export GIT_PS1_SHOWUNTRACKEDFILES=1
 export GIT_PS1_SHOWUPSTREAM="auto"
 
 PS1="%B%F{blue}%~%f%b"\
-$'$(__git_ps1 " on %%F{212}%s%%f")'\
+$'$(__git_ps1 " %%F{212}%s%%f")'\
 "%(?.. %B%F{red}%?%f%b)"\
-$'\n%F{cyan}%(1j.+%j .)%f%F{yellow}$%f '
+$'\n%F{cyan}%(1j.+%j .)%f%F{yellow}❱❱❱%f '
 PS2="... "
 
 __git_files () {

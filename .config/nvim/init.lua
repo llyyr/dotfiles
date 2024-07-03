@@ -28,7 +28,8 @@ vim.opt.completeopt     = 'menu,menuone,noselect'
 vim.opt.clipboard       = 'unnamedplus'          -- copy/paste to system clipboard
 vim.opt.hidden          = true
 vim.opt.signcolumn      = 'no'                   -- disable signscolumn
-vim.o.listchars         = 'tab:╶─╴,lead:·,trail:▒,eol:↲,extends:►,precedes:◄'
+vim.opt.list            = true
+vim.o.listchars         = 'tab:╶─╴,lead:·,trail:▒,eol:↲,extends:►,precedes:◄,nbsp:␣'
 vim.g.mapleader         = ','
 vim.g.netrw_fastbrowse  = 0
 vim.g.python3_host_prog = 'python3'
@@ -78,22 +79,22 @@ require("lazy").setup({
   { 'nvim-lua/plenary.nvim' },
   { 'neovim/nvim-lspconfig' },
   { 'JoosepAlviste/nvim-ts-context-commentstring' },
-  { import = 'treesitter_init'},
-  { import = 'cmp_init'},
-  { import = 'telescope_init'},
+  { import = 'treesitter_init' },
+  { import = 'cmp_init' },
+  { import = 'telescope_init' },
   { import = 'theme_init' },
-  { import = 'lualine_init'} ,
+  { import = 'lualine_init' } ,
   { import = 'barbar_init' },
-  { import = 'todo-comments_init'},
-  { import = 'leap_init'},
-  { import = 'scrollview_init'},
-  { import = 'comment_init'},
-  { import = 'indent_blankline_init'},
-  { import = 'guess-indent_init'},
-  { import = 'autopairs_init'},
-  { import = 'copilot_init'},
+  { import = 'todo-comments_init' },
+  { import = 'leap_init' },
+  { import = 'scrollview_init' },
+  { import = 'comment_init' },
+  { import = 'indent_blankline_init' },
+  { import = 'guess-indent_init' },
+  { import = 'autopairs_init' },
+  { import = 'copilot_init' },
+  { import = 'barbecue_init' },
 })
-
 
 vim.cmd[[
 fun! SetupCommandAlias(from, to)

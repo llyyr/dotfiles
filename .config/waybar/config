@@ -42,6 +42,9 @@
         "tooltip-format": "<tt>{calendar}</tt>",
         "interval": 1,
     },
+    "tray": {
+        "icon-size": 12,
+    },
     "wlr/taskbar": {
         "format": "{icon}",
         "icon-size": 12,

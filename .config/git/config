@@ -10,7 +10,7 @@
 	abbrev = 12
 
 [user]
-	email = llyyr@yukari.in
+	email = llyyr.public@gmail.com
 	name = llyyr
 	signingkey = 7976433E656E4C1F
 
@@ -24,16 +24,16 @@
 	s = status
 	co = checkout
 	b = branch
-    lb = branch --list --format=\
+	lb = branch --list --format=\
 '%(HEAD) \
 %(align:width=48)%(color:yellow)%(refname:short)%(color:reset)%(end)\
 %(contents:subject) - \
 (%(color:green)%(committerdate:relative)%(color:reset))'
 	brlog = log -p --reverse origin/master..HEAD
-    l = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --branches --remotes --tags --oneline --author-date-order
-    lv = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''%w(130,10,10)%C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all --author-date-order
-    lvv = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''%w(130,13,13)%C(white)%s%C(reset) %C(dim white)- %an <%ce> (comm. %cn <%ce>)%C(reset)%n''%w(64,18,18)%b'  --all
-    ll = log --all --decorate --oneline --graph
+	l = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --branches --remotes --tags --oneline --author-date-order
+	lv = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''%w(130,10,10)%C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all --author-date-order
+	lvv = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''%w(130,13,13)%C(white)%s%C(reset) %C(dim white)- %an <%ce> (comm. %cn <%ce>)%C(reset)%n''%w(64,18,18)%b'  --all
+	ll = log --all --decorate --oneline --graph
 
 
 	fp = format-patch --stdout -M -C
@@ -46,21 +46,15 @@
 	sd = stash drop
 	sl = stash list
 	fixes = show -s --pretty='format:Fixes: %h (\"%s\")'
-    pullpr = "!f() { remote=\"${2:-upstream}\"; git fetch \"$remote\" pull/$1/head:pr-$1 && git checkout pr-$1; }; f"
-    undo = reset --soft HEAD~1
+	pullpr = "!f() { remote=\"${2:-upstream}\"; git fetch \"$remote\" pull/$1/head:pr-$1 && git checkout pr-$1; }; f"
+	undo = reset --soft HEAD~1
 	ammend = commit --ammend
 	upstream = !git rev-parse --abbrev-ref $(git symbolic-ref --short HEAD)@{u}
 	range-compare = "!f() { rev1=${1:?no branch to compare to}; rev2=${2:-HEAD}; git range-diff $(git merge-base $rev1 $rev2) $rev1 $rev2; }; f"
 
-[sendemail]
-	smtpserver = smtpout.secureserver.net
-	smtpuser = llyyr@yukari.in
-	smtpencryption = ssl
-    smtpserverport = 465
-
 [sendemail.linux]
-    tocmd ="`pwd`/scripts/get_maintainer.pl --nogit --nogit-fallback --norolestats --nol    "
-    cccmd ="`pwd`/scripts/get_maintainer.pl --nogit --nogit-fallback --norolestats --nom    "
+	tocmd ="`pwd`/scripts/get_maintainer.pl --nogit --nogit-fallback --norolestats --nol    "
+	cccmd ="`pwd`/scripts/get_maintainer.pl --nogit --nogit-fallback --norolestats --nom    "
 
 [rebase]
 	autosquash = true
@@ -93,9 +87,10 @@
 	branch = auto
 	ui = true
 [diff]
-    colorMoved = default
-    algorithm  = histogram
-    indentHeuristic = true
+	colorMoved = default
+	algorithm  = histogram
+	indentHeuristic = true
+	tool = vimdiff
 
 [credential]
 	helper = keepassxc --git-groups
@@ -111,20 +106,25 @@
 	old = red # deletions
 	new = green # additions
 [merge]
-    conflictstyle = zdiff3
+	conflictstyle = zdiff3
 
 [interactive]
 	diffFilter = delta --color-only --features=interactive --tabs=4
 [delta]
-    navigate = true  # use n and N to move between diff sections
-    line-numbers = true
-    side-by-side = true
-    commit-decoration-style = bold ol dim yellow
+	navigate = true  # use n and N to move between diff sections
+	line-numbers = true
+	side-by-side = true
+	commit-decoration-style = bold ol dim yellow
 	features = line-numbers decorations
 	file-decoration-style = brightyellow ul ol
 	file-style = brightyellow
 	hunk-header-decoration-style = purple box
 	whitespace-error-style = 22 reverse
-    hunk-header-style = file line-number syntax
+	hunk-header-style = file line-number syntax
 [delta "interactive"]
 	keep-plus-minus-markers = false
+[sendemail]
+	smtpServer = smtp.gmail.com
+	smtpServerPort = 587
+	smtpEncryption = tls
+	smtpUser = llyyr.public@gmail.com

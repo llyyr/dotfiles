@@ -6,6 +6,7 @@ export XDG_SESSION_DESKTOP=sway
 export XDG_CURRENT_DESKTOP=sway
 
 export MOZ_ENABLE_WAYLAND=1
+export GSK_RENDERER=vulkan
 export CLUTTER_BACKEND=wayland
 export ECORE_EVAS_ENGINE=wayland-egl
 export ELM_ENGINE=wayland_egl
@@ -44,9 +45,9 @@ drm-debug)
 	sway -Dlegacy-wl-drm -d > ~/sway.log 2>&1
 	;;
 "")
-    systemd-cat --identifier=sway sway -Dlegacy-wl-drm
+	systemd-cat --identifier=sway sway -Dlegacy-wl-drm
 	# sway -Dlegacy-wl-drm > ~/sway.log 2>&1
-    # sway -Dlegacy-wl-drm $@ -d > ~/sway.log 2>&1
+	# sway -Dlegacy-wl-drm $@ -d > ~/sway.log 2>&1
 	;;
 *)
 	echo >&2 "Invalid argument: $1"
