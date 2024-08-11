@@ -27,7 +27,7 @@ output DP-1 {
 
 output DP-2 {
     mode 1920x1080@144Hz
-    pos 2561,0
+    pos 2560,0
     adaptive_sync on
     max_render_time 1
     subpixel rgb
@@ -54,8 +54,8 @@ for_window [app_id="genshinimpact.exe"] max_render_time 1
 # do makoctl reload because of https://github.com/emersion/mako/issues/281#issuecomment-739558735
 exec swayidle -w \
         timeout 900 'swaylock -f -c 1e1e1e' \
-        timeout 900 'swaymsg "output DP-2 power off" && swaymsg "output DP-1 power off"' \
-        resume 'swaymsg "output DP-2 power on" && swaymsg "output DP-1 power on" && makoctl reload' \
+        timeout 900 'swaymsg "output * power off"' \
+        resume 'swaymsg "output * power on" && makoctl reload' \
         before-sleep 'swaylock -f -c 1e1e1e'
 
 ### Input configuration
@@ -327,7 +327,7 @@ bindsym $mod+Shift+R exec 'bash ~/.local/bin/toggle-screen-recorder.sh'
 
 set $bg #080c0df8
 set $bgf #2772C8
-set $bga #444444
+set $bga #222222f8
 set $fg #ffffff
 set $fgi #888888
 bar {
@@ -356,6 +356,13 @@ bar {
 # set $XCURSOR_{THEME,SIZE}
 seat seat0 xcursor_theme suo_sango 36
 # seat seat0 hide_cursor 20000
+
+client.focused          $bg $bg $fg #2E9EF4   #285577
+client.focused_inactive $bga $bga $fg #484E50   #5F676A
+client.unfocused        $bg $bg $fgi #292D2E   #222222
+client.urgent           #2F343A #900000 #FFFFFF #900000   #900000
+client.placeholder      $bg $bg #FFFFFF #000000   #0C0C0C
+client.background       #000000f8
 
 # Set floating window constraints
 floating_maximum_size -1 x -1

@@ -30,9 +30,8 @@ def main():
     else:
         data = sys.stdin.buffer.read()
         if not args.ext:
-            args.ext = guess_extension(Magic(mime=True).from_buffer(data))
-            if args.ext:
-                args.ext = args.ext.lstrip(".")
+            if guess := guess_extension(Magic(mime=True).from_buffer(data)):
+                args.ext = guess.lstrip(".")
         r = requests.post(ENDPOINT, files={"file": (f"null.{args.ext}", data)})
 
     if r.status_code == 200:

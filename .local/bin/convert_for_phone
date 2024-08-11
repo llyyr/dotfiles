@@ -10,7 +10,7 @@ function convert_for_phone {
         else # portrait video
             vf="scale=min(1080\,iw):min(2160\,ih):force_original_aspect_ratio=decrease:force_divisible_by=2"
         fi
-    ffmpeg -hide_banner -i "$file" -c:v libx265 -vf "$vf" -preset slow -crf 29 -c:a libfdk_aac -b:a 96k "./done/${file}.mp4"
+    ffmpeg -hide_banner -i "$file" -c:v libx265 -vf "$vf" -preset slow -crf 29 -c:a libfdk_aac -b:a 96k "./done/${file%.*}.mp4"
     done
 }
 
