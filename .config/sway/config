@@ -23,6 +23,7 @@ output DP-1 {
     render_bit_depth 8
     scale_filter linear
     # bg /mnt/e/Images/bg.png stretch #000000
+    # bg /mnt/e/Images/Altina/鮫島タムラ \(2830191\)/88663225_p0 - アルティナ雑まとめv2.png stretch #000000
 }
 
 output DP-2 {
@@ -37,7 +38,6 @@ output DP-2 {
     # bg /mnt/c/Users/llyyr/Desktop/4chan/jp/1637197847029.jpg fit #000000
     # bg /mnt/e/Images/Altina/鮫島タムラ \(2830191\)/88663225_p0 - アルティナ雑まとめv2.png stretch #000000
 }
-
 
 for_window [class="gamescope"] max_render_time 1
 for_window [app_id="osu!"] max_render_time 1
@@ -54,9 +54,8 @@ for_window [app_id="genshinimpact.exe"] max_render_time 1
 # do makoctl reload because of https://github.com/emersion/mako/issues/281#issuecomment-739558735
 exec swayidle -w \
         timeout 900 'swaylock -f -c 1e1e1e' \
-        timeout 900 'swaymsg "output * power off"' \
-        resume 'swaymsg "output * power on" && makoctl reload' \
-        before-sleep 'swaylock -f -c 1e1e1e'
+        timeout 900 'swaymsg "output DP-1 power off" && swaymsg "output DP-2 power off"' \
+        resume 'swaymsg "output DP-1 power on" && swaymsg "output DP-2 power on" && makoctl reload'
 
 ### Input configuration
 # You can get the names of your inputs by running: swaymsg -t get_inputs
@@ -70,7 +69,7 @@ input "1241:4611:HID_04d9:1203" {
     repeat_delay 300
 }
 
-input "12538:768:USB_OPTICAL_MOUSE" {
+input "1133:49298:Logitech_G203_LIGHTSYNC_Gaming_Mouse" {
     accel_profile flat
     pointer_accel 0
 }
@@ -190,7 +189,7 @@ input "1386:768:Wacom_Bamboo_One_S_Pen" {
 
     # Move focus to the parent container
     bindsym $mod+a focus parent
-    
+
     # Toggle current focus sticky status
     bindsym $mod+Shift+s sticky toggle
 #
@@ -272,7 +271,7 @@ mode "move-to" {
     bindsym l     exec sway-grid-move right; mode "default"
     bindsym j     exec sway-grid-move bottom; mode "default"
     bindsym k     exec sway-grid-move top; mode "default"
-    
+
     # these reflect the position on the keyboard:
     # q w e
     # a s d
@@ -354,7 +353,7 @@ bar {
 # }
 
 # set $XCURSOR_{THEME,SIZE}
-seat seat0 xcursor_theme suo_sango 36
+seat seat0 xcursor_theme suo_sango 24
 # seat seat0 hide_cursor 20000
 
 client.focused          $bg $bg $fg #2E9EF4   #285577
@@ -450,6 +449,12 @@ for_window {
         move scratchpad
         scratchpad show
         exec sway-grid-move top-right
+    }
+    [app_id="flameshot"] {
+        border pixel 0
+        floating enable
+        fullscreen disable
+        move absolute position 0 0
     }
     [title="^Picture-in-Picture$"] {
         floating enable

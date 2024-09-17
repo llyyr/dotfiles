@@ -29,7 +29,7 @@ vim.opt.clipboard       = 'unnamedplus'          -- copy/paste to system clipboa
 vim.opt.hidden          = true
 vim.opt.signcolumn      = 'no'                   -- disable signscolumn
 vim.opt.list            = true
-vim.o.listchars         = 'tab:╶─╴,lead:·,trail:▒,eol:↲,extends:►,precedes:◄,nbsp:␣'
+vim.o.listchars         = 'tab:╶─╴,lead:·,trail:▒,extends:►,precedes:◄,nbsp:␣'
 vim.g.mapleader         = ','
 vim.g.netrw_fastbrowse  = 0
 vim.g.python3_host_prog = 'python3'
@@ -94,17 +94,8 @@ require("lazy").setup({
   { import = 'autopairs_init' },
   { import = 'copilot_init' },
   { import = 'barbecue_init' },
+  { import = 'which-key_init' },
 })
-
-vim.cmd[[
-fun! SetupCommandAlias(from, to)
-exec 'cnoreabbrev <expr> '.a:from
-\ .' ((getcmdtype() is# ":" && getcmdline() is# "'.a:from.'")'
-\ .'? ("'.a:to.'") : ("'.a:from.'"))'
-endfun
-call SetupCommandAlias("W","w")
-call SetupCommandAlias("Q","q")
-]]
 
 -- Restore cursor position
 vim.api.nvim_create_autocmd({ "BufReadPost" }, {

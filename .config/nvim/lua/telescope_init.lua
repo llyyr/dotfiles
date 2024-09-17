@@ -1,8 +1,8 @@
 local M = {
   'nvim-telescope/telescope.nvim', 
   dependencies = 
-  { 'nvim-telescope/telescope-fzf-native.nvim',
-    build = 'make' },
+    { 'nvim-telescope/telescope-fzf-native.nvim',
+      build = 'make' },
   { 'AckslD/nvim-neoclip.lua', 
     opts = {
       history = 256,
@@ -18,6 +18,11 @@ local M = {
   opts = {
     defaults = {
       dynamic_preview_title = true,
+      borderchars = {
+        prompt = { "─", " ", " ", " ", "─", "─", " ", " " },
+        results = { " " },
+        preview = { " " },
+      },
     },
     pickers = {
       find_files = {

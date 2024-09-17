@@ -1,5 +1,6 @@
 return {
   "dstein64/nvim-scrollview",
+  event = "VeryLazy",
   opts = {
     on_startup = 1,
     winblend = 60,

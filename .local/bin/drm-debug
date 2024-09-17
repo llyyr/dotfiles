@@ -1,0 +1,13 @@
+#!/bin/sh
+
+case "$1" in
+off)
+	echo 0 | sudo tee /sys/module/drm/parameters/debug
+	;;
+on|"")
+	echo 0x19F | sudo tee /sys/module/drm/parameters/debug
+	;;
+*)
+	echo >&2 "usage: drm-debug [on|off]"
+	exit 1
+esac

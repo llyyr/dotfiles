@@ -1,0 +1,11 @@
+#!/usr/bin/env sh
+
+if [ -z $1 ]; then
+    echo "You must specify a super-archive name."
+    exit 1
+fi
+
+git archive --prefix "$1/" -o "$1.tar" HEAD
+git submodule foreach --recursive "git archive --prefix=$1/\$path/ --output=\$sha1.tar HEAD && tar --concatenate --file=$(pwd)/$1.tar \$sha1.tar && rm \$sha1.tar"
+
+gzip "$1.tar"

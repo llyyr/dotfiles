@@ -1,23 +1,18 @@
 local M = {
   'hrsh7th/nvim-cmp', 
   dependencies = { 
-    'saadparwaiz1/cmp_luasnip',
     'hrsh7th/cmp-nvim-lsp',
     'onsails/lspkind-nvim',
     'ray-x/cmp-treesitter',
     'hrsh7th/cmp-path',
     'hrsh7th/cmp-buffer',
     'hrsh7th/cmp-cmdline',
-    'L3MON4D3/LuaSnip',
   }
 }
 
 M.config = function()
   local cmp = require('cmp')
-  local luasnip = require("luasnip")
   local lspkind = require('lspkind')
-
-  require("luasnip.loaders.from_snipmate").lazy_load()
 
   local has_words_before = function()
     local line, col = unpack(vim.api.nvim_win_get_cursor(0))
@@ -37,11 +32,6 @@ M.config = function()
       end
     end,
 
-    snippet = {
-      expand = function(args)
-        luasnip.lsp_expand(args.body)
-      end,
-    },
     window = {
       -- completion = cmp.config.window.bordered(),
       -- documentation = cmp.config.window.bordered(),
@@ -65,7 +55,6 @@ M.config = function()
         menu = ({
           buffer        = "[Buffer]",
           nvim_lsp      = "[LSP]",
-          luasnip       = "[LuaSnip]",
           nvim_lua      = "[Lua]",
           latex_symbols = "[Latex]",
           treesitter    = "[TS]",
@@ -93,8 +82,6 @@ M.config = function()
         function(fallback)
           if cmp.visible() then
             cmp.select_next_item()
-          elseif luasnip.expand_or_jumpable() then
-            luasnip.expand_or_jump()
           elseif has_words_before() then
             cmp.complete()
           else
@@ -108,8 +95,6 @@ M.config = function()
         function(fallback)
           if cmp.visible() then
             cmp.select_prev_item()
-          elseif luasnip.jumpable(-1) then
-            luasnip.jump(-1)
           else
             fallback()
           end
@@ -119,13 +104,8 @@ M.config = function()
 
       ['<CR>'] = cmp.mapping(
         function(fallback)
-          if luasnip.expand_or_jumpable() and cmp.get_selected_entry() == nil then
-            luasnip.expand_or_jump()
-          elseif cmp.visible() and cmp.get_selected_entry() ~= nil then
+          if cmp.visible() and cmp.get_selected_entry() ~= nil then
             cmp.confirm({ select = false, behavior = cmp.ConfirmBehavior.Replace })
-            if luasnip.expand_or_jumpable() then
-              luasnip.expand_or_jump()
-            end
           else
             fallback()
           end
@@ -136,7 +116,6 @@ M.config = function()
     sources = cmp.config.sources(
       {
         { name = 'nvim_lsp' },
-        { name = 'luasnip' }, -- For luasnip users.
       },
       {
         { name = 'treesitter' },
@@ -189,7 +168,13 @@ M.config = function()
     end
   })
 
-  lsp.pyright.setup{}
+  lsp.basedpyright.setup({
+    capabilities = capabilities,
+    settings = {
+      basedpyright = {
+        typeCheckingMode = "standard",
+
+      }}})
   lsp.zls.setup{}
 
 
