@@ -1,15 +1,7 @@
 #!/bin/sh
 
-# WINEFSYNC=1 WINEPREFIX=~/.local/share/anime-game-launcher/game/ ENABLE_GAMESCOPE_WSI=1 gamescope -H1080 -- ~/.local/share/anime-game-launcher/runners/lutris-GE-Proton8-25-x86_64/bin/wine64 cmd /c ~/.local/share/anime-game-launcher/game/drive_c/Program\ Files/Genshin\ Impact/launcher.bat
 export WINEPREFIX=/home/llyyr/.local/share/anime-game-launcher/game/
 export WINEESYNC=1
-# export SDL_VIDEODRIVER=x11
 export DISPLAY=
 cd ~/.local/share/anime-game-launcher/game/drive_c/Program\ Files/Genshin\ Impact/
-# gamescope -H1080 --rt -- ~/.local/share/anime-game-launcher/runners/lutris-GE-Proton8-25-x86_64/bin/wine64 cmd /c launcher.bat -window-mode exclusive
-
-wine64 cmd /c launcher.bat -popupwindow -screen-width 2560 -screen-height 1440
-# WINEPREFIX=/home/llyyr/.local/share/anime-game-launcher/game/ WINEESYNC=1 DISPLAY= wine64 cmd /c launcher.bat -popupwindow -screen-width 2560 -screen-height 1440
-
-# gamescope -H1440 --rt --expose-wayland -- wine64 cmd /c launcher.bat -popupwindow -screen-width 2560 -screen-height 1440
-# ~/.local/share/anime-game-launcher/runners/lutris-GE-Proton8-25-x86_64/bin/wine64 cmd /c launcher.bat -popupwindow -screen-width 2560 -screen-height 1440
+wine64 cmd /c launcher.bat

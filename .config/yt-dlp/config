@@ -1,8 +1,9 @@
---all-subs
---embed-subs
+# --all-subs
+# --embed-subs
 --no-mtime
---postprocessor-args '-movflags +faststart'
---concurrent-fragments 10
+--ffmpeg-location /opt/ffmpeg/bin/ffmpeg
+#--postprocessor-args '-movflags +faststart'
+#--concurrent-fragments 10
 
 #--buffer-size 4096
 #--external-downloader=aria2c

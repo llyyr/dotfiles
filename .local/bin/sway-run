@@ -10,7 +10,7 @@ export GSK_RENDERER=vulkan
 export CLUTTER_BACKEND=wayland
 export ECORE_EVAS_ENGINE=wayland-egl
 export ELM_ENGINE=wayland_egl
-export SDL_VIDEODRIVER=wayland # Bugs out SDL2 kb input under Vulkan (????? why)
+export SDL_VIDEODRIVER=wayland
 export _JAVA_AWT_WM_NONREPARENTING=1
 export NO_AT_BRIDGE=1
 export QT_QPA_PLATFORM="wayland"
@@ -19,9 +19,9 @@ export QT_QPA_PLATFORMTHEME=qt5ct
 export GTK_IM_MODULE=fcitx
 export QT_IM_MODULE=fcitx
 # export XMODIFIERS=@im=fcitx
-# export QT_WAYLAND_DISABLE_WINDOWDECORATION=1 # Causes banding issue in qtwebengine
+# export QT_WAYLAND_DISABLE_WINDOWDECORATION=1 # Causes banding in qtwebengine (???????)
 
-export RADV_PERFTEST=video_decode,transfer_queue
+export RADV_PERFTEST=video_decode,transfer_queue,video_encode
 export ANV_VIDEO_DECODE=1
 export AMD_DEBUG=useaco
 # card0 = intel, card1 = amd
@@ -42,10 +42,10 @@ export WLR_RENDERER=vulkan
 case "$1" in
 debug)
 	# ~/workspace/sway/build/sway/sway -Dlegacy-wl-drm -d >~/sway.log 2>&1
-	sway -d >~/sway.log 2>&1
+	sway -d > ~/sway.log 2>&1
 	;;
 drm-debug)
-	dmesg -W >~/dmesg.log &
+	dmesg -W > ~/dmesg.log &
 	sway -d > ~/sway.log 2>&1
 	;;
 "")
