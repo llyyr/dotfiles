@@ -94,7 +94,6 @@ require("lazy").setup({
   { import = 'autopairs_init' },
   { import = 'copilot_init' },
   { import = 'barbecue_init' },
-  { import = 'which-key_init' },
 })
 
 -- Restore cursor position

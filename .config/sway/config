@@ -15,7 +15,7 @@ font pango:Iosevka Term Custom 9
 
 ### Output configuration
 output DP-1 {
-    mode 2560x1440@144hz
+    mode 2560x1440@144Hz
     pos 0,0
     adaptive_sync on
     max_render_time 1
@@ -393,6 +393,7 @@ workspace 10 output DP-1
 
 # Misc settings
 for_window {
+    [app_id="waydroid.com.nexon.bluearchive"] floating enable
     [class="feh"] floating enable
     [app_id="imv"] floating enable
     [app_id="org.kde.kcalc"] floating enable
@@ -476,7 +477,8 @@ exec_always {
 
 exec sunset
 exec mako
-exec fcitx5 -rd
+# Disable until https://github.com/fcitx/fcitx5/issues/1028#issuecomment-2378353662
+# exec fcitx5 -rd
 exec /usr/libexec/polkit-gnome-authentication-agent-1
 exec swaymsg -q "workspace 2; exec $term"
 exec keepassxc

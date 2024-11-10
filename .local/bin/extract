@@ -51,7 +51,7 @@ process () {
     *.cbr|*.rar|*.RAR) program="unrar x";;
     *.tar|*.tgz|*.tbz2) program="tar -xf";;
     *.tar.gz|*.tar.bz2|*.tar.xz) program="tar -xf"; dir=${dir%.*};;
-    *.cbz|*.epub|*.zip|*.ZIP) program="unzip";;
+    *.cbz|*.epub|*.zip|*.ZIP) program="7z x";;
     *.7z|*.apk|*.arj|*.cab|*.cb7|*.chm|*.deb|*.dmg|*.iso|*.lzh|*.msi|*.pkg|*.rpm|*.udf|*.wim|*.xar) program="7z x";;
     *.exe) program="cabextract";;
     *) echo >&2 "$0: $1: unsupported archive type"; exit 4;;
