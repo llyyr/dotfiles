@@ -2,16 +2,7 @@ export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_STATE_HOME="$HOME/.local/state"
 export XDG_CACHE_HOME="$HOME/.cache"
-
-MESA="/opt/mesa"
-export LD_LIBRARY_PATH="$MESA/lib64:$MESA/lib:$LD_LIBRARY_PATH"
-export LIBGL_DRIVERS_PATH="$MESA/lib64/dri:$MESA/lib/dri"
-export VK_ICD_FILENAMES="$MESA/share/vulkan/icd.d/radeon_icd.x86_64.json:$MESA/share/vulkan/icd.d/intel_icd.x86_64.json:$MESA/share/vulkan/icd.d/lvp_icd.x86_64.json"
-export OCL_ICD_VENDORS="$MESA/etc/OpenCL/vendors"
-export LIBVA_DRIVERS_PATH="$MESA/lib64/dri:$MESA/lib/dri"
-export PKG_CONFIG_PATH="$PREFIX/lib64/pkgconfig:$PKG_CONFIG_PATH"
-# export VDPAU_DRIVER_PATH=$MESA/lib64/vdpau
-# export D3D_MODULE_PATH=$MESA/lib64/d3d/d3dadapter9.so.1:$MESA/lib/d3d/d3dadapter9.so.1
+source ~/.mesa_git_env
 
 typeset -U PATH path # ensure only unique entries in $PATH
 path+="${HOME}/go/bin/"

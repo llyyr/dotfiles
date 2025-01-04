@@ -8,4 +8,4 @@ export WINEESYNC=1
 export vblank_mode=0
 
 cd /mnt/e/osu!/ # Or wherever you installed osu! in
-wine osu!.exe "$@"
+gamescope -- wine osu!.exe "$@"

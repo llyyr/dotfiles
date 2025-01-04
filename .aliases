@@ -171,3 +171,34 @@ function cplast {
 function gdx {
     gdb -ex 'set confirm off' -ex 'set height unlimited' -ex r -ex bt -ex q --args "$@"
 }
+
+install_dxvk_dlls() {
+    [[ $# -lt 1 ]] && echo "\033[31mUsage: copy_dxvk_dlls <wine-prefix1> [<wine-prefix2> ...]\033[0m" && return 1
+    local DXVK_X64="dxvk-master/x64" DXVK_X86="dxvk-master/x32"
+    [[ ! -d $DXVK_X64 || ! -d $DXVK_X86 ]] && echo "\033[31mError: DXVK directories not found.\033[0m" && return 1
+
+    for PREFIX in "$@"; do
+        local SYS32="$PREFIX/drive_c/windows/system32" SYSWOW64="$PREFIX/drive_c/windows/syswow64"
+        if [[ ! -d $PREFIX || ! -d $SYS32 ]]; then
+            echo "\033[31mError: Invalid Wine prefix $PREFIX.\033[0m"
+            continue
+        fi
+
+        if [[ -d $SYSWOW64 ]]; then
+            echo "\033[34mProcessing 64-bit and 32-bit DLLs for $PREFIX...\033[0m"
+            for FILE in "$DXVK_X64"/*.dll; do
+                [[ $FILE != *.dll.a ]] && rm -f "$SYS32/$(basename "$FILE")" && cp -f "$FILE" "$SYS32/" && echo "\033[32mCopied $FILE to $SYS32\033[0m"
+            done
+            for FILE in "$DXVK_X86"/*.dll; do
+                [[ $FILE != *.dll.a ]] && rm -f "$SYSWOW64/$(basename "$FILE")" && cp -f "$FILE" "$SYSWOW64/" && echo "\033[32mCopied $FILE to $SYSWOW64\033[0m"
+            done
+        else
+            echo "\033[34mProcessing 32-bit DLLs for $PREFIX (no syswow64)...\033[0m"
+            for FILE in "$DXVK_X86"/*.dll; do
+                [[ $FILE != *.dll.a ]] && rm -f "$SYS32/$(basename "$FILE")" && cp -f "$FILE" "$SYS32/" && echo "\033[32mCopied $FILE to $SYS32\033[0m"
+            done
+            echo "\033[33mNo syswow64 found for $PREFIX, skipped 64-bit DLLs.\033[0m"
+        fi
+    done
+    echo "\033[34mDone.\033[0m"
+}

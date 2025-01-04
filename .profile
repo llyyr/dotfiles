@@ -17,6 +17,7 @@ test -z "$PROFILEREAD" && . /etc/profile || true
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
+source ~/.mesa_git_env
 # Some people don't like fortune. If you uncomment the following lines,
 # you will have a fortune each time you log in ;-)
 

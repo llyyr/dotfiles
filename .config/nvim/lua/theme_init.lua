@@ -10,7 +10,9 @@ local M = {
       vim.g.gruvbox_baby_highlights = {
         MatchParen = {fg=c.milk, style="bold"},
         ColorColumn = {bg=c.dark},
-        StatusLine = {bg="none"}
+        StatusLine = {bg="none"},
+        WinBar = {bg=c.none},
+        IncSearch = {link="Search"},
       }
       vim.g.gruvbox_baby_color_overrides = {
         clean_green = "#d3869b",

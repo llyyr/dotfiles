@@ -1,0 +1,8 @@
+#!/bin/sh
+
+export WINEPREFIX=~/.wuwa_prefix
+export WINEFSYNC=1
+export WINEDLLOVERRIDES="KRSDKExternal.exe="
+export DISPLAY=
+
+/opt/wine-tkg-staging-fsync-git-9.21.r0.gf03d32e3/bin/wine64 /mnt/f/harmonic_v0.3.0/harmonic_loader.exe /mnt/f/Wuthering\ Waves/Wuthering\ Waves\ Game/Client/Binaries/Win64/Client-Win64-Shipping.exe /mnt/f/harmonic_v0.3.0/out.dat -- -d3d11

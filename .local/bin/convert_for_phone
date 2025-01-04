@@ -6,9 +6,9 @@ function convert_for_phone {
         file=$(basename -- "$file")
         if (( $(ffprobe -v error -select_streams v:0 -show_entries stream=width,height -of csv=p=0 "$file" | awk -F',' '{print ($1 > $2) ? 1 : 0}') ))
         then # landscape video
-            vf="scale=min(2160\,iw):min(1080\,ih):force_original_aspect_ratio=decrease:force_divisible_by=2"
+            vf="scale=min(2400\,iw):min(1080\,ih):force_original_aspect_ratio=decrease:force_divisible_by=2"
         else # portrait video
-            vf="scale=min(1080\,iw):min(2160\,ih):force_original_aspect_ratio=decrease:force_divisible_by=2"
+            vf="scale=min(1080\,iw):min(2400\,ih):force_original_aspect_ratio=decrease:force_divisible_by=2"
         fi
     /opt/ffmpeg/bin/ffmpeg -hide_banner -i "$file" -c:v libx265 -vf "$vf" -preset slow -crf 29 -c:a libopus -b:a 64k "./done/${file%.*}.mp4"
     done

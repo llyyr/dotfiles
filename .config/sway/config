@@ -22,6 +22,7 @@ output DP-1 {
     subpixel rgb
     render_bit_depth 8
     scale_filter linear
+    bg /home/llyyr/dl/wall/__kisaki_blue_archive_drawn_by_zhiyan_li__037e37ff9cc3111f4a8b1d81c1d9ee26.jpg fit #000000
     # bg /mnt/e/Images/bg.png stretch #000000
     # bg /mnt/e/Images/Altina/鮫島タムラ \(2830191\)/88663225_p0 - アルティナ雑まとめv2.png stretch #000000
 }
@@ -35,14 +36,15 @@ output DP-2 {
     render_bit_depth 8
     scale_filter linear
     # bg /mnt/e/Images/bg.png stretch #000000
-    # bg /mnt/c/Users/llyyr/Desktop/4chan/jp/1637197847029.jpg fit #000000
+    bg /mnt/c/Users/llyyr/Desktop/4chan/jp/1637197847029.jpg fit #000000
     # bg /mnt/e/Images/Altina/鮫島タムラ \(2830191\)/88663225_p0 - アルティナ雑まとめv2.png stretch #000000
 }
 
 for_window [class="gamescope"] max_render_time 1
 for_window [app_id="osu!"] max_render_time 1
 for_window [app_id="genshinimpact.exe"] max_render_time 1
-
+for_window [app_id="bh3.exe"] max_render_time 1
+for_window [app_id="client-win64-shipping.exe"] max_render_time 1
 #
 # Example configuration:
 #
@@ -249,8 +251,8 @@ mode "resize" {
     bindsym Escape mode "default"
 }
 
-bindsym $mod+comma mode music
-mode music {
+bindsym $mod+comma mode "music"
+mode "music" {
     bindsym Escape mode default; mode "default"
     bindsym Return mode default; mode "default"
     bindsym Space exec playerctl play-pause; mode "default"
@@ -261,7 +263,7 @@ mode music {
     bindsym q exec playerctl stop; mode "default"
 }
 
-bindsym $mod+Shift+m mode move-to
+bindsym $mod+Shift+m mode "move-to"
 mode "move-to" {
     bindsym Left  exec sway-grid-move left; mode "default"
     bindsym Right exec sway-grid-move right; mode "default"
@@ -392,78 +394,97 @@ workspace 9 output DP-1
 workspace 10 output DP-1
 
 # Misc settings
-for_window {
-    [app_id="waydroid.com.nexon.bluearchive"] floating enable
-    [class="feh"] floating enable
-    [app_id="imv"] floating enable
-    [app_id="org.kde.kcalc"] floating enable
-    [app_id="electron"] floating enable
-    [class="gamescope"] move container to workspace 3
-    [class="krita"] move container to workspace 6
-    [app_id="cantata"] move container to workspace 7
-    [class="^.*[sS]team.*$"] move container to workspace 8
-    [app_id="thunderbird"] move container to workspace 9
-    [app_id="org.qbittorrent.qBittorrent"] move container to workspace 10
-    [app_id="com.transmissionbt.transmission_2068_24379607"] move container to workspace 10
-    [window_role="pop-up"] floating enable
-    [window_role="task_dialog"] floating enable
-    [app_id="qalculate-gtk"] floating enable
-    [app_id="sharex"] fullscreen enable global
-    [app_id="genshinimpact.exe"] {
-        move container to workspace 3
-    }
-    [app_id="(pavucontrol|psensor)"] {
-        floating enable
-        move position cursor
-        move down 35
-    }
-    [app_id="com.chatterino.chatterino"] {
-        floating enable
-        move scratchpad
-        scratchpad show
-    }
-    [app_id="thunar"] {
-        floating enable
-        move scratchpad
-        scratchpad show
-    }
-    [app_id="org.keepassxc.KeePassXC"] {
-        floating enable
-        move scratchpad
-        scratchpad show
-    }
-    [app_id="vesktop"] {
-        floating enable
-        move scratchpad
-        scratchpad show
-        exec sway-grid-move mid-left
-    }
-    [app_id="termfloat"] {
-        floating enable
-        resize set height 600
-        resize set width 800
-        move scratchpad
-        scratchpad show
-    }
-    [app_id="mpv"] {
-        floating enable
-        move scratchpad
-        scratchpad show
-        exec sway-grid-move top-right
-    }
-    [app_id="flameshot"] {
-        border pixel 0
-        floating enable
-        fullscreen disable
-        move absolute position 0 0
-    }
-    [title="^Picture-in-Picture$"] {
-        floating enable
-        sticky enable
-        move scratchpad
-        scratchpad show
-        exec sway-grid-move bottom-right
-    }
+for_window [class="feh"] floating enable
+for_window [app_id="imv"] floating enable
+for_window [app_id="org.kde.kcalc"] floating enable
+for_window [app_id="electron"] floating enable
+for_window [class="gamescope"] move container to workspace 3
+for_window [class="krita"] move container to workspace 6
+for_window [app_id="cantata"] move container to workspace 7
+for_window [class="^.*[sS]team.*$"] move container to workspace 8
+for_window [app_id="thunderbird"] move container to workspace 9
+for_window [app_id="org.qbittorrent.qBittorrent"] move container to workspace 10
+for_window [app_id="com.transmissionbt.transmission_2068_24379607"] move container to workspace 10
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="task_dialog"] floating enable
+for_window [app_id="qalculate-gtk"] floating enable
+for_window [app_id="waydroid.com.nexon.bluearchive"] {
+    move container to workspace 4
+    floating enable
+}
+# Genshin Impact
+for_window [app_id="genshinimpact.exe"] {
+    move container to workspace 3
+}
+# Wuthering Waves external
+for_window [app_id="krsdkexternal.exe"] {
+    move container to workspace 3
+    floating enable
+}
+# Wuthering Waves main window
+for_window [app_id="client-win64-shipping.exe"] {
+    move container to workspace 3
+}
+# Wuthering Waves web view
+for_window [app_id="krwebview.exe"] {
+    move container to workspace 3
+    floating enable
+}
+# Honkai Impact 3rd
+for_window [app_id="bh3.exe"] {
+    move container to workspace 3
+}
+for_window [app_id="(pavucontrol|psensor)"] {
+    floating enable
+    move position cursor
+    move down 35
+}
+for_window [app_id="com.chatterino.chatterino"] {
+    floating enable
+    move scratchpad
+    scratchpad show
+}
+for_window [app_id="thunar"] {
+    floating enable
+    move scratchpad
+    scratchpad show
+}
+for_window [app_id="org.keepassxc.KeePassXC"] {
+    floating enable
+    move scratchpad
+    scratchpad show
+}
+for_window [app_id="vesktop"] {
+    floating enable
+    move scratchpad
+    scratchpad show
+    exec sway-grid-move mid-left
+}
+for_window [app_id="termfloat"] {
+    floating enable
+    resize set height 600
+    resize set width 800
+    move scratchpad
+    scratchpad show
+}
+for_window [app_id="mpv"] {
+    floating enable
+    move scratchpad
+    scratchpad show
+    exec sway-grid-move top-right
+}
+for_window [app_id="flameshot"] {
+    border pixel 0
+    floating enable
+    fullscreen disable
+    move absolute position 0 0
+}
+for_window [title="^Picture-in-Picture$"] {
+    floating enable
+    sticky enable
+    move scratchpad
+    scratchpad show
+    exec sway-grid-move bottom-right
 }
 
 exec_always {

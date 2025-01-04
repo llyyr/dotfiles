@@ -15,6 +15,7 @@ vim.opt.smd             = true
 vim.opt.number          = true
 vim.opt.termguicolors   = true
 vim.opt.ignorecase      = true
+vim.opt.ignorecase      = true
 vim.opt.relativenumber  = true
 vim.opt.smartcase       = true
 vim.opt.magic           = true
@@ -27,13 +28,14 @@ vim.opt.foldexpr        = "nvim_treesitter#foldexpr()"
 vim.opt.completeopt     = 'menu,menuone,noselect'
 vim.opt.clipboard       = 'unnamedplus'          -- copy/paste to system clipboard
 vim.opt.hidden          = true
-vim.opt.signcolumn      = 'no'                   -- disable signscolumn
+vim.opt.signcolumn      = 'yes'                   -- disable signscolumn
 vim.opt.list            = true
 vim.o.listchars         = 'tab:╶─╴,lead:·,trail:▒,extends:►,precedes:◄,nbsp:␣'
 vim.g.mapleader         = ','
 vim.g.netrw_fastbrowse  = 0
 vim.g.python3_host_prog = 'python3'
 vim.o.sessionoptions    = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal"
+vim.opt.incsearch         = true
 vim.filetype.add({
   extension = {
     h = "c",
@@ -88,12 +90,12 @@ require("lazy").setup({
   { import = 'todo-comments_init' },
   { import = 'leap_init' },
   { import = 'scrollview_init' },
-  { import = 'comment_init' },
   { import = 'indent_blankline_init' },
   { import = 'guess-indent_init' },
   { import = 'autopairs_init' },
   { import = 'copilot_init' },
   { import = 'barbecue_init' },
+  { import = 'comment_init' },
 })
 
 -- Restore cursor position

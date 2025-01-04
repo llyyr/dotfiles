@@ -165,6 +165,8 @@ M.config = function()
       local maps = vim.keymap.set
       local opts_l = { silent = true, noremap = true }
       maps('n', 'K', vim.lsp.buf.hover, opts_l)
+      maps('n', 'gi', vim.lsp.buf.incoming_calls, opts_l)
+      maps('n', 'go', vim.lsp.buf.outgoing_calls, opts_l)
     end
   })
 
