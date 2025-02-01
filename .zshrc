@@ -21,7 +21,6 @@ export ZYPP_MEDIANETWORK=1
 export WINEDEBUG=-all
 # export DEBUGINFOD_URLS="https://debuginfod.opensuse.org/"
 export SSH_AUTH_SOCK="${XDG_RUNTIME_DIR}/ssh-agent.socket"
-eval $(dircolors ~/.dir_colors)
 source ~/.aliases
 source ~/.secrets
 

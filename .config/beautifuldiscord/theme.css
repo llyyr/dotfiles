@@ -168,23 +168,31 @@
   background: none;
 }
 
-/* embed stuff*/
-.container-2sjPya {
-  display: table;
-}
+/* embed stuff */
 
-.container-2sjPya > .messageAttachment-CZp8Iv, .container-2sjPya > .embed-hKpSrO {
-  display: inline-flex; vertical-align: top; margin: 0.5rem;
-}
-
-.reactions-3ryImn {
+.container_dbadf5 {
   display: flex;
+  flex-wrap: wrap;
+}
+/* Embed items */
+.container_dbadf5 > .inlineMediaEmbed__4270e {
+  margin: 0.25em;
+  vertical-align: top;
+}
+/* Workaround for loading images (gets overridden when image is loaded), and YT embeds and such */
+.container_dbadf5 .inlineMediaEmbed__4270e .clickableWrapper__64072 > *, .container_dbadf5 .inlineMediaEmbed__4270e .embedFull__8dc21 {
+  width: 520px;
+}
+/* Fix playing youtube embeds */
+.container_dbadf5 > .embedFull__8dc21 {
+  flex: 1;
+}
+/* Fix reactions */
+.reactions_b8dc93 {
+  flex-basis: 100%;
 }
 
-.removeAttachmentButton-1iO1qS {
-  top: -1.5rem;
-}
-/*embed stuff*/
+/* embed stuff */
 
 .icon-2Po-VO {
   display: none;

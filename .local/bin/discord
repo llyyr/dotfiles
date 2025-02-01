@@ -1,2 +1,5 @@
 # /opt/Discord/Discord --disable-smooth-scrolling --ozone-platform-hint=auto --enable-experimental-web-platform-features
-/opt/Vesktop/vesktop --disable-smooth-scrolling --ozone-platform-hint=auto --enable-webrtc-pipewire-capturer --enable-features=Vulkan
+/opt/Vesktop/vesktop --disable-smooth-scrolling --ozone-platform-hint=auto --enable-webrtc-pipewire-capturer --enable-features=VaapiVideoDecodeLinuxGL,VaapiVideoDecoder
+
+# https://github.com/Equicord/Equibop/issues/47
+# --disable-gpu-memory-buffer-video-frames
