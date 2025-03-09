@@ -19,9 +19,9 @@ local M = {
       button = 'X',
       -- Enables / disables diagnostic symbols
       diagnostics = {
-        [vim.diagnostic.severity.ERROR] = {enabled = true, icon = 'ﬀ'},
-        [vim.diagnostic.severity.WARN] = {enabled = false},
-        [vim.diagnostic.severity.INFO] = {enabled = false},
+        [vim.diagnostic.severity.ERROR] = {enabled = true},
+        [vim.diagnostic.severity.WARN] = {enabled = true},
+        [vim.diagnostic.severity.INFO] = {enabled = true},
         [vim.diagnostic.severity.HINT] = {enabled = true},
       },
       filetype = {

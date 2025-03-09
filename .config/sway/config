@@ -41,11 +41,12 @@ output DP-2 {
 }
 
 for_window [class="gamescope"] max_render_time 1
-for_window [app_id="osu!"] max_render_time 1
-for_window [app_id="genshinimpact.exe"] max_render_time 1
+for_window [app_id="^osu!(\.exe)?$"] max_render_time 1
+# for_window [app_id="genshinimpact.exe"] max_render_time 1
 for_window [app_id="bh3.exe"] max_render_time 1
 for_window [app_id="client-win64-shipping.exe"] max_render_time 1
 for_window [class="client-win64-shipping.exe"] max_render_time 1
+for_window [class="steam_app_2767030"] max_render_time 1
 #
 # Example configuration:
 #
@@ -207,8 +208,7 @@ input "1386:768:Wacom_Bamboo_One_S_Pen" {
     # Show the next scratchpad window or hide the focused scratchpad window.
     # If there are multiple scratchpad windows, this command cycles through them.
     bindsym $mod+minus scratchpad show
-    bindsym $mod+z exec 'swaymsg -q [app_id="com.chatterino.chatterino"] scratchpad show || exec chatterino'
-    bindsym $mod+x exec 'swaymsg -q [app_id="thunar"] scratchpad show || exec thunar'
+    bindsym $mod+x exec 'swaymsg -q [app_id="org.kde.dolphin"] scratchpad show || exec dolphin'
     bindsym $mod+c exec 'swaymsg -q [app_id="vesktop"] scratchpad show || exec discord'
     bindsym $mod+semicolon exec 'swaymsg -q [app_id="org.keepassxc.KeePassXC"] scratchpad show || exec keepassxc'
     bindsym $mod+t exec 'swaymsg -q [app_id="termfloat"] scratchpad show || exec $term --app-id="termfloat" -ocolors.alpha=0.995'
@@ -400,8 +400,8 @@ for_window [app_id="imv"] floating enable
 for_window [app_id="org.kde.kcalc"] floating enable
 for_window [app_id="electron"] floating enable
 for_window [class="gamescope"] move container to workspace 3
+for_window [app_id="cantata"] move container to workspace 5
 for_window [class="krita"] move container to workspace 6
-for_window [app_id="cantata"] move container to workspace 7
 for_window [class="^.*[sS]team.*$"] move container to workspace 8
 for_window [app_id="thunderbird"] move container to workspace 9
 for_window [app_id="org.qbittorrent.qBittorrent"] move container to workspace 10
@@ -414,9 +414,11 @@ for_window [app_id="qalculate-gtk"] floating enable
 for_window [app_id="waydroid.com.nexon.bluearchive"] floating enable
 
 # Genshin Impact
-for_window [app_id="genshinimpact.exe"] {
-    move container to workspace 3
-}
+for_window [app_id="genshinimpact.exe"] move container to workspace 3
+
+# Marvel Rivals
+for_window [class="steam_app_2767030"] move container to workspace 3
+
 # Wuthering Waves external
 for_window [app_id="krsdkexternal.exe"] {
     move container to workspace 3
@@ -427,12 +429,8 @@ for_window [class="krsdkexternal.exe"] {
     floating enable
 }
 # Wuthering Waves main window
-for_window [app_id="client-win64-shipping.exe"] {
-    move container to workspace 3
-}
-for_window [class="client-win64-shipping.exe"] {
-    move container to workspace 3
-}
+for_window [app_id="client-win64-shipping.exe"] move container to workspace 3
+for_window [class="client-win64-shipping.exe"] move container to workspace 3
 # Wuthering Waves web view
 for_window [app_id="krwebview.exe"] {
     move container to workspace 3
@@ -443,9 +441,9 @@ for_window [class="krwebview.exe"] {
     floating enable
 }
 # Honkai Impact 3rd
-for_window [app_id="bh3.exe"] {
-    move container to workspace 3
-}
+for_window [app_id="bh3.exe"] move container to workspace 3
+
+
 for_window [app_id="(pavucontrol|psensor)"] {
     floating enable
     move position cursor
@@ -456,7 +454,7 @@ for_window [app_id="com.chatterino.chatterino"] {
     move scratchpad
     scratchpad show
 }
-for_window [app_id="thunar"] {
+for_window [app_id="org.kde.dolphin"] {
     floating enable
     move scratchpad
     scratchpad show

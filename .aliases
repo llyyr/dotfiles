@@ -144,6 +144,10 @@ function genshin_wish {
     strings "${file}data_2" | rg -o "https://.*/getGachaLog\?.*end_id=0" | tail -n 1
 }
 
+function wuwa_wish {
+    strings "/mnt/g/Wuthering Waves/Wuthering Waves Game/Client/Saved/Logs/Client.log" | rg -o "https://.*/record\?.*platform=PC"
+}
+
 function gli {
     _gitLogLineToTitle="echo {} | grep -o '[a-f0-9]\{7\}' | head -1 | xargs git log -1 --pretty=format:'%s'"
     _gitLogLineToHash="echo {} | grep -o '[a-f0-9]\{7\}' | head -1 | xargs git rev-parse"

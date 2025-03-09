@@ -16,10 +16,10 @@ command = " pgrep wf-recorder > /dev/null && echo "
 signal = 11
 hide_when_empty = true
 
-[[block]]
-block = "custom"
-command = " curl 'https://wttr.in/jamal+patna?format='%t+%w+%p'' "
-interval = 600
+# [[block]]
+# block = "custom"
+# command = " curl 'https://wttr.in/jamal+patna?format='%t+%w+%p'' "
+# interval = 600
 
 [[block]]
 block = "time"

@@ -1,8 +1,8 @@
 #!/bin/sh
 
 export WINEPREFIX=~/.wuwa_prefix
-export WINEFSYNC=1
-export WINEDLLOVERRIDES="KRSDKExternal.exe="
+export WINEDLLOVERRIDES="KRSDKExternal.exe=d"
 # export DISPLAY=
-cd /mnt/f/harmonic_v0.3.0
-/opt/wine/bin/wine64 harmonic_loader.exe /mnt/f/Wuthering\ Waves/Wuthering\ Waves\ Game/Client/Binaries/Win64/Client-Win64-Shipping.exe out.dat -- -d3d12
+cd /mnt/g/jadeite_v5.0.0
+/opt/wine/bin/wine jadeite.exe /mnt/g/Wuthering\ Waves/Wuthering\ Waves\ Game/Client/Binaries/Win64/Client-Win64-Shipping.exe -- -dx11
+# /opt/wine/bin/wine64 harmonic_loader.exe /mnt/g/Wuthering\ Waves/Wuthering\ Waves\ Game/Client/Binaries/Win64/Client-Win64-Shipping.exe out.dat -- -dx11
