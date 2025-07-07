@@ -15,7 +15,6 @@ vim.opt.smd             = true
 vim.opt.number          = true
 vim.opt.termguicolors   = true
 vim.opt.ignorecase      = true
-vim.opt.ignorecase      = true
 vim.opt.relativenumber  = true
 vim.opt.smartcase       = true
 vim.opt.magic           = true
@@ -25,18 +24,18 @@ vim.opt.colorcolumn     = '81'
 vim.opt.foldenable      = false
 vim.opt.foldmethod      = "expr"
 vim.opt.foldexpr        = "nvim_treesitter#foldexpr()"
-vim.opt.completeopt     = 'menu,menuone,noselect'
+vim.opt.completeopt     = { "menu", "menuone", "noselect" }
 vim.opt.clipboard       = 'unnamedplus'          -- copy/paste to system clipboard
-vim.opt.hidden          = true
 vim.opt.signcolumn      = 'yes'                   -- disable signscolumn
 vim.opt.list            = true
-vim.o.listchars         = 'tab:╶─╴,lead:·,trail:▒,extends:►,precedes:◄,nbsp:␣'
+vim.opt.listchars       = 'tab:╶─╴,lead:·,trail:▒,extends:►,precedes:◄,nbsp:␣'
 vim.g.mapleader         = ','
 vim.g.netrw_fastbrowse  = 0
 vim.g.python3_host_prog = 'python3'
-vim.o.sessionoptions    = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal"
+vim.opt.sessionoptions  = { "blank", "buffers", "curdir", "folds", "help",
+                            "tabpages", "winsize", "winpos", "terminal" }
 vim.opt.incsearch       = true
-vim.o.updatetime        = 500
+vim.opt.updatetime      = 500
 vim.filetype.add({
   extension = {
     h = "c",
@@ -61,23 +60,6 @@ vim.opt.rtp:prepend(lazypath)
 
 vim.loader.enable()
 require("lazy").setup({
-  ui = {
-    icons = {
-      cmd = "⌘",
-      config = "🛠",
-      event = "📅",
-      ft = "📂",
-      init = "⚙",
-      keys = "🗝",
-      plugin = "🔌",
-      runtime = "💻",
-      require = "🌙",
-      source = "📄",
-      start = "🚀",
-      task = "📌",
-      lazy = "💤 ",
-    },
-  },
   { 'nvim-lua/plenary.nvim' },
   { 'neovim/nvim-lspconfig' },
   { 'JoosepAlviste/nvim-ts-context-commentstring' },
@@ -94,9 +76,26 @@ require("lazy").setup({
   { import = 'guess-indent_init' },
   { import = 'autopairs_init' },
   { import = 'copilot_init' },
-  { import = 'barbecue_init' },
+  { import = 'dropbar_init' },
   { import = 'comment_init' },
 })
+
+vim.api.nvim_create_autocmd("BufReadPost", {
+  callback = function()
+    vim.fn.matchadd("GitConflict", [[^<<<<<<< .*\|^=======$\|^>>>>>>> .*$]])
+  end,
+  desc = "Highlight Git conflict markers",
+})
+
+vim.keymap.set("n", "]x", function()
+  vim.fn.search([[^<<<<<<< .*\|^=======$\|^>>>>>>> .*$]], "W")
+end, { desc = "Next conflict marker" })
+
+vim.keymap.set("n", "[x", function()
+  vim.fn.search([[^<<<<<<< .*\|^=======$\|^>>>>>>> .*$]], "bW")
+end, { desc = "Previous conflict marker" })
+
+vim.api.nvim_set_hl(0, "GitConflict", { fg = "#fb4934", bold = true })
 
 -- Restore cursor position
 vim.api.nvim_create_autocmd({ "BufReadPost" }, {

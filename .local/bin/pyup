@@ -10,6 +10,7 @@ __VERSION__ = "0.1"
 
 def main():
     ENDPOINT = "https://0x0.st"
+    HEADERS = {"User-Agent": "curl/8.12.1"}
 
     parser = argparse.ArgumentParser(description="Uploads a file or data to the tilde 0x0 paste bin")
     parser.add_argument("filename", nargs="?", help="Filename to upload or '-' to read from stdin")
@@ -26,13 +27,13 @@ def main():
                 args.ext = args.filename.split(".")[-1]
             if not args.ext:
                 args.ext = "txt"
-            r = requests.post(ENDPOINT, files={"file": (f"null.{args.ext}", file)})
+            r = requests.post(ENDPOINT, files={"file": (f"null.{args.ext}", file)}, headers=HEADERS)
     else:
         data = sys.stdin.buffer.read()
         if not args.ext:
             if guess := guess_extension(Magic(mime=True).from_buffer(data)):
                 args.ext = guess.lstrip(".")
-        r = requests.post(ENDPOINT, files={"file": (f"null.{args.ext}", data)})
+        r = requests.post(ENDPOINT, files={"file": (f"null.{args.ext}", data)}, headers=HEADERS)
 
     if r.status_code == 200:
         print(r.text, end='')

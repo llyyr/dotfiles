@@ -18,12 +18,10 @@ output DP-1 {
     mode 2560x1440@144Hz
     pos 0,0
     adaptive_sync on
-    max_render_time 1
     subpixel rgb
-    render_bit_depth 8
+    render_bit_depth 10
+    hdr off
     scale_filter linear
-    bg /home/llyyr/dl/wall/__kisaki_blue_archive_drawn_by_zhiyan_li__037e37ff9cc3111f4a8b1d81c1d9ee26.jpg fit #000000
-    # bg /mnt/e/Images/bg.png stretch #000000
     # bg /mnt/e/Images/Altina/鮫島タムラ \(2830191\)/88663225_p0 - アルティナ雑まとめv2.png stretch #000000
 }
 
@@ -31,22 +29,18 @@ output DP-2 {
     mode 1920x1080@144Hz
     pos 2560,0
     adaptive_sync on
-    max_render_time 1
     subpixel rgb
     render_bit_depth 8
     scale_filter linear
-    # bg /mnt/e/Images/bg.png stretch #000000
-    bg /mnt/c/Users/llyyr/Desktop/4chan/jp/1637197847029.jpg fit #000000
-    # bg /mnt/e/Images/Altina/鮫島タムラ \(2830191\)/88663225_p0 - アルティナ雑まとめv2.png stretch #000000
 }
 
-for_window [class="gamescope"] max_render_time 1
-for_window [app_id="^osu!(\.exe)?$"] max_render_time 1
+# for_window [class="gamescope"] max_render_time 1
+# for_window [app_id="^osu!(\.exe)?$"] max_render_time 1
 # for_window [app_id="genshinimpact.exe"] max_render_time 1
-for_window [app_id="bh3.exe"] max_render_time 1
-for_window [app_id="client-win64-shipping.exe"] max_render_time 1
-for_window [class="client-win64-shipping.exe"] max_render_time 1
-for_window [class="steam_app_2767030"] max_render_time 1
+# for_window [app_id="bh3.exe"] max_render_time 1
+# for_window [app_id="client-win64-shipping.exe"] max_render_time 1
+# for_window [class="client-win64-shipping.exe"] max_render_time 1
+# for_window [class="steam_app_2767030"] max_render_time 1
 #
 # Example configuration:
 #
@@ -59,7 +53,8 @@ for_window [class="steam_app_2767030"] max_render_time 1
 exec swayidle -w \
         timeout 900 'swaylock -f -c 1e1e1e' \
         timeout 900 'swaymsg "output DP-1 power off" && swaymsg "output DP-2 power off"' \
-        resume 'swaymsg "output DP-1 power on" && swaymsg "output DP-2 power on" && makoctl reload'
+        resume 'swaymsg "output DP-1 power on" && swaymsg "output DP-2 power on"'
+        # && makoctl reload'
 
 ### Input configuration
 # You can get the names of your inputs by running: swaymsg -t get_inputs
@@ -98,7 +93,7 @@ input "1386:768:Wacom_Bamboo_One_S_Pen" {
     # Start your launcher
     bindsym $mod+d exec $menu
 
-    bindsym Pause exec 'swaymsg "output DP-2 power toggle" && swaymsg "output DP-1 power toggle" && makoctl reload'
+    bindsym Pause exec 'swaymsg "output DP-2 power toggle" && swaymsg "output DP-1 power toggle"'
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
@@ -208,12 +203,12 @@ input "1386:768:Wacom_Bamboo_One_S_Pen" {
     # Show the next scratchpad window or hide the focused scratchpad window.
     # If there are multiple scratchpad windows, this command cycles through them.
     bindsym $mod+minus scratchpad show
-    bindsym $mod+x exec 'swaymsg -q [app_id="org.kde.dolphin"] scratchpad show || exec dolphin'
-    bindsym $mod+c exec 'swaymsg -q [app_id="vesktop"] scratchpad show || exec discord'
-    bindsym $mod+semicolon exec 'swaymsg -q [app_id="org.keepassxc.KeePassXC"] scratchpad show || exec keepassxc'
-    bindsym $mod+t exec 'swaymsg -q [app_id="termfloat"] scratchpad show || exec $term --app-id="termfloat" -ocolors.alpha=0.995'
-    bindsym $mod+m exec 'swaymsg -q [app_id="mpv"] scratchpad show'
-    bindsym $mod+p exec 'swaymsg -q [title="^Picture-in-Picture$"] scratchpad show'
+    bindsym $mod+x exec 'swaymsg -q \[app_id="org.kde.dolphin"\] scratchpad show || exec dolphin'
+    bindsym $mod+c exec 'swaymsg -q \[app_id="vesktop"\] scratchpad show || exec discord'
+    bindsym $mod+semicolon exec 'swaymsg -q \[app_id="org.keepassxc.KeePassXC"\] scratchpad show || exec keepassxc'
+    bindsym $mod+t exec 'swaymsg -q \[app_id="termfloat"\] scratchpad show || exec $term --app-id="termfloat" -ocolors.alpha=0.995'
+    bindsym $mod+m exec 'swaymsg -q \[app_id="mpv"\] scratchpad show'
+    bindsym $mod+p exec 'swaymsg -q \[title="^Picture-in-Picture$"\] scratchpad show'
 
 
 #
@@ -326,7 +321,6 @@ bindsym $mod+Shift+R exec 'bash ~/.local/bin/toggle-screen-recorder.sh'
 
 
 # Status Bar:
-
 set $bg #080c0df8
 set $bgf #2772C8
 set $bga #222222f8
@@ -335,19 +329,19 @@ set $fgi #888888
 bar {
     status_command i3status-rs
     font pango:Sarasa Term J 9
-	position top
+    position top
     wrap_scroll yes
     tray_padding 0
     status_padding 0
     status_edge_padding 0
     height 12
-	colors {
-		statusline $fg
-		background $bg
-		focused_background $bg
-		focused_workspace $bg $bgf $fg
-		active_workspace $bg $bga $fg
-		inactive_workspace $bg $bg $fgi
+    colors {
+        statusline $fg
+        background #080c0df8
+        focused_background $bg
+        focused_workspace $bg $bgf $fg
+        active_workspace $bg $bga $fg
+        inactive_workspace $bg $bg $fgi
     }
 }
 
@@ -359,12 +353,12 @@ bar {
 seat seat0 xcursor_theme suo_sango 24
 # seat seat0 hide_cursor 20000
 
-client.focused          $bg $bg $fg #2E9EF4   #285577
+client.focused          $fgi $bg $fg #2E9EF4   #285577
 client.focused_inactive $bga $bga $fg #484E50   #5F676A
 client.unfocused        $bg $bg $fgi #292D2E   #222222
 client.urgent           #2F343A #900000 #FFFFFF #900000   #900000
 client.placeholder      $bg $bg #FFFFFF #000000   #0C0C0C
-client.background       #000000f8
+client.background       #000000
 
 # Set floating window constraints
 floating_maximum_size -1 x -1
@@ -403,15 +397,16 @@ for_window [class="gamescope"] move container to workspace 3
 for_window [app_id="cantata"] move container to workspace 5
 for_window [class="krita"] move container to workspace 6
 for_window [class="^.*[sS]team.*$"] move container to workspace 8
-for_window [app_id="thunderbird"] move container to workspace 9
-for_window [app_id="org.qbittorrent.qBittorrent"] move container to workspace 10
-for_window [app_id="com.transmissionbt.transmission_2068_24379607"] move container to workspace 10
+for_window [app_id="thunderbird"] move container to workspace 10, layout tabbed
+for_window [app_id="org.qbittorrent.qBittorrent"] move container to workspace 10, layout tabbed
+for_window [app_id="com.transmissionbt.transmission_2068_24379607"] move container to workspace 10, layout tabbed
 for_window [window_role="pop-up"] floating enable
 for_window [window_role="task_dialog"] floating enable
 for_window [app_id="qalculate-gtk"] floating enable
 
 # Blue Archive
 for_window [app_id="waydroid.com.nexon.bluearchive"] floating enable
+for_window [app_id="bluearchive.exe"] floating enable
 
 # Genshin Impact
 for_window [app_id="genshinimpact.exe"] move container to workspace 3

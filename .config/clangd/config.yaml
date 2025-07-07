@@ -3,6 +3,6 @@ CompileFlags:
 Diagnostics:
   ClangTidy:
     Add: [modernize*, bugprone*, performance*, concurrency*, abseil*]
-    Remove: [bugprone-sizeof-expression, bugprone-easily-swappable-parameters, bugprone-implicit-widening-of-multiplication-result, bugprone-assignment-in-if-condition]
+    Remove: [bugprone-sizeof-expression, bugprone-easily-swappable-parameters, bugprone-implicit-widening-of-multiplication-result, bugprone-assignment-in-if-condition, modernize-use-nullptr, concurrency-mt-unsafe]
     CheckOptions:
       bugprone-narrowing-conversions.WarnOnIntegerToFloatingPointNarrowingConversion: 'false'

@@ -11,7 +11,9 @@ set -Ux WINEDEBUG "-all"
 set -Ux HISTSIZE 10000
 set -Ux SAVEHIST 100000
 set -Ux MAKEFLAGS "-j$(nproc)"
-set -x ASAN_OPTIONS "disable_coredump=0"
+set -Ux NINJAFLAGS "-j$(nproc)"
+set -x ASAN_OPTIONS "abort_on_error=1:disable_coredump=0"
+set -x _JAVA_OPTIONS "-Dawt.useSystemAAFontSettings=gasp"
 
 if test -f ~/.mesa_git_env
     source ~/.mesa_git_env
@@ -51,7 +53,7 @@ alias dotfiles="/usr/bin/git --git-dir=$HOME/dotfiles --work-tree=$HOME"
 alias localejp="env LC_ALL=ja_JP.UTF-8 LANG=ja_JP.UTF-8"
 alias cpug="sudo cpupower frequency-set -g $argv[1]"
 alias makevenv="python3 -m venv venv"
-alias runvenv="source venv/bin/activate"
+alias runvenv="source venv/bin/activate.fish"
 alias ghc="ghc -no-keep-hi-files -no-keep-o-files $argv[1]"
 alias pypy="/opt/pypy/bin/pypy"
 alias rsync="rsync --info=progress2 --sparse --progress --human-readable"
@@ -185,8 +187,8 @@ function wuwa_wish
 end
 
 function gli
-    set -l gitLogLineToTitle "echo {} | grep -o '[a-f0-9]\\{7\\}' | head -1 | xargs git log -1 --pretty=format:'%s'"
-    set -l gitLogLineToHash "echo {} | grep -o '[a-f0-9]\\{7\\}' | head -1 | xargs git rev-parse"
+    set -l gitLogLineToTitle "echo {} | grep -o '[a-f0-9]\\{12\\}' | head -1 | xargs git log -1 --pretty=format:'%s'"
+    set -l gitLogLineToHash "echo {} | grep -o '[a-f0-9]\\{12\\}' | head -1 | xargs git rev-parse"
     set -l viewGitLogLine "$gitLogLineToHash | xargs -I % sh -c 'git show --color=always % | TERM=dumb delta --dark --color-only --diff-so-fancy --tabs=4'"
     set -l viewGitLogLineUnfancy "$gitLogLineToHash | xargs -I % sh -c 'git show % | delta --dark --color-only --diff-so-fancy --tabs=4'"
 

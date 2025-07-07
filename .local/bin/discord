@@ -1,5 +1,7 @@
 # /opt/Discord/Discord --disable-smooth-scrolling --ozone-platform-hint=auto --enable-experimental-web-platform-features
-/opt/Vesktop/vesktop --disable-smooth-scrolling --ozone-platform-hint=auto --enable-webrtc-pipewire-capturer --enable-experimental-web-platform-features
+
+# /opt/Vesktop/vesktop --ozone-platform-hint=auto --enable-webrtc-pipewire-capturer --enable-experimental-web-platform-features --disable-features=AcceleratedVideoEncoder
+/home/llyyr/workspace/Vesktop/dist/linux-unpacked/vesktop --ozone-platform-hint=auto --enable-webrtc-pipewire-capturer --enable-experimental-web-platform-features --disable-features=AcceleratedVideoEncoder
 
 # https://github.com/Equicord/Equibop/issues/47
 # --disable-gpu-memory-buffer-video-frames

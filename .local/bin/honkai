@@ -2,7 +2,6 @@
 
 # export WINEPREFIX=/mnt/g/honkai/prefix
 export WINEPREFIX=/home/llyyr/.local/share/anime-game-launcher/game/
-export WINEFSYNC=1
 export DISPLAY=
 cd "/mnt/g/honkai/Honkai Impact"
-/opt/wine/bin/wine64 ../patch/jadeite.exe 'Z:\/mnt/g/honkai/Honkai Impact/BH3.exe'
+/opt/wine/bin/wine ../patch/jadeite.exe 'Z:\/mnt/g/honkai/Honkai Impact/BH3.exe'
