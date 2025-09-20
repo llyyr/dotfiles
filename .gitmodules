@@ -1,0 +1,3 @@
+[submodule ".config/mpv/scripts/mpv-skipsilence"]
+	path = .config/mpv/scripts/mpv-skipsilence
+	url = https://github.com/ferreum/mpv-skipsilence/

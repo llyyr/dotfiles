@@ -1,0 +1,55 @@
+#!/bin/sh
+
+if [ "$#" -lt 1 ]; then
+    echo "Usage: $0 <wine-prefix1> [<wine-prefix2> ...]"
+    exit 1
+fi
+
+if [ -d dxvk-master/x32 ] && [ -d dxvk-master/x64 ]; then
+    SRC32="dxvk-master/x32"
+    SRC64="dxvk-master/x64"
+    LABEL="dxvk"
+elif [ -d vkd3d-proton-master/x86 ] && [ -d vkd3d-proton-master/x64 ]; then
+    SRC32="vkd3d-proton-master/x86"
+    SRC64="vkd3d-proton-master/x64"
+    LABEL="vkd3d-proton"
+else
+    echo "Error: Could not detect dxvk-master or vkd3d-proton-master directories"
+    exit 1
+fi
+
+log_copy() {
+    printf "  > copy %-30s → %s\n" "$1" "$2"
+    sudo cp -f "$1" "$2"
+}
+
+for PREFIX in "$@"; do
+    SYS32="$PREFIX/drive_c/windows/system32"
+    SYSWOW64="$PREFIX/drive_c/windows/syswow64"
+
+    if [ ! -d "$SYS32" ]; then
+        echo "Skipping invalid prefix: $PREFIX"
+        continue
+    fi
+
+    echo "> Installing $LABEL DLLs into: $PREFIX"
+
+    if [ -d "$SYSWOW64" ]; then
+        for f in "$SRC64"/*.dll; do
+            [ "${f##*.}" = "a" ] && continue
+            log_copy "$f" "$SYS32/$(basename "$f")"
+        done
+        for f in "$SRC32"/*.dll; do
+            [ "${f##*.}" = "a" ] && continue
+            log_copy "$f" "$SYSWOW64/$(basename "$f")"
+        done
+    else
+        for f in "$SRC32"/*.dll; do
+            [ "${f##*.}" = "a" ] && continue
+            log_copy "$f" "$SYS32/$(basename "$f")"
+        done
+        echo "No syswow64 in $PREFIX — skipped 64-bit DLLs"
+    fi
+done
+
+echo "Done."

@@ -1,8 +1,5 @@
 local M = {
   'numToStr/Comment.nvim',
-  dependencies = {
-    'nvim-treesitter/nvim-treesitter',
-  },
   event = 'BufReadPost',
 }
 

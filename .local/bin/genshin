@@ -3,7 +3,7 @@
 export WINEPREFIX=/home/llyyr/.local/share/anime-game-launcher/game/
 export DXVK_HDR=1
 unset DISPLAY
-cd /mnt/g/3dmigoto/
-/opt/wine/bin/wine "3DMigoto Loader.exe"
+# cd /mnt/g/3dmigoto/
+# /opt/wine/bin/wine "3DMigoto Loader.exe"
 cd ~/.local/share/anime-game-launcher/game/drive_c/Program\ Files/Genshin\ Impact/
 /opt/wine/bin/wine cmd /c launcher.bat

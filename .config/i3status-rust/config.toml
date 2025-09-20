@@ -40,6 +40,11 @@ format = " $icon $mem_used.eng(w:4,u:B,p:M) "
 format_alt = " $icon_swap $swap_used.eng(w:4,u:B,p:M) "
 
 [[block]]
+block = "amd_gpu"
+format = " $icon $utilization $vram_used_percents "
+interval = 1
+
+[[block]]
 block = "cpu"
 interval = 1
 

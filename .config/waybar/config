@@ -1,40 +1,32 @@
 {
-    "modules-left": ["sway/workspaces", 
-                    // "sway/scratchpad",
-                    "sway/mode",
-                    "sway/window"
-                    ],
-    "modules-center": ["custom/weather", 
-                    "custom/separator",
-                    "clock"
-                    ],
-    "modules-right": ["custom/recorder",
-                    "tray", 
-                    "wlr/taskbar",
-                    "custom/separator",
-                    "pulseaudio",
-                    "custom/separator",
-                    "memory",
-                    "custom/separator",
-                    "cpu",
-                    "custom/separator",
-                    "temperature",
-                    "custom/separator",
-                    "network",
-                    //"custom/separator",
-                    //"idle_inhibitor",
-                    "custom/separator",
-                    "custom/dnd"
-                    ],
+    "modules-left": [
+        "sway/workspaces",
+        "sway/mode",
+        "sway/window"
+    ],
+    "modules-center": [
+        "clock"
+    ],
+    "modules-right": [
+        "custom/recorder",
+        "tray",
+        "custom/separator",
+        "pulseaudio",
+        "custom/separator",
+        "memory",
+        "custom/separator",
+        "cpu",
+        "custom/separator",
+        "temperature",
+        "custom/separator",
+        "network",
+        // "custom/separator",
+        // "idle_inhibitor",
+        "custom/separator",
+        "custom/dnd"
+    ],
     "sway/window": {
         "max-length": 50,
-    },
-    "sway/scratchpad": {
-        "format": "{icon} {count}",
-        "show-empty": false,
-        "format-icons": ["", ""],
-        "tooltip": true,
-        "tooltip-format": "{app}: {title}"
     },
     "clock": {
         "timezones": ["Asia/Kolkata", "Asia/Tokyo"],
@@ -43,16 +35,7 @@
         "interval": 1,
     },
     "tray": {
-        "icon-size": 12,
-    },
-    "wlr/taskbar": {
-        "format": "{icon}",
-        "icon-size": 12,
-        "icon-theme": "Numix-Circle",
-        "tooltip-format": "{title}",
-        "on-click": "activate",
-        "on-click-middle": "close",
-        "ignore-list": ["org.kde.dolphin",],
+        "icon-size": 8,
     },
     "memory": {
         "interval": 30,
@@ -88,18 +71,13 @@
         "scroll-step": 1,
         "on-click": "pavucontrol"
     },
-    "custom/weather": {
-        "tooltip": true,
-        "exec": "curl -sf https://wttr.in/jamal+patna?format='%t+%w+%p'",
-        "interval": 600
-    },
     "custom/recorder": {
         "format": "",
-		"return-type": "json",
-		"interval": 1,
-		"exec": "echo '{\"class\": \"recording\"}'",
-		"exec-if": "pgrep wf-recorder"
-	},
+        "return-type": "json",
+        "interval": 1,
+        "exec": "echo '{\"class\": \"recording\"}'",
+        "exec-if": "pgrep wf-recorder"
+    },
     "idle_inhibitor": {
         "format": "{icon}",
         "format-icons": {
@@ -125,6 +103,6 @@
         "signal": 11
     },
     "custom/separator": {
-        "format": "|"
+        "format": " "
     }
 }

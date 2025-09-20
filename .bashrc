@@ -3,7 +3,7 @@
 # important for language settings, see below.
 
 export EDITOR=/usr/bin/nvim
-export PATH="${HOME}/.dotnet/:${HOME}/.local/bin:${HOME}/.cargo/bin:${PATH}"
+export PATH="${HOME}/.local/bin:${HOME}/.cargo/bin:${PATH}"
 # export LC_ALL=en_US.UTF-8
 # export LANG=en_US.UTF-8
 shopt -s extglob

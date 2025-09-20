@@ -75,8 +75,9 @@ input "1133:49298:Logitech_G203_LIGHTSYNC_Gaming_Mouse" {
 
 input "1386:768:Wacom_Bamboo_One_S_Pen" {
     left_handed enabled
-    # map_from_region 0.0x0.0 0.526x0.526
-    accel_profile flat
+    map_from_region 0.0x0.0 0.526x0.526
+    map_to_output DP-1
+    # accel_profile flat
     pointer_accel 0
 }
 
@@ -294,6 +295,7 @@ bindsym $mod+n exec sunset
 
 # Screenshot output to clipboard
 bindsym Print exec grimshot --notify --cursor copy output
+bindsym Shift+Print exec grimshot --notify --cursor copy output
 
 # Screenshot output to file
 bindsym $mod+Print exec grimshot --notify --cursor save output
@@ -350,7 +352,7 @@ bar {
 # }
 
 # set $XCURSOR_{THEME,SIZE}
-seat seat0 xcursor_theme suo_sango 24
+seat seat0 xcursor_theme reisen 24
 # seat seat0 hide_cursor 20000
 
 client.focused          $fgi $bg $fg #2E9EF4   #285577

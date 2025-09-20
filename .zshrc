@@ -6,7 +6,6 @@ source ~/.mesa_git_env
 
 typeset -U PATH path # ensure only unique entries in $PATH
 path+="${HOME}/go/bin/"
-path+="${HOME}/.dotnet/"
 path+="${HOME}/.local/bin/"
 path+="${HOME}/.cargo/bin/"
 

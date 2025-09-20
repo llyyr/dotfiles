@@ -25,10 +25,19 @@ done
 
 [[ $X11 -eq 0 && "$MODE" != "launcher" ]] && unset DISPLAY
 
-if [[ "$MODE" == "launcher" ]]; then
+set_channel_id() {
+    CHANNEL_ID="$1"
+    CONFIG_FILE="/mnt/g/Wuthering Waves/Wuthering Waves Game/Client/Binaries/Win64/ThirdParty/KrPcSdk_Global/KRSDKRes/KRSDK.bin"
+    sed -i "s/^KR_ChannelID=.*/KR_ChannelID=$CHANNEL_ID/" "$CONFIG_FILE"
+}
+
+if [ "$MODE" = "launcher" ]; then
+    unset SteamOS
+    set_channel_id 240
     export WINEDLLOVERRIDES="KRInstallExternal.exe=d"
     exec "$WINE_BIN" "$LAUNCHER_PATH"
 else
+    set_channel_id 205
     export WINEDLLOVERRIDES="KRSDKExternal.exe=d"
     # exec "$WINE_BIN" "$JADEITE_PATH" "$GAME_PATH" -- "$DX_MODE" -SkipSplash
     exec "$WINE_BIN" "$GAME_PATH" -- "$DX_MODE" -SkipSplash

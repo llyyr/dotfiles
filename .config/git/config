@@ -34,8 +34,6 @@
 	lv = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''%w(130,10,10)%C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all --author-date-order
 	lvv = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''%w(130,13,13)%C(white)%s%C(reset) %C(dim white)- %an <%ce> (comm. %cn <%ce>)%C(reset)%n''%w(64,18,18)%b'  --all
 	ll = log --all --decorate --oneline --graph
-
-
 	fp = format-patch --stdout -M -C
 	df = diff
 	ds = diff --staged
@@ -46,11 +44,26 @@
 	sd = stash drop
 	sl = stash list
 	fixes = show -s --pretty='format:Fixes: %h (\"%s\")'
-	pullpr = "!f() { remote=\"${2:-upstream}\"; git fetch \"$remote\" pull/$1/head:pr-$1 && git checkout pr-$1; }; f"
 	undo = reset --soft HEAD~1
 	ammend = commit --ammend
 	upstream = !git rev-parse --abbrev-ref $(git symbolic-ref --short HEAD)@{u}
 	range-compare = "!f() { rev1=${1:?no branch to compare to}; rev2=${2:-HEAD}; git range-diff $(git merge-base $rev1 $rev2) $rev1 $rev2; }; f"
+	fetch-mr = "!f() {                                                                        \
+		url=\"$1\";                                                                           \
+		if [[ \"$url\" =~ ^https://([^/]+)/([^/]+)/([^/]+)(/-)?/(tree|commits)/(.+)$ ]]; then \
+			host=\"${BASH_REMATCH[1]}\";                                                      \
+			user=\"${BASH_REMATCH[2]}\";                                                      \
+			repo=\"${BASH_REMATCH[3]}\";                                                      \
+			branch=\"${BASH_REMATCH[6]}\";                                                    \
+			remote_url=\"https://$host/$user/$repo\";                                         \
+			git fetch \"$remote_url\" \"$branch:mr/$branch\" &&                               \
+			git checkout \"mr/$branch\";                                                      \
+		else                                                                                  \
+			echo \"Error: could not parse branch URL: $url\" >&2;                             \
+			return 1;                                                                         \
+		fi;                                                                                   \
+	}; f"
+
 
 [sendemail.linux]
 	tocmd ="`pwd`/scripts/get_maintainer.pl --nogit --nogit-fallback --norolestats --nol    "

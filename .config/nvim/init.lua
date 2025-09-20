@@ -23,7 +23,6 @@ vim.opt.textwidth       = 0
 vim.opt.colorcolumn     = '81'
 vim.opt.foldenable      = false
 vim.opt.foldmethod      = "expr"
-vim.opt.foldexpr        = "nvim_treesitter#foldexpr()"
 vim.opt.completeopt     = { "menu", "menuone", "noselect" }
 vim.opt.clipboard       = 'unnamedplus'          -- copy/paste to system clipboard
 vim.opt.signcolumn      = 'yes'                   -- disable signscolumn
@@ -97,11 +96,25 @@ end, { desc = "Previous conflict marker" })
 
 vim.api.nvim_set_hl(0, "GitConflict", { fg = "#fb4934", bold = true })
 
--- Restore cursor position
-vim.api.nvim_create_autocmd({ "BufReadPost" }, {
-  pattern = { "*" },
-  callback = function()
-    vim.api.nvim_exec('silent! normal! g`"zv', false)
+-- Restore cursor position when opening a file
+-- https://github.com/neovim/neovim/issues/16339#issuecomment-1457394370
+vim.api.nvim_create_autocmd("BufRead", {
+  callback = function(opts)
+    vim.api.nvim_create_autocmd("BufWinEnter", {
+      once = true,
+      buffer = opts.buf,
+      callback = function()
+        local ft = vim.bo[opts.buf].filetype
+        local last_known_line = vim.api.nvim_buf_get_mark(opts.buf, '"')[1]
+        if
+          not (ft:match("commit") and ft:match("rebase"))
+          and last_known_line > 1
+          and last_known_line <= vim.api.nvim_buf_line_count(opts.buf)
+        then
+          vim.api.nvim_feedkeys('g`"', "nx", false)
+        end
+      end,
+    })
   end,
 })
 

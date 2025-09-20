@@ -20,7 +20,7 @@ if test -f ~/.mesa_git_env
 end
 
 set -U fish_greeting
-set -Ua fish_user_paths "$HOME/go/bin" "$HOME/.dotnet" "$HOME/.local/bin" "$HOME/.cargo/bin"
+set -Ua fish_user_paths "$HOME/go/bin" "$HOME/.local/bin" "$HOME/.cargo/bin"
 set -U fish_history_save_no_duplicates
 set -U fish_history_merge_on_read
 
@@ -59,7 +59,6 @@ alias pypy="/opt/pypy/bin/pypy"
 alias rsync="rsync --info=progress2 --sparse --progress --human-readable"
 alias adb="env HOME=$XDG_DATA_HOME/android adb"
 alias wget="wget --hsts-file=$XDG_DATA_HOME/wget-hsts"
-alias ta="tmux attach"
 
 function colpick
     grim -g (slurp -p) -t ppm - | convert - -format '%[pixel:p{0,0}]' txt:-
@@ -210,55 +209,19 @@ function gdx
     gdb -ex 'set confirm off' -ex 'set height unlimited' -ex r -ex bt -ex q --args $argv
 end
 
-function install_dxvk_dlls
-    if test (count $argv) -lt 1
-        echo "Usage: install_dxvk_dlls <wine-prefix1> [<wine-prefix2> ...]"
-        return 1
+function ta
+    if not tmux has-session -t 0 2>/dev/null
+        tmux new-session -d -s 0 -n weechat weechat \; attach
+        return
     end
 
-    set DXVK_X64 "dxvk-master/x64"
-    set DXVK_X86 "dxvk-master/x32"
-
-    if not test -d $DXVK_X64 -a -d $DXVK_X86
-        echo "Error: DXVK directories not found."
-        return 1
+    set clients (count (tmux list-clients -t 0))
+    if test $clients -eq 0
+        tmux attach
+        return
     end
 
-    for PREFIX in $argv
-        set SYS32 "$PREFIX/drive_c/windows/system32"
-        set SYSWOW64 "$PREFIX/drive_c/windows/syswow64"
-
-        if not test -d $PREFIX -a -d $SYS32
-            echo "Error: Invalid Wine prefix $PREFIX."
-            continue
-        end
-
-        if test -d $SYSWOW64
-            echo "Processing 64-bit and 32-bit DLLs for $PREFIX..."
-            for FILE in $DXVK_X64/*.dll
-                if not echo $FILE | grep -q '\.dll\.a$'
-                    rm -f "$SYS32/(basename $FILE)"
-                    sudo cp -f "$FILE" "$SYS32/"
-                end
-            end
-            for FILE in $DXVK_X86/*.dll
-                if not echo $FILE | grep -q '\.dll\.a$'
-                    rm -f "$SYSWOW64/(basename $FILE)"
-                    sudo cp -f "$FILE" "$SYSWOW64/"
-                end
-            end
-        else
-            echo "Processing 32-bit DLLs for $PREFIX (no syswow64)..."
-            for FILE in $DXVK_X86/*.dll
-                if not echo $FILE | grep -q '\.dll\.a$'
-                    rm -f "$SYS32/(basename $FILE)"
-                    sudo cp -f "$FILE" "$SYS32/"
-                end
-            end
-            echo "No syswow64 found for $PREFIX, skipped 64-bit DLLs."
-        end
-    end
-    echo "Done."
+    tmux new-session -t 0 -s "0-$clients" \; set-option destroy-unattached on
 end
 
 if status is-interactive
