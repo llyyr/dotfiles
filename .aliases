@@ -115,10 +115,10 @@ n ()
 }
 
 function rm() {
-  # Only show directory contents if there's exactly one directory argument
-  if [ $# -eq 1 ] && [ -d "$1" ]; then
-    ls "$1"
-  fi
+  # Show directory contents before removal (all directories in args)
+  for v in "$@"; do
+    [ -d "$v" ] && ls "$v"
+  done
   command rm -Iv "$@"
 }
 

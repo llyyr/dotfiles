@@ -133,8 +133,8 @@ zle -N self-insert url-quote-magic
 fzf_history_search() {
   setopt extendedglob
   local ret=$?
-  # Use fc directly without awk for better performance - zsh's fc already handles duplicates via hist_ignore_all_dups
-  candidates=(${(f)"$(fc -n -l -1 0 | fzf +s +m -x -e --preview-window=hidden --no-info -q "$BUFFER")"})
+  # Use awk to remove duplicates shown by fc - keeps first occurrence
+  candidates=(${(f)"$(fc -n -l -1 0 | awk '!seen[$0]++' | fzf +s +m -x -e --preview-window=hidden --no-info -q "$BUFFER")"})
   if [ -n "$candidates" ]; then
     BUFFER="${candidates[@]}"
     BUFFER=$(printf "${BUFFER[@]//\\\\n/\\\\\\n}")
