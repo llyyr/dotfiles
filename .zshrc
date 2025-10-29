@@ -59,10 +59,14 @@ fzf_colors='--color=gutter:regular:-1,bg:regular:-1,fg:regular:4,bg+:regular:-1,
 export FZF_DEFAULT_OPTS="$fzf_colors --pointer='█' --prompt='█ ' --reverse"
 
 # fzf completion
-if ! [ -d "$HOME/.config/zsh/fzf-tab" ]; then
-  git clone https://github.com/Aloxaf/fzf-tab "$HOME/.config/zsh/fzf-tab"
+# Only check once per session to avoid repeated directory checks
+if [[ -z "$_FZF_TAB_LOADED" ]]; then
+  if ! [ -d "$HOME/.config/zsh/fzf-tab" ]; then
+    git clone https://github.com/Aloxaf/fzf-tab "$HOME/.config/zsh/fzf-tab"
+  fi
+  source $HOME/.config/zsh/fzf-tab/fzf-tab.plugin.zsh
+  export _FZF_TAB_LOADED=1
 fi
-source $HOME/.config/zsh/fzf-tab/fzf-tab.plugin.zsh
 
 zstyle ':completion:*:git-checkout:*' sort false
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'lsd -1 --color=always $realpath'
@@ -129,7 +133,8 @@ zle -N self-insert url-quote-magic
 fzf_history_search() {
   setopt extendedglob
   local ret=$?
-  candidates=(${(f)"$(eval "fc -n -l -1 0 | awk '!seen[\$0]++'" | fzf +s +m -x -e --preview-window=hidden --no-info -q "$BUFFER")"})
+  # Use fc directly without awk for better performance - zsh's fc already handles duplicates via hist_ignore_all_dups
+  candidates=(${(f)"$(fc -n -l -1 0 | fzf +s +m -x -e --preview-window=hidden --no-info -q "$BUFFER")"})
   if [ -n "$candidates" ]; then
     BUFFER="${candidates[@]}"
     BUFFER=$(printf "${BUFFER[@]//\\\\n/\\\\\\n}")

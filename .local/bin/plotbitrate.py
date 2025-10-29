@@ -1,6 +1,5 @@
 #!/usr/bin/env python3.11
 
-from collections import OrderedDict
 from argparse import ArgumentParser
 import io
 import os
@@ -120,7 +119,8 @@ else:
     bitrate_every_second = []
     megabits_this_second = 0
     time_to_check = 1
-    dts_times_and_packet_sizes = OrderedDict()
+    # Regular dict maintains insertion order in Python 3.7+ and is faster than OrderedDict
+    dts_times_and_packet_sizes = {}
 
     for line in io.TextIOWrapper(process.stdout, encoding="utf-8"):
         dts_time, packet_size = line.strip().split("|")

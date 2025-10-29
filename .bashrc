@@ -28,5 +28,8 @@ HISTFILE="${XDG_STATE_HOME}"/bash/history
 export ZYPP_MEDIANETWORK=1
 export WINEDEBUG=-all
 
-eval $(dircolors ~/.dir_colors)
+# Cache dircolors to avoid spawning process on every shell startup
+if [ -z "$LS_COLORS" ]; then
+  eval $(dircolors ~/.dir_colors)
+fi
 source ~/.aliases

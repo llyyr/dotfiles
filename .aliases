@@ -70,7 +70,8 @@ function ff() {
 	if [ $# -eq 0 ]; then
 		set -- .
 	fi
-	find "$@" | grep -i -- "$pattern"
+	# Use find's built-in -iname instead of piping to grep for better performance
+	find "$@" -iname "*${pattern}*"
 }
 
 function man() {
@@ -114,18 +115,20 @@ n ()
 }
 
 function rm() {
-  for v in "$@"; do
-    [ -d "$v" ] && ls "$v"
-  done
+  # Only show directory contents if there's exactly one directory argument
+  if [ $# -eq 1 ] && [ -d "$1" ]; then
+    ls "$1"
+  fi
   command rm -Iv "$@"
 }
 
 fkill() {
   local pid
   if [ "$UID" != "0" ]; then
-    pid=$(ps -f -u $UID | sed 1d | fzf -m | awk '{print $2}')
+    # Use awk to extract PID directly instead of sed + awk pipeline
+    pid=$(ps -f -u $UID | awk 'NR>1' | fzf -m | awk '{print $2}')
   else
-    pid=$(ps -ef | sed 1d | fzf -m | awk '{print $2}')
+    pid=$(ps -ef | awk 'NR>1' | fzf -m | awk '{print $2}')
   fi
 
   if [ "x$pid" != "x" ]; then
