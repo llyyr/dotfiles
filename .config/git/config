@@ -122,7 +122,7 @@
 	conflictstyle = zdiff3
 
 [interactive]
-	diffFilter = delta --color-only --features=interactive --tabs=4
+	diffFilter = delta --dark --color-only --features=interactive --tabs=4
 [delta]
 	navigate = true  # use n and N to move between diff sections
 	line-numbers = true

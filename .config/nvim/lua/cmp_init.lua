@@ -1,6 +1,6 @@
 local M = {
-  'hrsh7th/nvim-cmp', 
-  dependencies = { 
+  'hrsh7th/nvim-cmp',
+  dependencies = {
     'hrsh7th/cmp-nvim-lsp',
     'onsails/lspkind-nvim',
     'ray-x/cmp-treesitter',
@@ -139,62 +139,38 @@ M.config = function()
     )
   })
 
-  --[[ LSP initialization ]]--
-  local lsp = require('lspconfig')
   local capabilities = require('cmp_nvim_lsp').default_capabilities()
-
-  lsp.clangd.setup({
-    capabilities = capabilities,
-    cmd = { "clangd",
-      "--malloc-trim",
-      "-j=6",
-      "--background-index",
-      "--pch-storage=memory",
-      "--inlay-hints",
-      "--header-insertion-decorators=false",
-      "--header-insertion=never",
-      "--log=error",
-      "--all-scopes-completion",
-      "--clang-tidy",
-      "--cross-file-rename",
-      "--completion-style=detailed",
-      "--enable-config",
+  vim.lsp.config(
+    'clangd', {
+      cmd = { "clangd", "--background-index" },
+      filetypes = { "c", "cpp", "h", "hpp" },
     },
-    filetypes = { "c", "h", "cc", "cpp", "hpp", "objc", "objcpp" },
+    'basedpyright', {
+      settings = { basedpyright = { typeCheckingMode = "standard" } }
+    }
+  )
+
+  vim.lsp.enable('clangd', {
     on_attach = function(client, bufnr)
-      vim.api.nvim_create_autocmd("CursorHold", {
-        buffer = bufnr,
-        callback = function()
-          local opts = {
-            focusable = false,
-            close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
-            border = 'rounded',
-            source = 'always',
-            prefix = ' ',
-            scope = 'cursor',
-          }
-          vim.diagnostic.open_float(nil, opts)
-        end
-      })
-      local maps = vim.keymap.set
       local opts_l = { silent = true, noremap = true }
+      local maps = vim.keymap.set
       maps('n', 'K', vim.lsp.buf.hover, opts_l)
       maps('n', 'gi', vim.lsp.buf.incoming_calls, opts_l)
       maps('n', 'go', vim.lsp.buf.outgoing_calls, opts_l)
-    end
+    end,
+    capabilities = capabilities,
   })
 
-  lsp.basedpyright.setup({
+  vim.lsp.enable('basedpyright', {
     capabilities = capabilities,
-    settings = {
-      basedpyright = {
-        typeCheckingMode = "standard",
-
-      }}})
-  lsp.zls.setup{}
-
-
-
+    on_attach = function(client, bufnr)
+      local opts_l = { silent = true, noremap = true }
+      local maps = vim.keymap.set
+      maps('n', 'K', vim.lsp.buf.hover, opts_l)
+      maps('n', 'gi', vim.lsp.buf.incoming_calls, opts_l)
+      maps('n', 'go', vim.lsp.buf.outgoing_calls, opts_l)
+    end,
+  })
 end
 
 return M

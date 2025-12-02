@@ -1,84 +1,3 @@
-/* embed stuff */
-
-.container_dbadf5 {
-  display: flex;
-  flex-wrap: wrap;
-}
-/* Embed items */
-.container_dbadf5 > .inlineMediaEmbed__4270e {
-  margin: 0.25em;
-  vertical-align: top;
-}
-/* Workaround for loading images (gets overridden when image is loaded), and YT embeds and such */
-.container_dbadf5 .inlineMediaEmbed__4270e .clickableWrapper__64072 > *, .container_dbadf5 .inlineMediaEmbed__4270e .embedFull__8dc21 {
-  width: 520px;
-}
-/* Fix playing youtube embeds */
-.container_dbadf5 > .embedFull__8dc21 {
-  flex: 1;
-}
-/* Fix reactions */
-.reactions_b8dc93 {
-  flex-basis: 100%;
-}
-
-/* embed stuff */
-
-.icon-2Po-VO {
-  display: none;
-}
-
-.theme-dark [class*=searchResult-] [class*=hit-],  { /* search result box */
-  box-shadow:none;
-}
-
-.searchResultsWrap-2DKFzt { /* search result width */
-  width: 666px;
-}
-
-.channelTextArea-rNsIhG, .form-2fGMdU { /* chat input box margins */
-  margin-top: unset;
-  margin-left: unset;
-  margin-right: unset;
-  border: unset;
-}
-
-
-.containerCozy-jafyvG { /* chat message spacing */
-  padding: 5px 0px 5px 0px;
-}
-
-.attachment-33OFj0, .wrapperAudio-1jDe0Q { /* attachment */
-  border: 0px;
-  padding: 0px;
-}
-
-.attachment-33OFj0 > img, .attachment-33OFj0 > a {
-  display:none;
-}
-
-.messageGroupWrapperOffsetCorrection-phOU-k { /* pinned messages offset correction */
-  margin: 0px 0px 0px -20px;
-}
-
-.channelTextArea-rNsIhG { /* message input area */
-  padding-top: 0px;
-  border-top: 0px;
-}
-
-.roleName-32vpEy { /* fix role names in user tooltip */
-  margin-top: 2.5px;
-  overflow: visible;
-}
-
-[class*=dots-] { /*remove typing dots */
-  display:none !important;
-}
-
-.footer_aa1bff {
-  display: none;
-}
-
 /* IRC theme */
 
 :root {
@@ -300,12 +219,6 @@
   }
 
   /* Code blocks */
-  code.inline {
-    margin: 0;
-    padding: 0;
-    border: none;
-    box-shadow: 0 0 0 1px inset var(--background-tertiary);
-  }
   pre,
   pre * {
     margin: 0;

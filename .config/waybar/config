@@ -1,8 +1,6 @@
 {
     "modules-left": [
-        "sway/workspaces",
-        "sway/mode",
-        "sway/window"
+        "ext/workspaces"
     ],
     "modules-center": [
         "clock"
@@ -25,17 +23,17 @@
         "custom/separator",
         "custom/dnd"
     ],
-    "sway/window": {
-        "max-length": 50,
+    "ext/workspaces": {
+        "on-click": "activate"
     },
     "clock": {
         "timezones": ["Asia/Kolkata", "Asia/Tokyo"],
         "format": "{:%a, %d %b. %r %Z}",
         "tooltip-format": "<tt>{calendar}</tt>",
-        "interval": 1,
+        "interval": 1
     },
     "tray": {
-        "icon-size": 8,
+        "icon-size": 8
     },
     "memory": {
         "interval": 30,
@@ -87,7 +85,7 @@
     },
     "network": {
         "format": "↓ {bandwidthDownBytes} ↑ {bandwidthUpBytes}",
-        "interval": 1,
+        "interval": 1
     },
     "custom/dnd": {
         "interval": "once",

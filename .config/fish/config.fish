@@ -20,7 +20,9 @@ if test -f ~/.mesa_git_env
 end
 
 set -U fish_greeting
-set -Ua fish_user_paths "$HOME/go/bin" "$HOME/.local/bin" "$HOME/.cargo/bin"
+fish_add_path "$HOME/go/bin"
+fish_add_path "$HOME/.local/bin"
+fish_add_path "$HOME/.cargo/bin"
 set -U fish_history_save_no_duplicates
 set -U fish_history_merge_on_read
 
@@ -103,7 +105,7 @@ function ff
     if test (count $argv) -eq 0
         set argv .
     end
-    find $argv | grep -i -- $pattern
+    find $argv | rg -i -- $pattern
 end
 
 function man

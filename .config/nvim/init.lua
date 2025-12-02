@@ -10,7 +10,7 @@ vim.opt.smartindent     = true                   -- autoindent new lines
 vim.opt.wrap            = true
 vim.opt.linebreak       = true
 vim.opt.splitbelow      = true
-vim.opt_splitright      = true
+vim.opt.splitright      = true
 vim.opt.smd             = true
 vim.opt.number          = true
 vim.opt.termguicolors   = true
@@ -118,33 +118,51 @@ vim.api.nvim_create_autocmd("BufRead", {
   end,
 })
 
-vim.api.nvim_set_keymap('n', '<C-h>', ':wincmd h<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<C-l>', ':wincmd l<CR>', { noremap = true, silent = true })
+-- Show diagnostics in a floating window on cursor hold
+vim.api.nvim_create_autocmd("CursorHold", {
+  callback = function()
+    local opts = {
+      focusable = false,
+      close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
+      border = 'rounded',
+      source = 'always',
+      prefix = ' ',
+      scope = 'cursor',
+    }
+    vim.diagnostic.open_float(nil, opts)
+  end
+})
 
-vim.api.nvim_set_keymap('n', '<A-j>', ":m .+1<CR>==", { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<A-k>', ":m .-2<CR>==", { noremap = true, silent = true })
-vim.api.nvim_set_keymap('v', '<A-j>', ":m '>+1<CR>gv=gv", { noremap = true, silent = true })
-vim.api.nvim_set_keymap('v', '<A-k>', ":m '<-2<CR>gv=gv", { noremap = true, silent = true })
+-- Window Navigation
+vim.keymap.set('n', '<C-h>', '<Cmd>wincmd h<CR>', { silent = true })
+vim.keymap.set('n', '<C-l>', '<Cmd>wincmd l<CR>', { silent = true })
 
-vim.api.nvim_set_keymap('n', '<leader>.', '/<c-r>=expand("<cword>")<CR><CR>N', { noremap = true, silent = true })
+-- Move lines
+vim.keymap.set('n', '<A-j>', ":m .+1<CR>==", { silent = true })
+vim.keymap.set('n', '<A-k>', ":m .-2<CR>==", { silent = true })
+vim.keymap.set('v', '<A-j>', ":m '>+1<CR>gv=gv", { silent = true })
+vim.keymap.set('v', '<A-k>', ":m '<-2<CR>gv=gv", { silent = true })
 
---[[ Esc to clear search ]]--
-vim.api.nvim_set_keymap('n', '<Esc>', ':noh<cr>', { noremap = true, silent = true })
+-- Search and Conflicts
+vim.keymap.set('n', '<Esc>', ':noh<CR>', { silent = true })
+vim.keymap.set('n', '<leader>.', '/<c-r>=expand("<cword>")<CR><CR>N', { silent = true })
+vim.keymap.set("n", "]x", function() vim.fn.search([[^<<<<<<< .*\|^=======$\|^>>>>>>> .*$]], "W") end)
+vim.keymap.set("n", "[x", function() vim.fn.search([[^<<<<<<< .*\|^=======$\|^>>>>>>> .*$]], "bW") end)
 
---[[ Builtin ]]--
-vim.api.nvim_set_keymap('n', '<leader>ff', ':lua require(\'telescope.builtin\').find_files()<cr>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>fg', ':lua require(\'telescope.builtin\').live_grep()<cr>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>fb', ':lua require(\'telescope.builtin\').buffers()<cr>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>fl', ':lua require(\'telescope.builtin\').diagnostics()<cr>', { noremap = true, silent = true })
+-- Telescope Builtin
+vim.keymap.set('n', '<leader>ff', function() require('telescope.builtin').find_files() end, { silent = true })
+vim.keymap.set('n', '<leader>fg', function() require('telescope.builtin').live_grep() end, { silent = true })
+vim.keymap.set('n', '<leader>fb', function() require('telescope.builtin').buffers() end, { silent = true })
+vim.keymap.set('n', '<leader>fl', function() require('telescope.builtin').diagnostics() end, { silent = true })
 
---[[ LSP ]]--
-vim.api.nvim_set_keymap('n', '<leader>fd', ':lua require(\'telescope.builtin\').lsp_definitions()<cr>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>fr', ':lua require(\'telescope.builtin\').lsp_references()<cr>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>fs', ':lua require(\'telescope.builtin\').lsp_dynamic_workspace_symbols()<cr>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>ca', ':lua vim.lsp.buf.code_action()<cr>', { noremap = true, silent = true })
+-- Telescope LSP
+vim.keymap.set('n', '<leader>fd', function() require('telescope.builtin').lsp_definitions() end, { silent = true })
+vim.keymap.set('n', '<leader>fr', function() require('telescope.builtin').lsp_references() end, { silent = true })
+vim.keymap.set('n', '<leader>fs', function() require('telescope.builtin').lsp_dynamic_workspace_symbols() end, { silent = true })
+vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, { silent = true })
 
---[[ Clipboard ]]--
-vim.api.nvim_set_keymap('n', '<leader>cc', ':lua require(\'telescope\').extensions.neoclip.default()<cr>', { noremap = true, silent = true })
+-- Telescope Extensions
+vim.keymap.set('n', '<leader>cc', function() require('telescope').extensions.neoclip.default() end, { silent = true })
 
---[[ Custom commands ]]--
-vim.api.nvim_set_keymap('n', '<leader>ww', ':w !sudo tee % > /dev/null<cr>', { noremap = true, silent = true })
+-- Custom Commands
+vim.keymap.set('n', '<leader>ww', ':w !sudo tee % > /dev/null<cr>', { silent = true })

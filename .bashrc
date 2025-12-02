@@ -3,7 +3,7 @@
 # important for language settings, see below.
 
 export EDITOR=/usr/bin/nvim
-export PATH="${HOME}/.local/bin:${HOME}/.cargo/bin:${PATH}"
+export PATH="${HOME}/go/bin:${HOME}/.local/bin:${HOME}/.cargo/bin:${PATH}"
 # export LC_ALL=en_US.UTF-8
 # export LANG=en_US.UTF-8
 shopt -s extglob
@@ -12,7 +12,7 @@ shopt -s autocd
 # Load/launch tmux if the user owns this script, bash is interactive,
 # the environment is not a Vim Terminal, and this is not a subshell.
 if [[ -O "$BASH_SOURCE" && $- == *i* && ! $VIM_TERMINAL ]] && [ -n "${DISPLAY}" ] && [ -z "${TMUX}" ]; then # && (SHLVL <3)
-	command tmux attach || command tmux 
+	command tmux attach || command tmux
 fi
 
 export GIT_PS1_SHOWDIRTYSTATE=1
@@ -27,6 +27,4 @@ HISTFILE="${XDG_STATE_HOME}"/bash/history
 
 export ZYPP_MEDIANETWORK=1
 export WINEDEBUG=-all
-
-eval $(dircolors ~/.dir_colors)
 source ~/.aliases

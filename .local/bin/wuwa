@@ -1,6 +1,6 @@
 #!/bin/sh
 
-export WINEPREFIX="$HOME/.wuwa_prefix"
+export WINEPREFIX="/mnt/g/.wuwa_prefix"
 export DXVK_HDR=1
 export SteamOS=1
 # export DXVK_CONFIG='dxgi.customDeviceDesc=\"AMD Radeon RX 6950 XT\";dxgi.customDeviceId=29631;dxgi.customVendorId=1002'
@@ -11,7 +11,7 @@ JADEITE_PATH="/mnt/g/jadeite_v5.0.1/jadeite.exe"
 LAUNCHER_PATH="/mnt/g/Wuthering Waves/launcher.exe"
 GAME_PATH="/mnt/g/Wuthering Waves/Wuthering Waves Game/Client/Binaries/Win64/Client-Win64-Shipping.exe"
 
-DX_MODE="-dx11"
+DX_MODE="-dx12"
 X11=0
 
 while [[ $# -gt 0 ]]; do
