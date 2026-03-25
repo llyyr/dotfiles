@@ -8,32 +8,68 @@
   --irc-newline-indent: 14;
   --irc-reply-indent: 7;
   --irc-reply-spine-length: 2;
+  --clan-tags-display: none; /* none or revert */
 }
-[id^="chat-messages"] div[class*="compact_"] {
-  margin-top: 0;
-  padding-top: 0;
-  padding-bottom: 0;
-  padding-left: calc(var(--irc-newline-indent) * 1ch); 
+
+[id^="chat-messages"],
+[class*="preview"] {
+  --custom-message-padding-vertical-container-compact: 0;
+
+  div[class*="compact"]:not(:has([class*="groupStart"])) {
+    margin-bottom: -.0625rem;
+    margin-left: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-left: calc(var(--irc-newline-indent) * 1ch); 
+  }
+  div[class*="compact"]:has([class*="groupStart"]) {
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-left: calc(var(--irc-newline-indent) * 1ch);
+  }
+
+  [class*="isSystemMessage"] {
+    /* System message i.e. join message */
+    [class*="container"] {
+      padding-left: 0;
+    }
+
+    /* Message icons i.e. join message arrow */
+    [class*="iconContainer"] {
+      margin-right: 1ch;
+      padding: 0;
+      height: 2ch;
+      width: 2ch;
+    }
+  }
 }
-[class*="compact_"] {
+[class*="preview"] div[class*="compact"] {
+  padding-left: calc(var(--irc-newline-indent) * 1ch);
+}
+[class^="chat"] [class*="compact"] {
   /* Fonts */
   * {
     font-family: var(--font-code);
+
     :not([id^="message-accessories-"] *) {
       font-size: 1rem;
       line-height: 1.375rem;
     }
   }
-  [class^="repliedMessage"],
+  [class*="repliedMessage"],
   code.inline,
-  [class^="textContainer"] code /* Text file previews */ {
+  [class*="textContainer"] code /* Text file previews */ {
     font-size: 1rem;
     line-height: 1.375rem;
   }
-  [class^="embedWrapper_"] *,
-  [class^="attachment_"] *,
-  [class^="children_"] * /* Those weird bot buttons */ {
+  [class*="embedWrapper"] *,
+  [class*="attachment"] *,
+  [class*="children"] *, /* Those weird bot buttons */
+  [class*="button"] * {
     font-family: var(--font-primary)
+  }
+  [class*="button"] * {
+    font-size: 14px
   }
   font-family: var(--font-code);
   font-size: 1rem;
@@ -43,12 +79,12 @@
     --custom-message-meta-space: 1ch;
     --custom-message-margin-compact-indent: 7ch;
   }
-  > [class^="contents_"] {
+  > [class*="contents"] {
     margin-left: 0;
     padding-left: 0;
     text-indent: calc((var(--irc-indent) - var(--irc-newline-indent)) * 1ch);
   }
-  [class^="repliedMessage_"] {
+  [class*="repliedMessage"] {
     margin-left: calc((var(--irc-reply-indent) - var(--irc-newline-indent)) * 1ch);
     padding-left: 0ch;
     text-indent: 0ch;
@@ -56,12 +92,12 @@
   }
 
   /* Message headers */
-  [class^="latin24CompactTimeStamp_"] {
+  [class*="timestamp"] {
     height: auto;
     width: auto;
     opacity: 100;
   }
-  [class^="avatar_"] {
+  [class*="avatar"] {
     top: -1px;
     width: 2ch;
     height: 2ch;
@@ -76,59 +112,54 @@
   }
 
   /* Timestamp brackets */
-  [class^="latin24CompactTimeStamp_"]::before {
+  [class*="timestamp"]:not(:has([aria-label*="Edited"]))::before {
     content: "[";
   }
-  [class^="latin24CompactTimeStamp_"]::after {
+  [class*="timestamp"]:not(:has([aria-label*="Edited"]))::after {
     content: "]";
   }
 
   /* Bold usernames */
-  [class^="username_"] {
+  [class*="username"] {
     font-weight: bold;
   }
 
   /* Username angle brackets */
-  [class^="username_"]::before {
+  [class^="username"]::before {
     color: var(--text-normal);
     content: "<";
   }
-  [class^="username_"]::after {
+  [class^="username"]::after {
     color: var(--text-normal);
     content: ">";
   }
 
   /* Replies */
-  [class^="repliedMessage_"] {
+  [class*="repliedMessage"] {
     --timestamp-width: 5ch;
     --custom-message-reply-indent: 0ch;
     --text-indent: calc((var(--custom-message-margin-compact-indent) - 1ch) * -1);
   }
-  [class^="repliedMessageClickableSpine_"] {
+  [class*="repliedMessageClickableSpine"] {
     left: calc(var(--irc-reply-spine-length) * -1ch);
     margin: 0 4px 0 2px;
   }
-  [class^="replyBadge_"] {
+  [class*="replyBadge"] {
     margin-right: 1ch;
     height: 2ch;
     width: 2ch;
   }
-  [class^="repliedTextPreview_"] {
+  [class*="repliedTextPreview"] {
     max-height: none;
   }
+
   /* Blocked message */
-  [class^="blockedSystemMessage_"] {
+  [class*="blockedSystemMessage"] {
     padding: 0;
-    [class^="iconContainer"] {
-      margin-right: 1ch;
-      padding: 0;
-      height: 2ch;
-      width: 2ch;
-    }
   }
 
   /* Bot tags */
-  [class^="botTagCompact_"] {
+  [class*="botTagCompact"] {
     display: inline;
     height: auto;
     top: 0;
@@ -138,56 +169,57 @@
     vertical-align: baseline;
     font-size: 1rem;
 
-    [class^="botTagVerified_"] {
+    [class*="botTagVerified"] {
       height: 2ch;
       width: 2ch;
       margin: 0;
       vertical-align: middle;
     }
 
-    [class^="botText_"] {
+    [class*="botText"] {
       font-size: inherit;
       vertical-align: inherit;
     }
   }
-  [id^="message-reply-context-"] [class^="botTagCompact_"] {
+  [id^="message-reply-context-"] [class*="botTagCompact"] {
     margin-left: 0;
     margin-right: 1ch;
   }
 
   /* Bot tag brackets */
-  [class^="botTagCompact_"]::before {
+  [class*="botTagCompact"]::before {
     color: inherit;
     content: "[";
   }
-  [class^="botTagCompact_"]::after {
+  [class*="botTagCompact"]::after {
     color: inherit;
     content: "]";
   }
 
   /* New member badge */
-  [class^="newMemberBadge"] {
+  [class*="newMemberBadge"] {
     margin-left: 1ch;
   }
 
   /* Clan tags */
-  [class^="chipletContainerInner_"] {
+  [class*="chipletContainerInner"], [class^="copyOnlyText"] {
+    display: var(--clan-tags-display);
     margin-left: 1ch;
     font-size: 1rem;
 
-    [class^="badge_"] {
+    [class*="badge"] {
       height: 2ch;
       width: 2ch;
       margin: 0;
       vertical-align: middle;
     }
 
-    [class^="text-xs/"] {
+    [class*="text-xs/"] {
       padding: 0;
       font-size: inherit;
     }
   }
-  [id^="message-reply-context-"] [class^="chipletContainerInner_"] {
+  [id^="message-reply-context-"] [class*="chipletContainerInner"] {
     margin-left: 0;
   }
 
@@ -202,14 +234,14 @@
 
   /* Mentions */
   .mention,
-  [class^="roleMention_"] {
+  [class*="roleMention"] {
     padding: 0;
   }
 
   /* Channel mentions */
   .channelMention {
     padding: 0;
-    [class^="icon_"] {
+    [class*="icon"] {
       height: 2ch;
       width: 2ch;
       margin: 0;
@@ -219,43 +251,48 @@
   }
 
   /* Code blocks */
+  code.inline {
+    margin: 0;
+    padding: 0;
+    border: none;
+    box-shadow: 0 0 0 1px inset var(--background-tertiary);
+  }
   pre,
   pre * {
     margin: 0;
     line-height: var(--custom-message-reply-message-preview-line-height)
   }
-  [class^="codeContainer_"] code {
+  [class*="codeContainer"] code {
     padding: 1ch;
     border: none;
     box-shadow: 0 0 0 1px inset var(--background-tertiary);
   }
 
   /* Text file preview */
-  [class^="nonVisualMediaItemContainer_"] {
+  [class*="nonVisualMediaItemContainer"] {
     margin: 0;
   }
-  [class^="textContainer"] code {
+  [class*="textContainer"] code {
     margin: 1ch 1ch 0;
     padding: 1ch;
   }
 }
 
 /* Thread Spines */
-[class*="compact"][class*="hasThread_"] {
-  [class^="spine_"] { /* The top half that is straight */
+[class*="compact"][class*="hasThread"] {
+  [class*="spine"] { /* The top half that is straight */
     left: calc(var(--irc-reply-spine-length) * -1ch);
     margin-left: 2px;
     width: calc((var(--irc-reply-spine-length) - 0.5) * 1ch);
   }
 
-  [class^="contents_"]::before { /* The bottom half that bends */
+  [class*="contents"]::before { /* The bottom half that bends */
     left: calc(var(--irc-reply-spine-length) * -1ch);
     margin-left: 2px;
   }
 }
 
 /* Message input */
-[class^="textArea_"] * {
+[class*="textArea"] * {
   font-family: var(--font-code);
 }
-

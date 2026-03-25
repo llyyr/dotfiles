@@ -1,0 +1,57 @@
+#!/usr/bin/env python3
+import sys, os, signal
+from typing import IO
+from pathlib import Path
+from subprocess import run, check_output, Popen, PIPE
+
+DIFF_CMD = [
+    "delta",
+    "--dark",
+    "--color-only",
+    "--diff-so-fancy",
+    "--tabs=4",
+]
+LOG_CMD = [
+    "git",
+    "log",
+    "--color=always",
+    "--format=%C(auto)%h%d %s %C(black)%C(bold)%cr %C(auto)%an"
+]
+PAGER_CMD = os.environ.get("PAGER", "less").split() + ["-R"]
+SHOW_CMD = "git show --color=always"
+
+def build_fzf_cmd() -> list[str]:
+    return [
+        "fzf", "--ansi", "--reverse", "--no-sort",
+        "--header", "enter to view, ctrl-y to copy hash, "
+                    "ctrl-v to open in nvim, ctrl+x to copy title",
+        "--bind", f"enter:execute(echo {{1}} "
+                  f"| {sys.executable} {Path(__file__).resolve()} enter)",
+        "--bind", "ctrl-y:execute(echo {1} | wl-copy)",
+        "--bind", "ctrl-x:execute(git log -1 --format=%s {1} | wl-copy)",
+        "--bind", f"ctrl-v:execute({SHOW_CMD} {{1}} | nvim -)",
+        "--preview", f"{SHOW_CMD} {{1}} | {" ".join(DIFF_CMD)}",
+    ]
+
+def run_cmds(cmds: list[list[str]], stdin: IO[bytes] | None = None):
+    cmd = cmds.pop(0)
+    if cmds:
+        with Popen(cmd, stdin=stdin, stdout=PIPE) as proc:
+            run_cmds(cmds, stdin=proc.stdout)
+    else:
+        run(cmd, stdin=stdin)
+
+def main():
+    if sys.argv[-1] == "enter":
+        commit = sys.stdin.read().strip().split()[0]
+        if len(check_output(["git", "rev-list", "--parents", "-n", "1",
+                             commit]).split()) <= 2:
+            run_cmds([SHOW_CMD.split() + [commit], DIFF_CMD, PAGER_CMD])
+        else:
+            run_cmds([LOG_CMD + [f"{commit}^1..{commit}"], build_fzf_cmd()])
+    else:
+        run_cmds([LOG_CMD + sys.argv[1:], build_fzf_cmd()])
+
+if __name__ == "__main__":
+    signal.signal(signal.SIGINT, lambda s, f: sys.exit())
+    main()

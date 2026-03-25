@@ -1,10 +1,11 @@
 #!/bin/sh
 
 export WINEPREFIX="/mnt/g/.wuwa_prefix"
-export DXVK_HDR=1
+# export DXVK_HDR=1
 export SteamOS=1
-# export DXVK_CONFIG='dxgi.customDeviceDesc=\"AMD Radeon RX 6950 XT\";dxgi.customDeviceId=29631;dxgi.customVendorId=1002'
-# export DXVK_CONFIG="dxgi.customDeviceDesc=\"AMD Radeon RX 7900 XTX\";dxgi.customDeviceId=29772;dxgi.customVendorId=1002"
+export VKD3D_CONFIG="transfer_queue"
+# export DXVK_CONFIG="dxgi.customDeviceDesc=\"AMD Radeon RX 9070 XT\";dxgi.customDeviceId=30032;dxgi.customVendorId=1002"
+# export DXVK_CONFIG="dxgi.customDeviceDesc=\"AMD Radeon RX 7900 XTX\";dxgi.customDeviceId=744c;dxgi.customVendorId=1002"
 # export DXVK_CONFIG="dxgi.customDeviceDesc=\"NVIDIA GeForce RTX 4090\";dxgi.customDeviceId=2684;dxgi.customVendorId=10de"
 WINE_BIN="/opt/wine/bin/wine"
 JADEITE_PATH="/mnt/g/jadeite_v5.0.1/jadeite.exe"
@@ -35,6 +36,7 @@ if [ "$MODE" = "launcher" ]; then
     unset SteamOS
     set_channel_id 240
     export WINEDLLOVERRIDES="KRInstallExternal.exe=d"
+    # exec "$WINE_BIN" reg add 'HKCU\Software\Wine\AppDefaults\msedgewebview2.exe' /v Version /d win7
     exec "$WINE_BIN" "$LAUNCHER_PATH"
 else
     set_channel_id 205

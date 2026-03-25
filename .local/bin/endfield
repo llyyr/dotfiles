@@ -1,0 +1,11 @@
+#!/bin/sh
+
+# export QTWEBENGINE_CHROMIUM_FLAGS="--disable-direct-composition --single-process"
+export WINEPREFIX="/mnt/g/.endfield_prefix"
+# export WINEDLLOVERRIDES="dcomp=d,libGLESv2=d"
+# export PROTON_ENABLE_WAYLAND=1
+export MANGOHUD=1
+export DISPLAY=
+
+/opt/wine/bin/wine /mnt/g/GRYPHLINK/games/EndField\ Game/Endfield.exe
+# ~/.local/share/Steam/compatibilitytools.d/dwproton-10.0-20/files/bin/wine /mnt/g/GRYPHLINK/games/EndField\ Game/Endfield.exe

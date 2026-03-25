@@ -61,7 +61,6 @@ vim.loader.enable()
 require("lazy").setup({
   { 'nvim-lua/plenary.nvim' },
   { 'neovim/nvim-lspconfig' },
-  { 'JoosepAlviste/nvim-ts-context-commentstring' },
   { import = 'treesitter_init' },
   { import = 'cmp_init' },
   { import = 'telescope_init' },
@@ -77,7 +76,9 @@ require("lazy").setup({
   { import = 'copilot_init' },
   { import = 'dropbar_init' },
   { import = 'comment_init' },
+  { import = 'highlight_colors_init' },
 })
+
 
 vim.api.nvim_create_autocmd("BufReadPost", {
   callback = function()

@@ -1,4 +1,5 @@
 CompileFlags:
+  Add: [-x, c-header, -DENABLE_DIAGNOSTICS=1]
   Remove: [-D_FORTIFY_SOURCE=2, -D_FORTIFY_SOURCE=3]
 Diagnostics:
   ClangTidy:

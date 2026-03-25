@@ -33,8 +33,8 @@ M.config = function()
     end,
 
     window = {
-      -- completion = cmp.config.window.bordered(),
-      -- documentation = cmp.config.window.bordered(),
+      completion = cmp.config.window.bordered(),
+      documentation = cmp.config.window.bordered(),
     },
     completion = {
       keyword_length = 3,
@@ -142,15 +142,68 @@ M.config = function()
   local capabilities = require('cmp_nvim_lsp').default_capabilities()
   vim.lsp.config(
     'clangd', {
-      cmd = { "clangd", "--background-index" },
+      capabilities = capabilities,
+      on_attach = function(client, bufnr)
+        local opts_l = { silent = true, noremap = true }
+        local maps = vim.keymap.set
+        maps('n', 'K', vim.lsp.buf.hover, opts_l)
+        maps('n', 'gi', vim.lsp.buf.incoming_calls, opts_l)
+        maps('n', 'go', vim.lsp.buf.outgoing_calls, opts_l)
+      end,
+      cmd = {
+        "clangd",
+        "--background-index",
+        "--header-insertion=never",
+        "--log=error",
+      },
       filetypes = { "c", "cpp", "h", "hpp" },
-    },
+    }
+  )
+  vim.lsp.config(
     'basedpyright', {
-      settings = { basedpyright = { typeCheckingMode = "standard" } }
+      capabilities = capabilities,
+      on_attach = function(client, bufnr)
+        local opts_l = { silent = true, noremap = true }
+        local maps = vim.keymap.set
+        maps('n', 'K', vim.lsp.buf.hover, opts_l)
+        maps('n', 'gi', vim.lsp.buf.incoming_calls, opts_l)
+        maps('n', 'go', vim.lsp.buf.outgoing_calls, opts_l)
+      end,
+      settings = { basedpyright = { analysis = { typeCheckingMode = "strict", } } }
     }
   )
 
-  vim.lsp.enable('clangd', {
+  vim.lsp.config('lua_ls', {
+    capabilities = capabilities,
+    on_init = function(client)
+      if client.workspace_folders then
+        local path = client.workspace_folders[1].name
+        if
+          path ~= vim.fn.stdpath('config')
+          and (vim.uv.fs_stat(path .. '/.luarc.json') or vim.uv.fs_stat(path .. '/.luarc.jsonc'))
+        then
+          return
+        end
+      end
+
+      client.config.settings.Lua = vim.tbl_deep_extend('force', client.config.settings.Lua, {
+        runtime = {
+          version = 'LuaJIT',
+          path = {
+            'lua/?.lua',
+            'lua/?/init.lua',
+          },
+        },
+        workspace = {
+          checkThirdParty = false,
+          library = {
+            vim.env.VIMRUNTIME
+          }
+        }})
+    end,
+    settings = {
+      Lua = {}
+    },
     on_attach = function(client, bufnr)
       local opts_l = { silent = true, noremap = true }
       local maps = vim.keymap.set
@@ -158,19 +211,11 @@ M.config = function()
       maps('n', 'gi', vim.lsp.buf.incoming_calls, opts_l)
       maps('n', 'go', vim.lsp.buf.outgoing_calls, opts_l)
     end,
-    capabilities = capabilities,
   })
 
-  vim.lsp.enable('basedpyright', {
-    capabilities = capabilities,
-    on_attach = function(client, bufnr)
-      local opts_l = { silent = true, noremap = true }
-      local maps = vim.keymap.set
-      maps('n', 'K', vim.lsp.buf.hover, opts_l)
-      maps('n', 'gi', vim.lsp.buf.incoming_calls, opts_l)
-      maps('n', 'go', vim.lsp.buf.outgoing_calls, opts_l)
-    end,
-  })
+  vim.lsp.enable('lua_ls', true)
+  vim.lsp.enable('clangd', true)
+  vim.lsp.enable('basedpyright', true)
 end
 
 return M

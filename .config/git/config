@@ -48,7 +48,7 @@
 	ammend = commit --ammend
 	upstream = !git rev-parse --abbrev-ref $(git symbolic-ref --short HEAD)@{u}
 	range-compare = "!f() { rev1=${1:?no branch to compare to}; rev2=${2:-HEAD}; git range-diff $(git merge-base $rev1 $rev2) $rev1 $rev2; }; f"
-	fetch-mr = "!f() {                                                                        \
+	pull-branch = "!f() {                                                                        \
 		url=\"$1\";                                                                           \
 		if [[ \"$url\" =~ ^https://([^/]+)/([^/]+)/([^/]+)(/-)?/(tree|commits)/(.+)$ ]]; then \
 			host=\"${BASH_REMATCH[1]}\";                                                      \

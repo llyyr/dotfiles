@@ -187,7 +187,7 @@ function wuwa_wish
     strings "/mnt/g/Wuthering Waves/Wuthering Waves Game/Client/Saved/Logs/Client.log" | rg -o "https://.*/record\?.*platform=PC"
 end
 
-function gli
+function gli_old
     set -l gitLogLineToTitle "echo {} | grep -o '[a-f0-9]\\{12\\}' | head -1 | xargs git log -1 --pretty=format:'%s'"
     set -l gitLogLineToHash "echo {} | grep -o '[a-f0-9]\\{12\\}' | head -1 | xargs git rev-parse"
     set -l viewGitLogLine "$gitLogLineToHash | xargs -I % sh -c 'git show --color=always % | TERM=dumb delta --dark --color-only --diff-so-fancy --tabs=4'"
@@ -196,7 +196,7 @@ function gli
     git log --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr% C(auto)%an" $argv |
         fzf --no-sort --reverse --tiebreak=index --no-multi \
             --ansi --preview="$viewGitLogLine" \
-            --header "enter to view, ctrl-y to copy hash, ctrl-v to open in nvim" \
+            --header "enter to view, ctrl-y to copy hash, ctrl-v to open in nvim, ctrl+x to copy title" \
             --bind "enter:execute:$viewGitLogLine   | less -R" \
             --bind "ctrl-v:execute:$viewGitLogLineUnfancy | nvim -" \
             --bind "ctrl-y:execute:$gitLogLineToHash | wl-copy" \

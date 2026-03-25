@@ -19,10 +19,8 @@ export QT_QPA_PLATFORMTHEME=qt6ct
 export GTK_IM_MODULE=fcitx
 export QT_IM_MODULE=fcitx
 # export XMODIFIERS=@im=fcitx
-# export QT_WAYLAND_DISABLE_WINDOWDECORATION=1 # Causes banding in qtwebengine (???????)
 
-export RADV_PERFTEST=video_decode,transfer_queue,video_encode
-export AMD_DEBUG=useaco
+export RADV_PERFTEST=video_decode,transfer_queue,video_encode,hic
 export ANV_DEBUG=video-decode,video-encode
 # card0 = intel, card1 = amd
 # export WLR_DRM_DEVICES=/dev/dri/card0:/dev/dri/card1
@@ -51,6 +49,7 @@ drm-debug)
 	sway -d > ~/sway.log 2>&1
 	;;
 "")
+	# ~/workspace/kl/sway/build/sway/sway
 	systemd-cat --identifier=sway sway
 	# sway > ~/sway.log 2>&1
 	# sway $@ -d > ~/sway.log 2>&1
