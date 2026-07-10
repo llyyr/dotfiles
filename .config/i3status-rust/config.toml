@@ -2,7 +2,7 @@
 theme = "space-villain"
 
 [icons]
-icons = "awesome6"
+icons = "none"
 
 [[block]]
 block = "focused_window"
@@ -12,7 +12,7 @@ short = " $title.str(max_w:50) |"
 
 [[block]]
 block = "custom"
-command = " pgrep wf-recorder > /dev/null && echo "
+command = " pgrep wl-screenrec > /dev/null && echo "
 signal = 11
 hide_when_empty = true
 

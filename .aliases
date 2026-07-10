@@ -70,7 +70,7 @@ function ff() {
 	if [ $# -eq 0 ]; then
 		set -- .
 	fi
-	find "$@" | grep -i -- "$pattern"
+    fd -i -L --full-path "$pattern" "$@"
 }
 
 function man() {

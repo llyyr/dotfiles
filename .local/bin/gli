@@ -15,7 +15,7 @@ LOG_CMD = [
     "git",
     "log",
     "--color=always",
-    "--format=%C(auto)%h%d %s %C(black)%C(bold)%cr %C(auto)%an"
+    "--format=%C(auto)%h%x1f%d %x1f%s %x1f%C(yellow)%C(bold)%cr %x1f%C(auto)%an"
 ]
 PAGER_CMD = os.environ.get("PAGER", "less").split() + ["-R"]
 SHOW_CMD = "git show --color=always"
@@ -23,6 +23,8 @@ SHOW_CMD = "git show --color=always"
 def build_fzf_cmd() -> list[str]:
     return [
         "fzf", "--ansi", "--reverse", "--no-sort",
+        "--delimiter=\x1f",
+        "--nth=3",
         "--header", "enter to view, ctrl-y to copy hash, "
                     "ctrl-v to open in nvim, ctrl+x to copy title",
         "--bind", f"enter:execute(echo {{1}} "

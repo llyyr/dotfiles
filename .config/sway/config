@@ -16,8 +16,8 @@ output DP-1 {
     max_render_time auto
     hdr off
     scale_filter linear
-    # color_profile --device-primaries gamma22
-    bg /mnt/f/Images/139884816_p0.jpg stretch #000000
+    #color_profile --device-primaries gamma22
+#    bg /mnt/f/Images/139884816_p0.jpg stretch #000000
 }
 
 output DP-2 {
@@ -28,8 +28,8 @@ output DP-2 {
     render_bit_depth 8
     max_render_time auto
     scale_filter linear
-    # color_profile --device-primaries gamma22
-    bg /mnt/f/Images/139884816_p0.jpg stretch #000000
+    #color_profile --device-primaries gamma22
+#    bg /mnt/f/Images/139884816_p0.jpg stretch #000000
 }
 
 for_window [class="gamescope"] max_render_time auto
@@ -196,7 +196,7 @@ input "type:tablet_tool" {
     bindsym $mod+minus scratchpad show
     bindsym $mod+x exec 'swaymsg -q \[app_id="org.kde.dolphin"\] scratchpad show || exec dolphin'
     bindsym $mod+semicolon exec 'swaymsg -q \[app_id="org.keepassxc.KeePassXC"\] scratchpad show || exec keepassxc'
-    bindsym $mod+t exec 'swaymsg -q \[app_id="termfloat"\] scratchpad show || exec $term --app-id="termfloat" -ocolors.alpha=0.995'
+    bindsym $mod+t exec 'swaymsg -q \[app_id="termfloat"\] scratchpad show || exec $term --app-id="termfloat" -ocolors-dark.alpha=0.995'
     bindsym $mod+m exec 'swaymsg -q \[app_id="mpv"\] scratchpad show'
     bindsym $mod+p exec 'swaymsg -q \[title="^Picture-in-Picture$"\] scratchpad show'
 
@@ -393,9 +393,11 @@ for_window [app_id="imv"] floating enable
 for_window [app_id="org.kde.kcalc"] floating enable
 for_window [app_id="electron"] floating enable
 for_window [class="gamescope"] move container to workspace 3
+for_window [app_id="vesktop"] move container to workspace 4
+for_window [app_id="discord"] move container to workspace 4
 for_window [app_id="cantata"] move container to workspace 5
 for_window [class="krita"] move container to workspace 6
-# for_window [class="^.*[sS]team.*$"] move container to workspace 8
+for_window [class="^.*[sS]team.*$"] move container to workspace 8
 for_window [app_id="thunderbird"] move container to workspace 10, layout tabbed
 for_window [app_id="org.qbittorrent.qBittorrent"] move container to workspace 10, layout tabbed
 for_window [window_role="pop-up"] floating enable
@@ -410,8 +412,9 @@ for_window [app_id="bluearchive.exe"] floating enable
 # Genshin Impact
 for_window [app_id="genshinimpact.exe"] move container to workspace 3
 
-# Marvel Rivals
-for_window [class="steam_app_2767030"] move container to workspace 3
+# Steam games
+for_window [class="^steam_app_.*$"] move container to workspace 3
+for_window [app_id="^steam_app_.*$"] move container to workspace 3
 
 # Wuthering Waves external
 for_window [app_id="krsdkexternal.exe"] {
@@ -441,11 +444,6 @@ for_window [app_id="(pavucontrol|psensor)"] {
     floating enable
     move position cursor
     move down 35
-}
-for_window [app_id="com.chatterino.chatterino"] {
-    floating enable
-    move scratchpad
-    scratchpad show
 }
 for_window [app_id="org.kde.dolphin"] {
     floating enable
@@ -492,14 +490,15 @@ for_window [title="^Picture-in-Picture$"] {
 
 exec_always {
     systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP DISPLAY SWAYSOCK
-    systemctl --user restart xdg-desktop-portal
     dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP DISPLAY XCURSOR_THEME XCURSOR_SIZE SWAYSOCK
+    systemctl --user restart xdg-desktop-portal
     gsettings set org.gnome.desktop.interface gtk-theme 'Breeze'
     gsettings set org.gnome.desktop.interface icon-theme 'Breeze'
     gsettings set org.gnome.desktop.interface cursor-theme 'reisen'
     "pkill -f 'python3? .+/column-layout';  ~/.config/sway/column-layout"
 }
 
+exec swaymsg -t subscribe '["shutdown"]' && systemctl --user stop graphical-session-activation.service
 exec sunset
 exec mako
 # Disable until https://github.com/fcitx/fcitx5/issues/1028#issuecomment-2378353662

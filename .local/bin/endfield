@@ -4,8 +4,9 @@
 export WINEPREFIX="/mnt/g/.endfield_prefix"
 # export WINEDLLOVERRIDES="dcomp=d,libGLESv2=d"
 # export PROTON_ENABLE_WAYLAND=1
-export MANGOHUD=1
-export DISPLAY=
+# export MANGOHUD=1
+unset DISPLAY
+export DXVK_HDR=1
 
 /opt/wine/bin/wine /mnt/g/GRYPHLINK/games/EndField\ Game/Endfield.exe
 # ~/.local/share/Steam/compatibilitytools.d/dwproton-10.0-20/files/bin/wine /mnt/g/GRYPHLINK/games/EndField\ Game/Endfield.exe

@@ -2,8 +2,10 @@
 
 export WINEPREFIX=/home/llyyr/.local/share/anime-game-launcher/game/
 unset DISPLAY
-export PROTONPATH="/home/llyyr/.local/share/Steam/compatibilitytools.d/dwproton-10.0-20"
+export PROTONPATH="/home/llyyr/.local/share/Steam/compatibilitytools.d/cachyos-11.0-20260506-slr"
 export WINELOADERNOEXEC=1
+export WINE_ENABLE_TIMEOUT_FIX=1
+export DXVK_HDR=1
 # cd /mnt/g/3dmigoto/
 # /opt/wine/bin/wine "3DMigoto Loader.exe"
 

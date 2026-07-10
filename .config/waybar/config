@@ -3,9 +3,9 @@
         "ext/workspaces"
     ],
     "modules-center": [
-        "clock"
     ],
     "modules-right": [
+        "clock",
         "custom/recorder",
         "tray",
         "custom/separator",
@@ -24,7 +24,8 @@
         "custom/dnd"
     ],
     "ext/workspaces": {
-        "on-click": "activate"
+        "on-click": "activate",
+        "enable-bar-scroll": true
     },
     "clock": {
         "timezones": ["Asia/Kolkata", "Asia/Tokyo"],

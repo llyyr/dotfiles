@@ -1,44 +1,182 @@
 #!/usr/bin/env python3
 
 import sys
+import os
+import json
+import uuid
 import argparse
-import requests
+import urllib.request
+import urllib.error
+from typing import Union
 from magic import Magic
 from mimetypes import guess_extension
 
-__VERSION__ = "0.1"
+USER_AGENT: str = "curl/8.12.1"
 
-def main():
-    ENDPOINT = "https://0x0.st"
-    HEADERS = {"User-Agent": "curl/8.12.1"}
+def detect_ext(data: bytes, fallback: str = "txt") -> str:
+    try:
+        mime: str = Magic(mime=True).from_buffer(data)
+        guess = guess_extension(mime)
+        if guess:
+            return guess.lstrip(".")
+    except Exception:
+        pass
+    return fallback
 
-    parser = argparse.ArgumentParser(description="Uploads a file or data to the tilde 0x0 paste bin")
-    parser.add_argument("filename", nargs="?", help="Filename to upload or '-' to read from stdin")
-    parser.add_argument("-e", "--ext", help="Specify file extension used in the upload")
-    parser.add_argument("-s", "--server", help="Use alternative pastebin server address")
+
+def encode_multipart(
+    fields: dict[str, str],
+    files: dict[str, tuple[str, bytes]],
+) -> tuple[bytes, str]:
+    boundary: str = uuid.uuid4().hex
+    body = bytearray()
+
+    def write_line(line: Union[str, bytes]) -> None:
+        if isinstance(line, bytes):
+            body.extend(line + b"\r\n")
+        else:
+            body.extend(line.encode() + b"\r\n")
+
+    for name, value in fields.items():
+        write_line(f"--{boundary}")
+        write_line(f'Content-Disposition: form-data; name="{name}"')
+        write_line("")
+        write_line(value)
+
+    for name, (filename, content) in files.items():
+        write_line(f"--{boundary}")
+        write_line(
+            f'Content-Disposition: form-data; name="{name}"; filename="{filename}"'
+        )
+        write_line("Content-Type: application/octet-stream")
+        write_line("")
+        write_line(content)
+
+    write_line(f"--{boundary}--")
+    write_line("")
+
+    content_type: str = f"multipart/form-data; boundary={boundary}"
+    return bytes(body), content_type
+
+
+def http_post(
+    url: str,
+    fields: dict[str, str],
+    files: dict[str, tuple[str, bytes]],
+) -> tuple[bytes, int]:
+    body, content_type = encode_multipart(fields, files)
+
+    req = urllib.request.Request(url, data=body)
+    req.add_header("Content-Type", content_type)
+    req.add_header("User-Agent", USER_AGENT)
+
+    try:
+        with urllib.request.urlopen(req) as resp:
+            return resp.read(), resp.status
+    except urllib.error.HTTPError as e:
+        return e.read(), e.code
+
+
+def upload_0x0(file_content: bytes, filename: str, endpoint: str) -> None:
+    body, status = http_post(endpoint, {}, {"file": (filename, file_content)})
+
+    if status == 200:
+        sys.stdout.write(body.decode())
+    else:
+        print(f"Error uploading file: {status}", file=sys.stderr)
+        sys.exit(1)
+
+
+def upload_sul(file_content: bytes, filename: str, key: str) -> None:
+    endpoint: str = "https://s-ul.eu/api/v1/upload"
+
+    body, status = http_post(
+        endpoint,
+        {"wizard": "true", "key": key},
+        {"file": (filename, file_content)},
+    )
+
+    if status != 200:
+        print(f"Error uploading file: {status}", file=sys.stderr)
+        sys.exit(1)
+
+    try:
+        j: dict[str, object] = json.loads(body.decode())
+    except Exception:
+        print("Invalid JSON response", file=sys.stderr)
+        print(body.decode())
+        sys.exit(1)
+
+    url = j.get("url")
+    if isinstance(url, str):
+        print(url)
+    else:
+        print("Upload failed:", j, file=sys.stderr)
+        sys.exit(1)
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(
+        description="Upload to s-ul.eu (default) or 0x0.st"
+    )
+    parser.add_argument(
+        "filename", nargs="?", help="File to upload or '-' for stdin"
+    )
+    parser.add_argument("-e", "--ext", help="Force file extension")
+    parser.add_argument(
+        "-s",
+        "--server",
+        default="sul",
+        help="Server: sul (default), 0x0, or custom URL",
+    )
+    parser.add_argument(
+        "-k", "--key", help="API key (overrides SUL_KEY env)"
+    )
+
     args = parser.parse_args()
 
-    if args.server:
-        ENDPOINT = args.server
+    server: str = args.server.lower()
+    use_sul: bool = server in {"sul", "s-ul", "s-ul.eu"}
+    use_0x0: bool = server in {"0x0", "0x0.st"}
 
-    if args.filename:
-        with open(args.filename, "rb") as file:
-            if "." in args.filename:
-                args.ext = args.filename.split(".")[-1]
-            if not args.ext:
-                args.ext = "txt"
-            r = requests.post(ENDPOINT, files={"file": (f"null.{args.ext}", file)}, headers=HEADERS)
+    key: str | None = args.key or os.getenv("SUL_KEY")
+
+    if use_sul:
+        if key is None:
+            print(
+                "Error: API key required. Use -k or set SUL_KEY env variable.",
+                file=sys.stderr,
+            )
+            sys.exit(1)
+        sul_key: str = key  # narrowed
+    else:
+        sul_key = ""
+
+    # ---- read input ----
+    if args.filename and args.filename != "-":
+        with open(args.filename, "rb") as f:
+            data: bytes = f.read()
+
+        ext: str | None = args.ext
+        if not ext and "." in args.filename:
+            ext = args.filename.split(".")[-1]
+        if not ext:
+            ext = "txt"
+
+        filename: str = f"upload.{ext}"
+
     else:
         data = sys.stdin.buffer.read()
-        if not args.ext:
-            if guess := guess_extension(Magic(mime=True).from_buffer(data)):
-                args.ext = guess.lstrip(".")
-        r = requests.post(ENDPOINT, files={"file": (f"null.{args.ext}", data)}, headers=HEADERS)
+        ext = args.ext or detect_ext(data)
+        filename = f"stdin.{ext}"
 
-    if r.status_code == 200:
-        print(r.text, end='')
+    # ---- upload ----
+    if use_sul:
+        upload_sul(data, filename, sul_key)
     else:
-        print(f"Error uploading file: {r.status_code}")
+        endpoint: str = "https://0x0.st" if use_0x0 else args.server
+        upload_0x0(data, filename, endpoint)
+
 
 if __name__ == "__main__":
     main()

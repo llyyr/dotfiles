@@ -7,7 +7,6 @@ set -Ux EDITOR "/usr/bin/nvim"
 set -Ux LC_ALL "en_US.UTF-8"
 set -Ux LANG "en_US.UTF-8"
 set -Ux ZYPP_MEDIANETWORK 1
-set -Ux WINEDEBUG "-all"
 set -Ux HISTSIZE 10000
 set -Ux SAVEHIST 100000
 set -Ux MAKEFLAGS "-j$(nproc)"
@@ -184,7 +183,7 @@ function genshin_wish
 end
 
 function wuwa_wish
-    strings "/mnt/g/Wuthering Waves/Wuthering Waves Game/Client/Saved/Logs/Client.log" | rg -o "https://.*/record\?.*platform=PC"
+    strings "/mnt/g/SteamLibrary/steamapps/common/Wuthering Waves/Client/Saved/Logs/Client.log" | rg -o "https://.*/record\?.*platform=PC"
 end
 
 function gli_old
