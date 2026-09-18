@@ -1,19 +1,32 @@
-#!/bin/sh
+#!/bin/bash
 
 function convert_for_phone {
     mkdir -p done # create the output directory if it doesn't exist
     for file in ./*.{mp4,mov,mkv,webm,qt,ts,gif}; do
         file=$(basename -- "$file")
-        if (( $(ffprobe -v error -select_streams v:0 -show_entries stream=width,height -of csv=p=0 "$file" | awk -F',' '{print ($1 > $2) ? 1 : 0}') ))
+
+        dimensions=$(
+            /opt/ffmpeg/bin/ffprobe \
+                -v error \
+                -select_streams v \
+                -show_entries stream=index,width,height \
+                -of csv=p=0 "$file" |
+            awk -F',' '!seen[$1]++ { print $2 "," $3; exit }'
+        )
+
+        if (( $(awk -F',' '{print ($1 > $2) ? 1 : 0}' <<< "$dimensions") ))
         then # landscape video
             vf="scale=min(2400\,iw):min(1080\,ih):force_original_aspect_ratio=decrease:force_divisible_by=2"
         else # portrait video
             vf="scale=min(1080\,iw):min(2400\,ih):force_original_aspect_ratio=decrease:force_divisible_by=2"
         fi
-    /opt/ffmpeg/bin/ffmpeg -hide_banner -i "$file" -c:v libx265 -vf "$vf" -preset slow -crf 29 -c:a libopus -b:a 64k "./done/${file%.*}.mp4"
+
+        /opt/ffmpeg/bin/ffmpeg -hide_banner -i "$file" \
+            -c:v libx265 -vf "$vf" -preset slow -crf 29 \
+            -c:a libopus -b:a 64k "./done/${file%.*}.mp4"
     done
 }
 
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
-  convert_for_phone
+    convert_for_phone
 fi

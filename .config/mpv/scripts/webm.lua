@@ -51,6 +51,7 @@ local options = {
 	-- av1
 	-- hevc
 	-- webm-vp9 (libvpx-vp9/libopus)
+	-- webp
 	-- avc (h264/AAC)
 	-- avc-nvenc (h264-NVENC/AAC)
 	-- webm-vp8 (libvpx/libvorbis)
@@ -84,6 +85,9 @@ local options = {
 	-- Force square pixels on output video
 	-- Some players like recent Firefox versions display videos with non-square pixels with wrong aspect ratio
 	force_square_pixels = false,
+	-- MPV command to run upon successful encoding
+	-- %{output} will be replaced with the path to the resulting file.
+	completion_command = "",
 }
 
 mpopts.read_options(options)
@@ -128,8 +132,57 @@ test_set_options = function(new_options_json)
   for k, v in pairs(new_options) do
     options[k] = v
   end
+  return emit_event("options-set")
 end
 mp.register_script_message("mpv-webm-set-options", test_set_options)
+local register_test_handlers
+register_test_handlers = function(main_page)
+  mp.register_script_message("mpv-webm-set-range", function(range_json)
+    local range = utils.parse_json(range_json)
+    main_page.startTime = range.startTime
+    main_page.endTime = range.endTime
+    if range.region then
+      local _list_0 = {
+        "x",
+        "y",
+        "w",
+        "h"
+      }
+      for _index_0 = 1, #_list_0 do
+        local key = _list_0[_index_0]
+        main_page.region[key] = range.region[key]
+      end
+    end
+    return emit_event("range-set")
+  end)
+  mp.register_script_message("mpv-webm-encode", function()
+    return main_page:encode()
+  end)
+  return mp.register_script_message("mpv-webm-get-state", function()
+    local mouse_x, mouse_y = mp.get_mouse_pos()
+    local osd_w, osd_h = mp.get_osd_size()
+    local state_json = utils.format_json({
+      startTime = main_page.startTime,
+      endTime = main_page.endTime,
+      region = {
+        x = main_page.region.x,
+        y = main_page.region.y,
+        w = main_page.region.w,
+        h = main_page.region.h
+      },
+      mainVisible = main_page.visible or false,
+      mouse = {
+        x = mouse_x,
+        y = mouse_y
+      },
+      osd = {
+        w = osd_w,
+        h = osd_h
+      }
+    })
+    return emit_event("state", state_json)
+  end)
+end
 local bold
 bold = function(text)
   return "{\\b1}" .. tostring(text) .. "{\\b0}"
@@ -1386,6 +1439,71 @@ do
   GIF = _class_0
 end
 formats["gif"] = GIF()
+local WebP
+do
+  local _class_0
+  local _parent_0 = Format
+  local _base_0 = {
+    getFlags = function(self)
+      local qscale = math.max(0, math.min(100, 100 - (options.crf * 2.5)))
+      return {
+        "--ovcopts-add=threads=" .. tostring(options.threads),
+        "--ovcopts-add=compression_level=6",
+        "--ovcopts-add=qscale=" .. tostring(qscale),
+        "--ofopts-add=loop=0"
+      }
+    end,
+    postCommandModifier = function(self, command, region, startTime, endTime)
+      local new_command = { }
+      for _, v in ipairs(command) do
+        if not v:match("^%-%-ovcopts%-add=crf=") then
+          append(new_command, {
+            v
+          })
+        end
+      end
+      return new_command
+    end
+  }
+  _base_0.__index = _base_0
+  setmetatable(_base_0, _parent_0.__base)
+  _class_0 = setmetatable({
+    __init = function(self)
+      self.displayName = "WebP"
+      self.supportsTwopass = false
+      self.videoCodec = "libwebp"
+      self.audioCodec = ""
+      self.outputExtension = "webp"
+      self.acceptsBitrate = false
+    end,
+    __base = _base_0,
+    __name = "WebP",
+    __parent = _parent_0
+  }, {
+    __index = function(cls, name)
+      local val = rawget(_base_0, name)
+      if val == nil then
+        local parent = rawget(cls, "__parent")
+        if parent then
+          return parent[name]
+        end
+      else
+        return val
+      end
+    end,
+    __call = function(cls, ...)
+      local _self_0 = setmetatable({}, _base_0)
+      cls.__init(_self_0, ...)
+      return _self_0
+    end
+  })
+  _base_0.__class = _class_0
+  if _parent_0.__inherited then
+    _parent_0.__inherited(_parent_0, _class_0)
+  end
+  WebP = _class_0
+end
+formats["webp"] = WebP()
 local Page
 do
   local _class_0
@@ -1742,8 +1860,8 @@ local get_sub_options
 get_sub_options = function()
   local ret = { }
   append_property(ret, "sub-ass-override")
-  append_property(ret, "sub-ass-force-style")
-  append_property(ret, "sub-ass-vsfilter-aspect-compat")
+  append_property(ret, "sub-ass-style-overrides")
+  append_property(ret, "sub-ass-use-video-data")
   append_property(ret, "sub-auto")
   append_property(ret, "sub-pos")
   append_property(ret, "sub-delay")
@@ -2014,7 +2132,8 @@ encode = function(region, startTime, endTime)
     "--o=" .. tostring(out_path)
   })
   emit_event("encode-started")
-  if options.twopass and format.supportsTwopass and not is_stream then
+  local constant_quality_x26x = options.target_filesize <= 0 and (format.videoCodec == "libx264" or format.videoCodec == "libx265")
+  if options.twopass and format.supportsTwopass and not constant_quality_x26x and not is_stream then
     local first_pass_cmdline
     do
       local _accum_0 = { }
@@ -2071,6 +2190,9 @@ encode = function(region, startTime, endTime)
     if res then
       message("Encoded successfully! Saved to\\N" .. tostring(bold(out_path)))
       emit_event("encode-finished", "success")
+      if options.completion_command ~= "" then
+        mp.command(options.completion_command:gsub("%%{output}", out_path))
+      end
     else
       message("Encode failed! Check the logs for details.")
       emit_event("encode-finished", "fail")
@@ -2086,6 +2208,10 @@ do
   local _class_0
   local _parent_0 = Page
   local _base_0 = {
+    show = function(self)
+      _class_0.__parent.show(self)
+      return emit_event("show-crop-page")
+    end,
     reset = function(self)
       local dimensions = get_video_dimensions()
       local xa, ya
@@ -2107,6 +2233,7 @@ do
     setPointA = function(self)
       local posX, posY = mp.get_mouse_pos()
       self.pointA:set_from_screen(posX, posY)
+      emit_event("crop-point-a", tostring(self.pointA.x), tostring(self.pointA.y))
       if self.visible then
         return self:draw()
       end
@@ -2114,6 +2241,7 @@ do
     setPointB = function(self)
       local posX, posY = mp.get_mouse_pos()
       self.pointB:set_from_screen(posX, posY)
+      emit_event("crop-point-b", tostring(self.pointB.x), tostring(self.pointB.y))
       if self.visible then
         return self:draw()
       end
@@ -2533,7 +2661,25 @@ do
             "source"
           },
           {
+            4
+          },
+          {
+            8
+          },
+          {
+            10
+          },
+          {
+            12
+          },
+          {
             15
+          },
+          {
+            16
+          },
+          {
+            20
           },
           {
             24
@@ -2551,6 +2697,9 @@ do
             60
           },
           {
+            90
+          },
+          {
             120
           },
           {
@@ -2565,6 +2714,7 @@ do
         "avc",
         "avc-nvenc",
         "webm-vp8",
+        "webp",
         "gif",
         "mp3",
         "raw"
@@ -3059,6 +3209,7 @@ do
 end
 monitor_dimensions()
 local mainPage = MainPage()
+register_test_handlers(mainPage)
 mp.add_key_binding(options.keybind, "display-webm-encoder", (function()
   local _base_0 = mainPage
   local _fn_0 = _base_0.show

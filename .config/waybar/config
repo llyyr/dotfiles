@@ -5,103 +5,98 @@
     "modules-center": [
     ],
     "modules-right": [
-        "clock",
+        "wlr/taskbar",
         "custom/recorder",
-        "tray",
-        "custom/separator",
+        "clock",
         "pulseaudio",
-        "custom/separator",
         "memory",
-        "custom/separator",
+        "custom/amdgpu",
         "cpu",
-        "custom/separator",
         "temperature",
-        "custom/separator",
         "network",
-        // "custom/separator",
-        // "idle_inhibitor",
-        "custom/separator",
         "custom/dnd"
     ],
+
     "ext/workspaces": {
         "on-click": "activate",
         "enable-bar-scroll": true
     },
-    "clock": {
-        "timezones": ["Asia/Kolkata", "Asia/Tokyo"],
-        "format": "{:%a, %d %b. %r %Z}",
-        "tooltip-format": "<tt>{calendar}</tt>",
-        "interval": 1
+
+    "wlr/taskbar": {
+        "format": "{name}",
+        "icon-size": 0,
+        "tooltip": false,
+        "all-outputs": false,
+        "active-first": true,
+        "active-only": true
     },
-    "tray": {
-        "icon-size": 8
-    },
-    "memory": {
-        "interval": 30,
-        "format": "{used:0.1f}G "
-    },
-    "cpu": {
-        "interval": 10,
-        "format": "{usage}% ",
-        "max-length": 10
-    },
-    "temperature": {
-        "thermal-zone": 1,
-        "critical-threshold": 80,
-        "format-critical": "{temperatureC}°C ",
-        "format": "{temperatureC}°C "
-    },
-    "pulseaudio": {
-        "format": "{volume}% {icon} {format_source}",
-        "format-bluetooth": "{volume}% {icon} {format_source}",
-        "format-bluetooth-muted": " {icon} {format_source}",
-        "format-muted": " {format_source}",
-        "format-source": "{volume}% ",
-        "format-source-muted": "",
-        "format-icons": {
-            "headphone": "",
-            "hands-free": "",
-            "headset": "",
-            "phone": "",
-            "portable": "",
-            "car": "",
-            "default": ["", "", ""]
-        },
-        "scroll-step": 1,
-        "on-click": "pavucontrol"
-    },
+
     "custom/recorder": {
-        "format": "",
-        "return-type": "json",
         "interval": 1,
-        "exec": "echo '{\"class\": \"recording\"}'",
-        "exec-if": "pgrep wf-recorder"
+        "exec": "pgrep wl-screenrec >/dev/null && echo  || echo ''",
+        "tooltip": false
     },
-    "idle_inhibitor": {
-        "format": "{icon}",
-        "format-icons": {
-            "activated": "",
-            "deactivated": ""
+
+    "clock": {
+        "timezones": ["", "Asia/Tokyo"],
+        "format": "{:%a, %d %b. %r %Z}",
+        "tooltip": false,
+        "interval": 1,
+        "on-click-right": "zenity --calendar --text=Calendar",
+        "actions": {
+            "on-click": "tz_up"
         }
     },
-    "network": {
-        "format": "↓ {bandwidthDownBytes} ↑ {bandwidthUpBytes}",
+
+    "pulseaudio": {
+        "format": "VOL {volume}%",
+        "format-bluetooth": "VOL {volume}% BT",
+        "format-muted": "VOL MUTED",
+        "on-click": "pavucontrol",
+        "on-click-middle": "helvum",
+        "on-click-right": "pactl set-sink-mute 77 toggle"
+    },
+
+    "memory": {
+        "interval": 30,
+        "format": "MEM {used:0.2f}GB",
+        "unit": "GB"
+    },
+
+    "custom/amdgpu": {
+        "interval": 1,
+        "exec": "sh -c 'u=$(cat /sys/class/drm/card1/device/gpu_busy_percent 2>/dev/null || echo 0); v=$(cat /sys/class/drm/card1/device/mem_info_vram_used 2>/dev/null || echo 0); t=$(cat /sys/class/drm/card1/device/mem_info_vram_total 2>/dev/null || echo 1); p=$(awk -v v=\"$v\" -v t=\"$t\" \"BEGIN{printf \\\"%.0f\\\", (v/t)*100}\"); echo \"GPU ${u}% ${p}%\"'"
+    },
+
+    "cpu": {
+        "format": "CPU {usage}%",
         "interval": 1
     },
+
+    "temperature": {
+        "format": "TEMP {temperatureC}°",
+        "thermal-zone": 1,
+        "interval": 10
+    },
+
+    "network": {
+        "interval": 1,
+        "format-wifi": "WIFI DOWN {bandwidthDownBytes} UP {bandwidthUpBytes}",
+        "format-ethernet": "ETH DOWN {bandwidthDownBytes} UP {bandwidthUpBytes}",
+        "format-disconnected": "disconnected"
+    },
+
     "custom/dnd": {
         "interval": "once",
         "return-type": "json",
-        "format": "{}{icon}",
+        "format": "{icon}",
         "format-icons": {
-            "default": "◯",
-            "dnd": "✖"
+            "default": "default",
+            "dnd": "dnd"
         },
-        "on-click": "makoctl mode | grep 'dnd' && makoctl mode -r dnd || makoctl mode -a dnd; pkill -RTMIN+11 waybar",
+        "exec": "printf '{\"alt\":\"%s\",\"tooltip\":\"mode: %s\"}' $(makoctl mode | grep -q dnd && echo dnd || echo default) \"$(makoctl mode | tail -1)\"",
+        "on-click": "makoctl mode | grep -q dnd && makoctl mode -r dnd || makoctl mode -a dnd; pkill -RTMIN+11 waybar",
         "on-click-right": "makoctl restore",
-        "exec": "printf '{\"alt\":\"%s\",\"tooltip\":\"mode: %s\"}' $(makoctl mode | grep -q 'dnd' && echo dnd || echo default) $(makoctl mode | tail -1)",
         "signal": 11
-    },
-    "custom/separator": {
-        "format": " "
     }
 }

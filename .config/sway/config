@@ -17,7 +17,7 @@ output DP-1 {
     hdr off
     scale_filter linear
     #color_profile --device-primaries gamma22
-#    bg /mnt/f/Images/139884816_p0.jpg stretch #000000
+    bg /mnt/f/Images/139884816_p0.jpg stretch #000000
 }
 
 output DP-2 {
@@ -29,7 +29,7 @@ output DP-2 {
     max_render_time auto
     scale_filter linear
     #color_profile --device-primaries gamma22
-#    bg /mnt/f/Images/139884816_p0.jpg stretch #000000
+    bg /mnt/f/Images/139884816_p0.jpg stretch #000000
 }
 
 for_window [class="gamescope"] max_render_time auto
@@ -65,6 +65,7 @@ input "type:tablet_tool" {
     left_handed enabled
     map_from_region 0.0x0.0 0.526x0.526
     map_to_output DP-1
+    accel_profile flat
     pointer_accel 0
 }
 

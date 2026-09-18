@@ -1,6 +1,7 @@
 #!/bin/sh
 
-[ "$XDG_CURRENT_DESKTOP" = "jay" ] && temp_dp1=5200 || temp_dp1=4500
+# [ "$XDG_CURRENT_DESKTOP" = "jay" ] && temp_dp1=5200 || temp_dp1=4500
+temp_dp1=4500
 
 if ! pgrep wlsunset > /dev/null; then
     nohup wlsunset -l 25.609 -L 85.14 -o DP-2 -t 4500 > /dev/null &

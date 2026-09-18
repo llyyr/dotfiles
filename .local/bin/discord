@@ -1,8 +1,4 @@
-~/.config/discord/Discord --disable-smooth-scrolling --ozone-platform-hint=auto --enable-experimental-web-platform-features "$@"
-
-# /opt/Discord/Discord --disable-smooth-scrolling --ozone-platform-hint=auto --enable-experimental-web-platform-features
+# Hide color-management from discord because it binds to the latest version available, and uses version 1 semantics.
+~/workspace/wl-proxy/target/release/wl-veil -f wp_color_manager_v1 -- ~/.config/discord/Discord --disable-smooth-scrolling --enable-experimental-web-platform-features --disable-accelerated-video-decode "$@"
 
 #/home/llyyr/workspace/Vesktop/dist/linux-unpacked/vesktop --ozone-platform=wayland --enable-webrtc-pipewire-capturer --enable-experimental-web-platform-features --disable-features=AcceleratedVideoEncoder --render-node-override=/dev/dri/renderD128 &
-
-# https://github.com/Equicord/Equibop/issues/47
-# --disable-gpu-memory-buffer-video-frames

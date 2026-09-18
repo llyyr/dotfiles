@@ -183,7 +183,12 @@ function genshin_wish
 end
 
 function wuwa_wish
-    strings "/mnt/g/SteamLibrary/steamapps/common/Wuthering Waves/Client/Saved/Logs/Client.log" | rg -o "https://.*/record\?.*platform=PC"
+    python3 -c '
+url = "/mnt/g/SteamLibrary/steamapps/common/Wuthering Waves/Client/Saved/Logs/Client.log"
+data = bytes(b ^ (0xa5 if b & 1 else 0xef) for b in open(url, "rb").read())
+matches = __import__("re").findall(rb"https://\S*/record\?\S*?platform=PC", data)
+if matches: print(matches[-1].decode())
+    '
 end
 
 function gli_old
